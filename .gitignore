@@ -1,0 +1,26 @@
+# OMNeT++ build artifacts
+out/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.dylib
+
+# OMNeT++ generated files
+*.nedfolded
+*.msg.cpp
+*.msg.h
+*_m.cc
+*_m.h
+
+# IDE / OS noise
+.DS_Store
+.idea/
+.vscode/
+
+# CMake / Make
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(source:*)",
+      "Bash(opp_msgc:*)",
+      "Bash(ls:*)",
+      "Bash(opp_makemake:*)",
+      "Bash(make)",
+      "Bash(../out/clang-release/bgpdns:*)",
+      "Bash(opp_scavetool query:*)",
+      "Bash(opp_scavetool export:*)",
+      "Bash(while read f)",
+      "Bash(done)",
+      "Bash(../out/clang-release/bgp-dns:*)"
+    ]
+  }
+}
