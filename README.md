@@ -1,6 +1,6 @@
 # BGP-DNS EID Distribution Simulation
 
-A pure OMNeT++ simulation (no INET dependency) that quantitatively compares two control-plane strategies for distributing DTN EID reachability information:
+An OMNeT++ simulation model (with no INET dependency) that quantitatively compares two control-plane strategies for distributing DTN EID reachability information:
 
 1. **BGP-like approach (push)**: Continuously disseminates EID reachability state through neighbor-to-neighbor updates
 2. **DNS-like approach (pull)**: Resolves EID → endpoint mapping on demand via hierarchical/cached queries
@@ -299,7 +299,3 @@ Adjust `byteSize` in `EidMessages.msg` or override in `omnetpp.ini`:
 ```ini
 **.BgpAnnounce.byteSize = 128
 ```
-
-## License
-
-LGPL - See LICENSE file for details.
