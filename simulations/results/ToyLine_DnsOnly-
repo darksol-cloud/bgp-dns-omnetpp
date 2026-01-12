@@ -1,42 +1,45 @@
 version 3
-run ToyLine_BgpOnly-0-20260111-22:10:09-4032
-attr configname ToyLine_BgpOnly
-attr datetime 20260111-22:10:09
-attr datetimef 20260111-221009
-attr experiment ToyLine_BgpOnly
+run ToyLine_DnsOnly-0-20260111-22:10:32-4217
+attr configname ToyLine_DnsOnly
+attr datetime 20260111-22:10:32
+attr datetimef 20260111-221032
+attr experiment ToyLine_DnsOnly
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network bgpdns.ToyLineNetwork
-attr processid 4032
+attr processid 4217
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-config description "5-node line network, BGP only, single EID"
+config description "5-node line network, DNS only, single EID"
 config network bgpdns.ToyLineNetwork
 config sim-time-limit 30s
 config *.numNodes 5
 config *.node[0].isPublisher true
+config *.node[0].isAuthority true
 config *.node[0].publishEids "\"100\""
 config *.node[0].publishStartTime 1s
+config *.node[0].dnsTtl 60s
+config *.node[2].isResolver true
 config *.node[4].isClient true
 config *.node[4].queryEids "\"100\""
 config *.node[4].queryStartTime 5s
 config *.node[4].queryCount 10
 config *.node[4].queryInterval 1s
-config *.node[*].bgpEnabled true
-config *.node[*].dnsEnabled false
+config *.node[4].resolverNodeId 2
+config *.node[*].bgpEnabled false
+config *.node[*].dnsEnabled true
 config *.groundTruth.verboseLogging true
-config *.groundTruth.snapshotInterval 1s
 config network bgpdns.ToyLineNetwork
 config sim-time-limit 100s
 config warmup-period 1s
-config output-scalar-file results/ToyLine_BgpOnly-
-config output-vector-file results/ToyLine_BgpOnly-
+config output-scalar-file results/ToyLine_DnsOnly-
+config output-vector-file results/ToyLine_DnsOnly-
 config seed-set 0
 config repeat 5
 config **.result-recording-modes default,+histogram
@@ -72,19 +75,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[0].port$o[0].channel messages:histogram
-field count 3
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 3
-field sqrsum 3
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	3
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[1].port$o[0].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[1].port$o[0].channel disabled false
@@ -108,19 +111,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[1].port$o[0].channel messages:histogram
-field count 2
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 2
-field sqrsum 2
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	2
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[1].port$o[1].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[1].port$o[1].channel disabled false
@@ -144,19 +147,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[1].port$o[1].channel messages:histogram
-field count 3
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 3
-field sqrsum 3
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	3
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[2].port$o[0].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[2].port$o[0].channel disabled false
@@ -180,19 +183,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[2].port$o[0].channel messages:histogram
-field count 2
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 2
-field sqrsum 2
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	2
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[2].port$o[1].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[2].port$o[1].channel disabled false
@@ -216,19 +219,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[2].port$o[1].channel messages:histogram
-field count 3
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 3
-field sqrsum 3
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	3
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[3].port$o[0].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[3].port$o[0].channel disabled false
@@ -252,19 +255,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[3].port$o[0].channel messages:histogram
-field count 2
+field count 1
 field mean 1
-field stddev 0
+field stddev nan
 field min 1
 field max 1
-field sum 2
-field sqrsum 2
+field sum 1
+field sqrsum 1
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	2
+bin	1	1
 bin	2	0
 par ToyLineNetwork.node[3].port$o[1].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[3].port$o[1].channel disabled false
@@ -288,19 +291,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[3].port$o[1].channel messages:histogram
-field count 3
+field count 11
 field mean 1
 field stddev 0
 field min 1
 field max 1
-field sum 3
-field sqrsum 3
+field sum 11
+field sqrsum 11
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	3
+bin	1	11
 bin	2	0
 par ToyLineNetwork.node[4].port$o[0].channel typename "\"bgpdns.EidChannel\""
 par ToyLineNetwork.node[4].port$o[0].channel disabled false
@@ -324,19 +327,19 @@ bin	0	0
 bin	1	1
 bin	2	0
 statistic ToyLineNetwork.node[4].port$o[0].channel messages:histogram
-field count 2
+field count 11
 field mean 1
 field stddev 0
 field min 1
 field max 1
-field sum 2
-field sqrsum 2
+field sum 11
+field sqrsum 11
 attr interpolationmode none
 attr recordingmode histogram
 attr source constant1(messageSent)
 bin	-inf	0
 bin	0	0
-bin	1	2
+bin	1	11
 bin	2	0
 par ToyLineNetwork.groundTruth typename "\"bgpdns.GroundTruth\""
 par ToyLineNetwork.groundTruth snapshotInterval 1s
@@ -351,59 +354,16 @@ par ToyLineNetwork.groundTruth recordConvergenceEvents true
 par ToyLineNetwork.groundTruth recordAccuracySnapshots true
 scalar ToyLineNetwork.groundTruth totalEidsPublished 1
 scalar ToyLineNetwork.groundTruth activeEids 1
-scalar ToyLineNetwork.groundTruth convergedEids 1
-scalar ToyLineNetwork.groundTruth avgConvergenceTime 0.1
-scalar ToyLineNetwork.groundTruth totalBgpTableSize 5
+scalar ToyLineNetwork.groundTruth convergedEids 0
+scalar ToyLineNetwork.groundTruth totalBgpTableSize 0
 scalar ToyLineNetwork.groundTruth totalDnsCacheSize 0
-scalar ToyLineNetwork.groundTruth totalDnsAuthoritySize 0
-scalar ToyLineNetwork.groundTruth totalTableOperations 5
-scalar ToyLineNetwork.groundTruth totalTableOperations:last 5
+scalar ToyLineNetwork.groundTruth totalDnsAuthoritySize 1
+scalar ToyLineNetwork.groundTruth totalTableOperations 1
+scalar ToyLineNetwork.groundTruth totalTableOperations:last 1
 attr recordingmode last
-scalar ToyLineNetwork.groundTruth totalTableOperations:sum 150
+scalar ToyLineNetwork.groundTruth totalTableOperations:sum 30
 attr recordingmode sum
 statistic ToyLineNetwork.groundTruth totalTableOperations:histogram
-field count 31
-field mean 4.8387096774194
-field stddev 0.89802651013388
-field min 0
-field max 5
-field sum 150
-field sqrsum 750
-attr recordingmode histogram
-bin	-inf	0
-bin	0	1
-bin	1	0
-bin	2	0
-bin	3	0
-bin	4	0
-bin	5	30
-bin	6	0
-bin	7	0
-scalar ToyLineNetwork.groundTruth avgDnsCacheSize:mean nan
-attr recordingmode mean
-scalar ToyLineNetwork.groundTruth avgDnsCacheSize:max nan
-attr recordingmode max
-scalar ToyLineNetwork.groundTruth avgDnsCacheSize:timeavg nan
-attr recordingmode timeavg
-statistic ToyLineNetwork.groundTruth avgDnsCacheSize:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	0
-scalar ToyLineNetwork.groundTruth avgBgpTableSize:mean 0.96774193548387
-attr recordingmode mean
-scalar ToyLineNetwork.groundTruth avgBgpTableSize:max 1
-attr recordingmode max
-scalar ToyLineNetwork.groundTruth avgBgpTableSize:timeavg 0.96551724137931
-attr recordingmode timeavg
-statistic ToyLineNetwork.groundTruth avgBgpTableSize:histogram
 field count 31
 field mean 0.96774193548387
 field stddev 0.17960530202677
@@ -416,6 +376,91 @@ bin	-inf	0
 bin	0	1
 bin	1	30
 bin	2	0
+scalar ToyLineNetwork.groundTruth avgDnsCacheSize:mean 0
+attr recordingmode mean
+scalar ToyLineNetwork.groundTruth avgDnsCacheSize:max 0
+attr recordingmode max
+scalar ToyLineNetwork.groundTruth avgDnsCacheSize:timeavg 0
+attr recordingmode timeavg
+statistic ToyLineNetwork.groundTruth avgDnsCacheSize:histogram
+field count 31
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	31
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar ToyLineNetwork.groundTruth avgBgpTableSize:mean nan
+attr recordingmode mean
+scalar ToyLineNetwork.groundTruth avgBgpTableSize:max nan
+attr recordingmode max
+scalar ToyLineNetwork.groundTruth avgBgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic ToyLineNetwork.groundTruth avgBgpTableSize:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
 scalar ToyLineNetwork.groundTruth globalStaleRate:mean 0
 attr recordingmode mean
 scalar ToyLineNetwork.groundTruth globalStaleRate:max 0
@@ -483,119 +528,156 @@ bin	0.44	0
 bin	0.46	0
 bin	0.48	0
 bin	0.5	0
-scalar ToyLineNetwork.groundTruth globalCoverage:mean 1
+scalar ToyLineNetwork.groundTruth globalCoverage:mean 0
 attr recordingmode mean
-scalar ToyLineNetwork.groundTruth globalCoverage:min 1
+scalar ToyLineNetwork.groundTruth globalCoverage:min 0
 attr recordingmode min
-scalar ToyLineNetwork.groundTruth globalCoverage:timeavg 1
+scalar ToyLineNetwork.groundTruth globalCoverage:timeavg 0
 attr recordingmode timeavg
 statistic ToyLineNetwork.groundTruth globalCoverage:histogram
 field count 30
-field mean 1
+field mean 0
 field stddev 0
-field min 1
-field max 1
-field sum 30
-field sqrsum 30
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	30
-bin	2	0
-scalar ToyLineNetwork.groundTruth globalAccuracy:mean 1
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	30
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar ToyLineNetwork.groundTruth globalAccuracy:mean 0
 attr recordingmode mean
-scalar ToyLineNetwork.groundTruth globalAccuracy:min 1
+scalar ToyLineNetwork.groundTruth globalAccuracy:min 0
 attr recordingmode min
-scalar ToyLineNetwork.groundTruth globalAccuracy:timeavg 1
+scalar ToyLineNetwork.groundTruth globalAccuracy:timeavg 0
 attr recordingmode timeavg
 statistic ToyLineNetwork.groundTruth globalAccuracy:histogram
 field count 30
-field mean 1
+field mean 0
 field stddev 0
-field min 1
-field max 1
-field sum 30
-field sqrsum 30
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	30
-bin	2	0
-scalar ToyLineNetwork.groundTruth globalConvergenceTime:mean 0.1
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	30
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar ToyLineNetwork.groundTruth globalConvergenceTime:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.groundTruth globalConvergenceTime:max 0.1
+scalar ToyLineNetwork.groundTruth globalConvergenceTime:max nan
 attr recordingmode max
 statistic ToyLineNetwork.groundTruth globalConvergenceTime:histogram
-field count 1
-field mean 0.1
+field count 0
+field mean nan
 field stddev nan
-field min 0.1
-field max 0.1
-field sum 0.1
-field sqrsum 0.01
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	0
-bin	0.03	0
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	1
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-bin	0.52	0
-bin	0.53	0
-bin	0.54	0
-bin	0.55	0
-bin	0.56	0
-bin	0.57	0
-bin	0.58	0
-bin	0.59	0
-bin	0.6	0
+bin	1	0
 scalar ToyLineNetwork.groundTruth globalDnsBytes:last nan
 attr recordingmode last
 scalar ToyLineNetwork.groundTruth globalDnsBytes:sum 0
@@ -664,10 +746,10 @@ par ToyLineNetwork.node[0] typename "\"bgpdns.EidNode\""
 par ToyLineNetwork.node[0] nodeId -1
 par ToyLineNetwork.node[0] isPublisher true
 par ToyLineNetwork.node[0] isClient false
-par ToyLineNetwork.node[0] bgpEnabled true
-par ToyLineNetwork.node[0] dnsEnabled false
+par ToyLineNetwork.node[0] bgpEnabled false
+par ToyLineNetwork.node[0] dnsEnabled true
 par ToyLineNetwork.node[0] isResolver false
-par ToyLineNetwork.node[0] isAuthority false
+par ToyLineNetwork.node[0] isAuthority true
 par ToyLineNetwork.node[0] isRoot false
 par ToyLineNetwork.node[0] authorityDomain -1
 par ToyLineNetwork.node[0] resolverNodeId -1
@@ -678,7 +760,7 @@ par ToyLineNetwork.node[0] bgpHoldTime 90s
 attr unit s
 par ToyLineNetwork.node[0] bgpPathVector true
 par ToyLineNetwork.node[0] bgpMaxPathLength 100
-par ToyLineNetwork.node[0] dnsTtl 300s
+par ToyLineNetwork.node[0] dnsTtl 60s
 attr unit s
 par ToyLineNetwork.node[0] dnsCacheSize 10000
 par ToyLineNetwork.node[0] dnsQueryTimeout 5s
@@ -704,9 +786,9 @@ par ToyLineNetwork.node[0] churnProbability 0.1
 par ToyLineNetwork.node[0] withdrawProbability 0.3
 par ToyLineNetwork.node[0] processingDelayPerOp 0.0001s
 attr unit s
-scalar ToyLineNetwork.node[0] finalBgpTableSize 1
+scalar ToyLineNetwork.node[0] finalBgpTableSize 0
 scalar ToyLineNetwork.node[0] finalDnsCacheSize 0
-scalar ToyLineNetwork.node[0] finalDnsAuthoritySize 0
+scalar ToyLineNetwork.node[0] finalDnsAuthoritySize 1
 scalar ToyLineNetwork.node[0] totalTableOperations 1
 scalar ToyLineNetwork.node[0] nodeId 0
 scalar ToyLineNetwork.node[0] correctAnswers:count 0
@@ -788,21 +870,20 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[0] messageBytesSent:sum 64
+scalar ToyLineNetwork.node[0] messageBytesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[0] messageBytesSent:histogram
-field count 1
-field mean 64
+field count 0
+field mean nan
 field stddev nan
-field min 64
-field max 64
-field sum 64
-field sqrsum 4096
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	63	0
-bin	64	1
-bin	65	0
+bin	0	0
+bin	1	0
 scalar ToyLineNetwork.node[0] dnsQueryLatency:mean nan
 attr recordingmode mean
 scalar ToyLineNetwork.node[0] dnsQueryLatency:min nan
@@ -1016,25 +1097,73 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[0] bgpTableSize:last 1
+scalar ToyLineNetwork.node[0] bgpTableSize:last 0
 attr recordingmode last
-scalar ToyLineNetwork.node[0] bgpTableSize:max 1
+scalar ToyLineNetwork.node[0] bgpTableSize:max 0
 attr recordingmode max
-scalar ToyLineNetwork.node[0] bgpTableSize:timeavg 1
+scalar ToyLineNetwork.node[0] bgpTableSize:timeavg nan
 attr recordingmode timeavg
 statistic ToyLineNetwork.node[0] bgpTableSize:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	2
-bin	2	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
 scalar ToyLineNetwork.node[0] bgpWithdrawsReceived:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[0] bgpWithdrawsReceived:sum 0
@@ -1083,29 +1212,28 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[0] bgpAnnouncesSent:count 2
+scalar ToyLineNetwork.node[0] bgpAnnouncesSent:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[0] bgpAnnouncesSent:sum 2
+scalar ToyLineNetwork.node[0] bgpAnnouncesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[0] bgpAnnouncesSent:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	2
-bin	2	0
+bin	1	0
 par ToyLineNetwork.node[1] typename "\"bgpdns.EidNode\""
 par ToyLineNetwork.node[1] nodeId -1
 par ToyLineNetwork.node[1] isPublisher false
 par ToyLineNetwork.node[1] isClient false
-par ToyLineNetwork.node[1] bgpEnabled true
-par ToyLineNetwork.node[1] dnsEnabled false
+par ToyLineNetwork.node[1] bgpEnabled false
+par ToyLineNetwork.node[1] dnsEnabled true
 par ToyLineNetwork.node[1] isResolver false
 par ToyLineNetwork.node[1] isAuthority false
 par ToyLineNetwork.node[1] isRoot false
@@ -1144,10 +1272,10 @@ par ToyLineNetwork.node[1] churnProbability 0.1
 par ToyLineNetwork.node[1] withdrawProbability 0.3
 par ToyLineNetwork.node[1] processingDelayPerOp 0.0001s
 attr unit s
-scalar ToyLineNetwork.node[1] finalBgpTableSize 1
+scalar ToyLineNetwork.node[1] finalBgpTableSize 0
 scalar ToyLineNetwork.node[1] finalDnsCacheSize 0
 scalar ToyLineNetwork.node[1] finalDnsAuthoritySize 0
-scalar ToyLineNetwork.node[1] totalTableOperations 1
+scalar ToyLineNetwork.node[1] totalTableOperations 0
 scalar ToyLineNetwork.node[1] nodeId 1
 scalar ToyLineNetwork.node[1] correctAnswers:count 0
 attr recordingmode count
@@ -1181,119 +1309,66 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[1] discoveryLatency:mean 0.01
+scalar ToyLineNetwork.node[1] discoveryLatency:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[1] discoveryLatency:min 0.01
+scalar ToyLineNetwork.node[1] discoveryLatency:min nan
 attr recordingmode min
-scalar ToyLineNetwork.node[1] discoveryLatency:max 0.01
+scalar ToyLineNetwork.node[1] discoveryLatency:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[1] discoveryLatency:histogram
-field count 1
-field mean 0.01
+field count 0
+field mean nan
 field stddev nan
-field min 0.01
-field max 0.01
-field sum 0.01
-field sqrsum 0.0001
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	1
-bin	0.02	0
-bin	0.03	0
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-scalar ToyLineNetwork.node[1] tableOperations:sum 1
+bin	1	0
+scalar ToyLineNetwork.node[1] tableOperations:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[1] tableOperations:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[1] messageBytesReceived:sum 64
+bin	1	0
+scalar ToyLineNetwork.node[1] messageBytesReceived:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[1] messageBytesReceived:histogram
-field count 1
-field mean 64
+field count 0
+field mean nan
 field stddev nan
-field min 64
-field max 64
-field sum 64
-field sqrsum 4096
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	63	0
-bin	64	1
-bin	65	0
-scalar ToyLineNetwork.node[1] messageBytesSent:sum 72
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[1] messageBytesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[1] messageBytesSent:histogram
-field count 1
-field mean 72
+field count 0
+field mean nan
 field stddev nan
-field min 72
-field max 72
-field sum 72
-field sqrsum 5184
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	71	0
-bin	72	1
-bin	73	0
+bin	0	0
+bin	1	0
 scalar ToyLineNetwork.node[1] dnsQueryLatency:mean nan
 attr recordingmode mean
 scalar ToyLineNetwork.node[1] dnsQueryLatency:min nan
@@ -1491,91 +1566,89 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[1] bgpConvergenceTime:mean 0.01
+scalar ToyLineNetwork.node[1] bgpConvergenceTime:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[1] bgpConvergenceTime:max 0.01
+scalar ToyLineNetwork.node[1] bgpConvergenceTime:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[1] bgpConvergenceTime:histogram
-field count 1
-field mean 0.01
+field count 0
+field mean nan
 field stddev nan
-field min 0.01
-field max 0.01
-field sum 0.01
-field sqrsum 0.0001
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	1
-bin	0.02	0
-bin	0.03	0
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-scalar ToyLineNetwork.node[1] bgpTableSize:last 1
+bin	1	0
+scalar ToyLineNetwork.node[1] bgpTableSize:last 0
 attr recordingmode last
-scalar ToyLineNetwork.node[1] bgpTableSize:max 1
+scalar ToyLineNetwork.node[1] bgpTableSize:max 0
 attr recordingmode max
-scalar ToyLineNetwork.node[1] bgpTableSize:timeavg 1
+scalar ToyLineNetwork.node[1] bgpTableSize:timeavg nan
 attr recordingmode timeavg
 statistic ToyLineNetwork.node[1] bgpTableSize:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	2
-bin	2	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
 scalar ToyLineNetwork.node[1] bgpWithdrawsReceived:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[1] bgpWithdrawsReceived:sum 0
@@ -1608,47 +1681,45 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[1] bgpAnnouncesReceived:count 1
+scalar ToyLineNetwork.node[1] bgpAnnouncesReceived:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[1] bgpAnnouncesReceived:sum 1
+scalar ToyLineNetwork.node[1] bgpAnnouncesReceived:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[1] bgpAnnouncesReceived:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[1] bgpAnnouncesSent:count 1
+bin	1	0
+scalar ToyLineNetwork.node[1] bgpAnnouncesSent:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[1] bgpAnnouncesSent:sum 1
+scalar ToyLineNetwork.node[1] bgpAnnouncesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[1] bgpAnnouncesSent:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
+bin	1	0
 par ToyLineNetwork.node[2] typename "\"bgpdns.EidNode\""
 par ToyLineNetwork.node[2] nodeId -1
 par ToyLineNetwork.node[2] isPublisher false
 par ToyLineNetwork.node[2] isClient false
-par ToyLineNetwork.node[2] bgpEnabled true
-par ToyLineNetwork.node[2] dnsEnabled false
-par ToyLineNetwork.node[2] isResolver false
+par ToyLineNetwork.node[2] bgpEnabled false
+par ToyLineNetwork.node[2] dnsEnabled true
+par ToyLineNetwork.node[2] isResolver true
 par ToyLineNetwork.node[2] isAuthority false
 par ToyLineNetwork.node[2] isRoot false
 par ToyLineNetwork.node[2] authorityDomain -1
@@ -1686,10 +1757,10 @@ par ToyLineNetwork.node[2] churnProbability 0.1
 par ToyLineNetwork.node[2] withdrawProbability 0.3
 par ToyLineNetwork.node[2] processingDelayPerOp 0.0001s
 attr unit s
-scalar ToyLineNetwork.node[2] finalBgpTableSize 1
+scalar ToyLineNetwork.node[2] finalBgpTableSize 0
 scalar ToyLineNetwork.node[2] finalDnsCacheSize 0
 scalar ToyLineNetwork.node[2] finalDnsAuthoritySize 0
-scalar ToyLineNetwork.node[2] totalTableOperations 1
+scalar ToyLineNetwork.node[2] totalTableOperations 0
 scalar ToyLineNetwork.node[2] nodeId 2
 scalar ToyLineNetwork.node[2] correctAnswers:count 0
 attr recordingmode count
@@ -1723,120 +1794,66 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[2] discoveryLatency:mean 0.02
+scalar ToyLineNetwork.node[2] discoveryLatency:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[2] discoveryLatency:min 0.02
+scalar ToyLineNetwork.node[2] discoveryLatency:min nan
 attr recordingmode min
-scalar ToyLineNetwork.node[2] discoveryLatency:max 0.02
+scalar ToyLineNetwork.node[2] discoveryLatency:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[2] discoveryLatency:histogram
-field count 1
-field mean 0.02
+field count 0
+field mean nan
 field stddev nan
-field min 0.02
-field max 0.02
-field sum 0.02
-field sqrsum 0.0004
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	1
-bin	0.03	0
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-bin	0.52	0
-scalar ToyLineNetwork.node[2] tableOperations:sum 1
+bin	1	0
+scalar ToyLineNetwork.node[2] tableOperations:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[2] tableOperations:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[2] messageBytesReceived:sum 72
+bin	1	0
+scalar ToyLineNetwork.node[2] messageBytesReceived:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[2] messageBytesReceived:histogram
-field count 1
-field mean 72
+field count 0
+field mean nan
 field stddev nan
-field min 72
-field max 72
-field sum 72
-field sqrsum 5184
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	71	0
-bin	72	1
-bin	73	0
-scalar ToyLineNetwork.node[2] messageBytesSent:sum 76
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[2] messageBytesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[2] messageBytesSent:histogram
-field count 1
-field mean 76
+field count 0
+field mean nan
 field stddev nan
-field min 76
-field max 76
-field sum 76
-field sqrsum 5776
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	75	0
-bin	76	1
-bin	77	0
+bin	0	0
+bin	1	0
 scalar ToyLineNetwork.node[2] dnsQueryLatency:mean nan
 attr recordingmode mean
 scalar ToyLineNetwork.node[2] dnsQueryLatency:min nan
@@ -2034,92 +2051,89 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[2] bgpConvergenceTime:mean 0.02
+scalar ToyLineNetwork.node[2] bgpConvergenceTime:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[2] bgpConvergenceTime:max 0.02
+scalar ToyLineNetwork.node[2] bgpConvergenceTime:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[2] bgpConvergenceTime:histogram
-field count 1
-field mean 0.02
+field count 0
+field mean nan
 field stddev nan
-field min 0.02
-field max 0.02
-field sum 0.02
-field sqrsum 0.0004
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	1
-bin	0.03	0
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-bin	0.52	0
-scalar ToyLineNetwork.node[2] bgpTableSize:last 1
+bin	1	0
+scalar ToyLineNetwork.node[2] bgpTableSize:last 0
 attr recordingmode last
-scalar ToyLineNetwork.node[2] bgpTableSize:max 1
+scalar ToyLineNetwork.node[2] bgpTableSize:max 0
 attr recordingmode max
-scalar ToyLineNetwork.node[2] bgpTableSize:timeavg 1
+scalar ToyLineNetwork.node[2] bgpTableSize:timeavg nan
 attr recordingmode timeavg
 statistic ToyLineNetwork.node[2] bgpTableSize:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	2
-bin	2	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
 scalar ToyLineNetwork.node[2] bgpWithdrawsReceived:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[2] bgpWithdrawsReceived:sum 0
@@ -2152,46 +2166,44 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[2] bgpAnnouncesReceived:count 1
+scalar ToyLineNetwork.node[2] bgpAnnouncesReceived:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[2] bgpAnnouncesReceived:sum 1
+scalar ToyLineNetwork.node[2] bgpAnnouncesReceived:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[2] bgpAnnouncesReceived:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[2] bgpAnnouncesSent:count 1
+bin	1	0
+scalar ToyLineNetwork.node[2] bgpAnnouncesSent:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[2] bgpAnnouncesSent:sum 1
+scalar ToyLineNetwork.node[2] bgpAnnouncesSent:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[2] bgpAnnouncesSent:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
+bin	1	0
 par ToyLineNetwork.node[3] typename "\"bgpdns.EidNode\""
 par ToyLineNetwork.node[3] nodeId -1
 par ToyLineNetwork.node[3] isPublisher false
 par ToyLineNetwork.node[3] isClient false
-par ToyLineNetwork.node[3] bgpEnabled true
-par ToyLineNetwork.node[3] dnsEnabled false
+par ToyLineNetwork.node[3] bgpEnabled false
+par ToyLineNetwork.node[3] dnsEnabled true
 par ToyLineNetwork.node[3] isResolver false
 par ToyLineNetwork.node[3] isAuthority false
 par ToyLineNetwork.node[3] isRoot false
@@ -2230,10 +2242,10 @@ par ToyLineNetwork.node[3] churnProbability 0.1
 par ToyLineNetwork.node[3] withdrawProbability 0.3
 par ToyLineNetwork.node[3] processingDelayPerOp 0.0001s
 attr unit s
-scalar ToyLineNetwork.node[3] finalBgpTableSize 1
+scalar ToyLineNetwork.node[3] finalBgpTableSize 0
 scalar ToyLineNetwork.node[3] finalDnsCacheSize 0
 scalar ToyLineNetwork.node[3] finalDnsAuthoritySize 0
-scalar ToyLineNetwork.node[3] totalTableOperations 1
+scalar ToyLineNetwork.node[3] totalTableOperations 0
 scalar ToyLineNetwork.node[3] nodeId 3
 scalar ToyLineNetwork.node[3] correctAnswers:count 0
 attr recordingmode count
@@ -2267,120 +2279,67 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[3] discoveryLatency:mean 0.03
+scalar ToyLineNetwork.node[3] discoveryLatency:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[3] discoveryLatency:min 0.03
+scalar ToyLineNetwork.node[3] discoveryLatency:min nan
 attr recordingmode min
-scalar ToyLineNetwork.node[3] discoveryLatency:max 0.03
+scalar ToyLineNetwork.node[3] discoveryLatency:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[3] discoveryLatency:histogram
-field count 1
-field mean 0.03
+field count 0
+field mean nan
 field stddev nan
-field min 0.03
-field max 0.03
-field sum 0.03
-field sqrsum 0.0009
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	0
-bin	0.03	1
-bin	0.04	0
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-bin	0.52	0
-bin	0.53	0
-scalar ToyLineNetwork.node[3] tableOperations:sum 1
+bin	1	0
+scalar ToyLineNetwork.node[3] tableOperations:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[3] tableOperations:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[3] messageBytesReceived:sum 76
+bin	1	0
+scalar ToyLineNetwork.node[3] messageBytesReceived:sum 480
 attr recordingmode sum
 statistic ToyLineNetwork.node[3] messageBytesReceived:histogram
-field count 1
-field mean 76
-field stddev nan
-field min 76
-field max 76
-field sum 76
-field sqrsum 5776
+field count 10
+field mean 48
+field stddev 0
+field min 48
+field max 48
+field sum 480
+field sqrsum 23040
 attr recordingmode histogram
 bin	-inf	0
-bin	75	0
-bin	76	1
-bin	77	0
-scalar ToyLineNetwork.node[3] messageBytesSent:sum 80
+bin	47	0
+bin	48	10
+bin	49	0
+scalar ToyLineNetwork.node[3] messageBytesSent:sum 800
 attr recordingmode sum
 statistic ToyLineNetwork.node[3] messageBytesSent:histogram
-field count 1
+field count 10
 field mean 80
-field stddev nan
+field stddev 0
 field min 80
 field max 80
-field sum 80
-field sqrsum 6400
+field sum 800
+field sqrsum 64000
 attr recordingmode histogram
 bin	-inf	0
 bin	79	0
-bin	80	1
+bin	80	10
 bin	81	0
 scalar ToyLineNetwork.node[3] dnsQueryLatency:mean nan
 attr recordingmode mean
@@ -2531,38 +2490,40 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[3] dnsResponsesSent:count 0
+scalar ToyLineNetwork.node[3] dnsResponsesSent:count 10
 attr recordingmode count
-scalar ToyLineNetwork.node[3] dnsResponsesSent:sum 0
+scalar ToyLineNetwork.node[3] dnsResponsesSent:sum 10
 attr recordingmode sum
 statistic ToyLineNetwork.node[3] dnsResponsesSent:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+field count 10
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 10
+field sqrsum 10
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	0
-scalar ToyLineNetwork.node[3] dnsQueriesReceived:count 0
+bin	1	10
+bin	2	0
+scalar ToyLineNetwork.node[3] dnsQueriesReceived:count 10
 attr recordingmode count
-scalar ToyLineNetwork.node[3] dnsQueriesReceived:sum 0
+scalar ToyLineNetwork.node[3] dnsQueriesReceived:sum 10
 attr recordingmode sum
 statistic ToyLineNetwork.node[3] dnsQueriesReceived:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+field count 10
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 10
+field sqrsum 10
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	0
+bin	1	10
+bin	2	0
 scalar ToyLineNetwork.node[3] dnsQueriesSent:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[3] dnsQueriesSent:sum 0
@@ -2579,24 +2540,254 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[3] bgpConvergenceTime:mean 0.03
+scalar ToyLineNetwork.node[3] bgpConvergenceTime:mean nan
 attr recordingmode mean
-scalar ToyLineNetwork.node[3] bgpConvergenceTime:max 0.03
+scalar ToyLineNetwork.node[3] bgpConvergenceTime:max nan
 attr recordingmode max
 statistic ToyLineNetwork.node[3] bgpConvergenceTime:histogram
-field count 1
-field mean 0.03
+field count 0
+field mean nan
 field stddev nan
-field min 0.03
-field max 0.03
-field sum 0.03
-field sqrsum 0.0009
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[3] bgpTableSize:last 0
+attr recordingmode last
+scalar ToyLineNetwork.node[3] bgpTableSize:max 0
+attr recordingmode max
+scalar ToyLineNetwork.node[3] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic ToyLineNetwork.node[3] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar ToyLineNetwork.node[3] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[3] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[3] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[3] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[3] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[3] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[3] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[3] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[3] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[3] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[3] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[3] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par ToyLineNetwork.node[4] typename "\"bgpdns.EidNode\""
+par ToyLineNetwork.node[4] nodeId -1
+par ToyLineNetwork.node[4] isPublisher false
+par ToyLineNetwork.node[4] isClient true
+par ToyLineNetwork.node[4] bgpEnabled false
+par ToyLineNetwork.node[4] dnsEnabled true
+par ToyLineNetwork.node[4] isResolver false
+par ToyLineNetwork.node[4] isAuthority false
+par ToyLineNetwork.node[4] isRoot false
+par ToyLineNetwork.node[4] authorityDomain -1
+par ToyLineNetwork.node[4] resolverNodeId 2
+par ToyLineNetwork.node[4] authorityNodeId -1
+par ToyLineNetwork.node[4] bgpKeepaliveInterval 30s
+attr unit s
+par ToyLineNetwork.node[4] bgpHoldTime 90s
+attr unit s
+par ToyLineNetwork.node[4] bgpPathVector true
+par ToyLineNetwork.node[4] bgpMaxPathLength 100
+par ToyLineNetwork.node[4] dnsTtl 300s
+attr unit s
+par ToyLineNetwork.node[4] dnsCacheSize 10000
+par ToyLineNetwork.node[4] dnsQueryTimeout 5s
+attr unit s
+par ToyLineNetwork.node[4] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[4] publishEids "\"\""
+par ToyLineNetwork.node[4] publishStartTime 1s
+attr unit s
+par ToyLineNetwork.node[4] publishInterval 0s
+attr unit s
+par ToyLineNetwork.node[4] claProtocol "\"tcpcl\""
+par ToyLineNetwork.node[4] claPort 4556
+par ToyLineNetwork.node[4] queryEids "\"100\""
+par ToyLineNetwork.node[4] queryStartTime 5s
+attr unit s
+par ToyLineNetwork.node[4] queryInterval 1s
+attr unit s
+par ToyLineNetwork.node[4] queryCount 10
+par ToyLineNetwork.node[4] queryZipfAlpha 0
+par ToyLineNetwork.node[4] churnInterval 0s
+attr unit s
+par ToyLineNetwork.node[4] churnProbability 0.1
+par ToyLineNetwork.node[4] withdrawProbability 0.3
+par ToyLineNetwork.node[4] processingDelayPerOp 0.0001s
+attr unit s
+scalar ToyLineNetwork.node[4] finalBgpTableSize 0
+scalar ToyLineNetwork.node[4] finalDnsCacheSize 0
+scalar ToyLineNetwork.node[4] finalDnsAuthoritySize 0
+scalar ToyLineNetwork.node[4] totalTableOperations 0
+scalar ToyLineNetwork.node[4] nodeId 4
+scalar ToyLineNetwork.node[4] correctAnswers:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[4] correctAnswers:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[4] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[4] staleAnswers:count 0
+attr recordingmode count
+scalar ToyLineNetwork.node[4] staleAnswers:sum 0
+attr recordingmode sum
+statistic ToyLineNetwork.node[4] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar ToyLineNetwork.node[4] discoveryLatency:mean 0.02
+attr recordingmode mean
+scalar ToyLineNetwork.node[4] discoveryLatency:min 0.02
+attr recordingmode min
+scalar ToyLineNetwork.node[4] discoveryLatency:max 0.02
+attr recordingmode max
+statistic ToyLineNetwork.node[4] discoveryLatency:histogram
+field count 10
+field mean 0.02
+field stddev 0
+field min 0.02
+field max 0.02
+field sum 0.2
+field sqrsum 0.004
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	0.01	0
-bin	0.02	0
-bin	0.03	1
+bin	0.02	10
+bin	0.03	0
 bin	0.04	0
 bin	0.05	0
 bin	0.06	0
@@ -2646,31 +2837,9 @@ bin	0.49	0
 bin	0.5	0
 bin	0.51	0
 bin	0.52	0
-bin	0.53	0
-scalar ToyLineNetwork.node[3] bgpTableSize:last 1
-attr recordingmode last
-scalar ToyLineNetwork.node[3] bgpTableSize:max 1
-attr recordingmode max
-scalar ToyLineNetwork.node[3] bgpTableSize:timeavg 1
-attr recordingmode timeavg
-statistic ToyLineNetwork.node[3] bgpTableSize:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	2
-bin	2	0
-scalar ToyLineNetwork.node[3] bgpWithdrawsReceived:count 0
-attr recordingmode count
-scalar ToyLineNetwork.node[3] bgpWithdrawsReceived:sum 0
+scalar ToyLineNetwork.node[4] tableOperations:sum 0
 attr recordingmode sum
-statistic ToyLineNetwork.node[3] bgpWithdrawsReceived:histogram
+statistic ToyLineNetwork.node[4] tableOperations:histogram
 field count 0
 field mean nan
 field stddev nan
@@ -2682,159 +2851,57 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[3] bgpWithdrawsSent:count 0
-attr recordingmode count
-scalar ToyLineNetwork.node[3] bgpWithdrawsSent:sum 0
+scalar ToyLineNetwork.node[4] messageBytesReceived:sum 800
 attr recordingmode sum
-statistic ToyLineNetwork.node[3] bgpWithdrawsSent:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	0
-scalar ToyLineNetwork.node[3] bgpAnnouncesReceived:count 1
-attr recordingmode count
-scalar ToyLineNetwork.node[3] bgpAnnouncesReceived:sum 1
-attr recordingmode sum
-statistic ToyLineNetwork.node[3] bgpAnnouncesReceived:histogram
-field count 1
-field mean 1
-field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[3] bgpAnnouncesSent:count 1
-attr recordingmode count
-scalar ToyLineNetwork.node[3] bgpAnnouncesSent:sum 1
-attr recordingmode sum
-statistic ToyLineNetwork.node[3] bgpAnnouncesSent:histogram
-field count 1
-field mean 1
-field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	1
-bin	2	0
-par ToyLineNetwork.node[4] typename "\"bgpdns.EidNode\""
-par ToyLineNetwork.node[4] nodeId -1
-par ToyLineNetwork.node[4] isPublisher false
-par ToyLineNetwork.node[4] isClient true
-par ToyLineNetwork.node[4] bgpEnabled true
-par ToyLineNetwork.node[4] dnsEnabled false
-par ToyLineNetwork.node[4] isResolver false
-par ToyLineNetwork.node[4] isAuthority false
-par ToyLineNetwork.node[4] isRoot false
-par ToyLineNetwork.node[4] authorityDomain -1
-par ToyLineNetwork.node[4] resolverNodeId -1
-par ToyLineNetwork.node[4] authorityNodeId -1
-par ToyLineNetwork.node[4] bgpKeepaliveInterval 30s
-attr unit s
-par ToyLineNetwork.node[4] bgpHoldTime 90s
-attr unit s
-par ToyLineNetwork.node[4] bgpPathVector true
-par ToyLineNetwork.node[4] bgpMaxPathLength 100
-par ToyLineNetwork.node[4] dnsTtl 300s
-attr unit s
-par ToyLineNetwork.node[4] dnsCacheSize 10000
-par ToyLineNetwork.node[4] dnsQueryTimeout 5s
-attr unit s
-par ToyLineNetwork.node[4] dnsMaxHierarchyDepth 5
-par ToyLineNetwork.node[4] publishEids "\"\""
-par ToyLineNetwork.node[4] publishStartTime 1s
-attr unit s
-par ToyLineNetwork.node[4] publishInterval 0s
-attr unit s
-par ToyLineNetwork.node[4] claProtocol "\"tcpcl\""
-par ToyLineNetwork.node[4] claPort 4556
-par ToyLineNetwork.node[4] queryEids "\"100\""
-par ToyLineNetwork.node[4] queryStartTime 5s
-attr unit s
-par ToyLineNetwork.node[4] queryInterval 1s
-attr unit s
-par ToyLineNetwork.node[4] queryCount 10
-par ToyLineNetwork.node[4] queryZipfAlpha 0
-par ToyLineNetwork.node[4] churnInterval 0s
-attr unit s
-par ToyLineNetwork.node[4] churnProbability 0.1
-par ToyLineNetwork.node[4] withdrawProbability 0.3
-par ToyLineNetwork.node[4] processingDelayPerOp 0.0001s
-attr unit s
-scalar ToyLineNetwork.node[4] finalBgpTableSize 1
-scalar ToyLineNetwork.node[4] finalDnsCacheSize 0
-scalar ToyLineNetwork.node[4] finalDnsAuthoritySize 0
-scalar ToyLineNetwork.node[4] totalTableOperations 1
-scalar ToyLineNetwork.node[4] nodeId 4
-scalar ToyLineNetwork.node[4] correctAnswers:count 10
-attr recordingmode count
-scalar ToyLineNetwork.node[4] correctAnswers:sum 10
-attr recordingmode sum
-statistic ToyLineNetwork.node[4] correctAnswers:histogram
+statistic ToyLineNetwork.node[4] messageBytesReceived:histogram
 field count 10
-field mean 1
+field mean 80
 field stddev 0
-field min 1
-field max 1
-field sum 10
-field sqrsum 10
+field min 80
+field max 80
+field sum 800
+field sqrsum 64000
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	10
-bin	2	0
-scalar ToyLineNetwork.node[4] staleAnswers:count 0
-attr recordingmode count
-scalar ToyLineNetwork.node[4] staleAnswers:sum 0
+bin	79	0
+bin	80	10
+bin	81	0
+scalar ToyLineNetwork.node[4] messageBytesSent:sum 480
 attr recordingmode sum
-statistic ToyLineNetwork.node[4] staleAnswers:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+statistic ToyLineNetwork.node[4] messageBytesSent:histogram
+field count 10
+field mean 48
+field stddev 0
+field min 48
+field max 48
+field sum 480
+field sqrsum 23040
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	0
-scalar ToyLineNetwork.node[4] discoveryLatency:mean 0.04
+bin	47	0
+bin	48	10
+bin	49	0
+scalar ToyLineNetwork.node[4] dnsQueryLatency:mean 0.02
 attr recordingmode mean
-scalar ToyLineNetwork.node[4] discoveryLatency:min 0.04
+scalar ToyLineNetwork.node[4] dnsQueryLatency:min 0.02
 attr recordingmode min
-scalar ToyLineNetwork.node[4] discoveryLatency:max 0.04
+scalar ToyLineNetwork.node[4] dnsQueryLatency:max 0.02
 attr recordingmode max
-statistic ToyLineNetwork.node[4] discoveryLatency:histogram
-field count 1
-field mean 0.04
-field stddev nan
-field min 0.04
-field max 0.04
-field sum 0.04
-field sqrsum 0.0016
+statistic ToyLineNetwork.node[4] dnsQueryLatency:histogram
+field count 10
+field mean 0.02
+field stddev 0
+field min 0.02
+field max 0.02
+field sum 0.2
+field sqrsum 0.004
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	0.01	0
-bin	0.02	0
+bin	0.02	10
 bin	0.03	0
-bin	0.04	1
+bin	0.04	0
 bin	0.05	0
 bin	0.06	0
 bin	0.07	0
@@ -2883,86 +2950,23 @@ bin	0.49	0
 bin	0.5	0
 bin	0.51	0
 bin	0.52	0
-bin	0.53	0
-bin	0.54	0
-scalar ToyLineNetwork.node[4] tableOperations:sum 1
-attr recordingmode sum
-statistic ToyLineNetwork.node[4] tableOperations:histogram
-field count 1
-field mean 1
-field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	1
-bin	2	0
-scalar ToyLineNetwork.node[4] messageBytesReceived:sum 80
-attr recordingmode sum
-statistic ToyLineNetwork.node[4] messageBytesReceived:histogram
-field count 1
-field mean 80
-field stddev nan
-field min 80
-field max 80
-field sum 80
-field sqrsum 6400
-attr recordingmode histogram
-bin	-inf	0
-bin	79	0
-bin	80	1
-bin	81	0
-scalar ToyLineNetwork.node[4] messageBytesSent:sum 0
-attr recordingmode sum
-statistic ToyLineNetwork.node[4] messageBytesSent:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	0
-scalar ToyLineNetwork.node[4] dnsQueryLatency:mean nan
-attr recordingmode mean
-scalar ToyLineNetwork.node[4] dnsQueryLatency:min nan
-attr recordingmode min
-scalar ToyLineNetwork.node[4] dnsQueryLatency:max nan
-attr recordingmode max
-statistic ToyLineNetwork.node[4] dnsQueryLatency:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	1	0
-scalar ToyLineNetwork.node[4] dnsCacheMisses:count 0
+scalar ToyLineNetwork.node[4] dnsCacheMisses:count 10
 attr recordingmode count
-scalar ToyLineNetwork.node[4] dnsCacheMisses:sum 0
+scalar ToyLineNetwork.node[4] dnsCacheMisses:sum 10
 attr recordingmode sum
 statistic ToyLineNetwork.node[4] dnsCacheMisses:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+field count 10
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 10
+field sqrsum 10
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	0
+bin	1	10
+bin	2	0
 scalar ToyLineNetwork.node[4] dnsCacheHits:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[4] dnsCacheHits:sum 0
@@ -3062,22 +3066,23 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[4] dnsResponsesReceived:count 0
+scalar ToyLineNetwork.node[4] dnsResponsesReceived:count 10
 attr recordingmode count
-scalar ToyLineNetwork.node[4] dnsResponsesReceived:sum 0
+scalar ToyLineNetwork.node[4] dnsResponsesReceived:sum 10
 attr recordingmode sum
 statistic ToyLineNetwork.node[4] dnsResponsesReceived:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+field count 10
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 10
+field sqrsum 10
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	0
+bin	1	10
+bin	2	0
 scalar ToyLineNetwork.node[4] dnsResponsesSent:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[4] dnsResponsesSent:sum 0
@@ -3110,11 +3115,28 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[4] dnsQueriesSent:count 0
+scalar ToyLineNetwork.node[4] dnsQueriesSent:count 10
 attr recordingmode count
-scalar ToyLineNetwork.node[4] dnsQueriesSent:sum 0
+scalar ToyLineNetwork.node[4] dnsQueriesSent:sum 10
 attr recordingmode sum
 statistic ToyLineNetwork.node[4] dnsQueriesSent:histogram
+field count 10
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 10
+field sqrsum 10
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	10
+bin	2	0
+scalar ToyLineNetwork.node[4] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar ToyLineNetwork.node[4] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic ToyLineNetwork.node[4] bgpConvergenceTime:histogram
 field count 0
 field mean nan
 field stddev nan
@@ -3126,94 +3148,73 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[4] bgpConvergenceTime:mean 0.04
-attr recordingmode mean
-scalar ToyLineNetwork.node[4] bgpConvergenceTime:max 0.04
-attr recordingmode max
-statistic ToyLineNetwork.node[4] bgpConvergenceTime:histogram
-field count 1
-field mean 0.04
-field stddev nan
-field min 0.04
-field max 0.04
-field sum 0.04
-field sqrsum 0.0016
-attr recordingmode histogram
-bin	-inf	0
-bin	0	0
-bin	0.01	0
-bin	0.02	0
-bin	0.03	0
-bin	0.04	1
-bin	0.05	0
-bin	0.06	0
-bin	0.07	0
-bin	0.08	0
-bin	0.09	0
-bin	0.1	0
-bin	0.11	0
-bin	0.12	0
-bin	0.13	0
-bin	0.14	0
-bin	0.15	0
-bin	0.16	0
-bin	0.17	0
-bin	0.18	0
-bin	0.19	0
-bin	0.2	0
-bin	0.21	0
-bin	0.22	0
-bin	0.23	0
-bin	0.24	0
-bin	0.25	0
-bin	0.26	0
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	0
-bin	0.35	0
-bin	0.36	0
-bin	0.37	0
-bin	0.38	0
-bin	0.39	0
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
-bin	0.5	0
-bin	0.51	0
-bin	0.52	0
-bin	0.53	0
-bin	0.54	0
-scalar ToyLineNetwork.node[4] bgpTableSize:last 1
+scalar ToyLineNetwork.node[4] bgpTableSize:last 0
 attr recordingmode last
-scalar ToyLineNetwork.node[4] bgpTableSize:max 1
+scalar ToyLineNetwork.node[4] bgpTableSize:max 0
 attr recordingmode max
-scalar ToyLineNetwork.node[4] bgpTableSize:timeavg 1
+scalar ToyLineNetwork.node[4] bgpTableSize:timeavg nan
 attr recordingmode timeavg
 statistic ToyLineNetwork.node[4] bgpTableSize:histogram
-field count 2
-field mean 1
-field stddev 0
-field min 1
-field max 1
-field sum 2
-field sqrsum 2
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
-bin	0	0
-bin	1	2
-bin	2	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
 scalar ToyLineNetwork.node[4] bgpWithdrawsReceived:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[4] bgpWithdrawsReceived:sum 0
@@ -3246,23 +3247,22 @@ attr recordingmode histogram
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar ToyLineNetwork.node[4] bgpAnnouncesReceived:count 1
+scalar ToyLineNetwork.node[4] bgpAnnouncesReceived:count 0
 attr recordingmode count
-scalar ToyLineNetwork.node[4] bgpAnnouncesReceived:sum 1
+scalar ToyLineNetwork.node[4] bgpAnnouncesReceived:sum 0
 attr recordingmode sum
 statistic ToyLineNetwork.node[4] bgpAnnouncesReceived:histogram
-field count 1
-field mean 1
+field count 0
+field mean nan
 field stddev nan
-field min 1
-field max 1
-field sum 1
-field sqrsum 1
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
 attr recordingmode histogram
 bin	-inf	0
 bin	0	0
-bin	1	1
-bin	2	0
+bin	1	0
 scalar ToyLineNetwork.node[4] bgpAnnouncesSent:count 0
 attr recordingmode count
 scalar ToyLineNetwork.node[4] bgpAnnouncesSent:sum 0

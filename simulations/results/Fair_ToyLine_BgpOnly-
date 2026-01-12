@@ -1,22 +1,22 @@
 version 3
-run ToyLine_BgpOnly-0-20260111-22:10:09-4032
-attr configname ToyLine_BgpOnly
-attr datetime 20260111-22:10:09
-attr datetimef 20260111-221009
-attr experiment ToyLine_BgpOnly
+run Fair_ToyLine_BgpOnly-0-20260111-22:40:27-15055
+attr configname Fair_ToyLine_BgpOnly
+attr datetime 20260111-22:40:27
+attr datetimef 20260111-224027
+attr experiment Fair_ToyLine_BgpOnly
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network bgpdns.ToyLineNetwork
-attr processid 4032
+attr processid 15055
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-config description "5-node line network, BGP only, single EID"
+config description "5-node line network, BGP only (baseline)"
 config network bgpdns.ToyLineNetwork
 config sim-time-limit 30s
 config *.numNodes 5
@@ -31,12 +31,11 @@ config *.node[4].queryInterval 1s
 config *.node[*].bgpEnabled true
 config *.node[*].dnsEnabled false
 config *.groundTruth.verboseLogging true
-config *.groundTruth.snapshotInterval 1s
 config network bgpdns.ToyLineNetwork
 config sim-time-limit 100s
 config warmup-period 1s
-config output-scalar-file results/ToyLine_BgpOnly-
-config output-vector-file results/ToyLine_BgpOnly-
+config output-scalar-file results/Fair_ToyLine_BgpOnly-
+config output-vector-file results/Fair_ToyLine_BgpOnly-
 config seed-set 0
 config repeat 5
 config **.result-recording-modes default,+histogram
@@ -684,6 +683,9 @@ par ToyLineNetwork.node[0] dnsCacheSize 10000
 par ToyLineNetwork.node[0] dnsQueryTimeout 5s
 attr unit s
 par ToyLineNetwork.node[0] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[0] dnsDirectMode false
+par ToyLineNetwork.node[0] dnsBaseRtt 0s
+attr unit s
 par ToyLineNetwork.node[0] publishEids "\"100\""
 par ToyLineNetwork.node[0] publishStartTime 1s
 attr unit s
@@ -1124,6 +1126,9 @@ par ToyLineNetwork.node[1] dnsCacheSize 10000
 par ToyLineNetwork.node[1] dnsQueryTimeout 5s
 attr unit s
 par ToyLineNetwork.node[1] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[1] dnsDirectMode false
+par ToyLineNetwork.node[1] dnsBaseRtt 0s
+attr unit s
 par ToyLineNetwork.node[1] publishEids "\"\""
 par ToyLineNetwork.node[1] publishStartTime 1s
 attr unit s
@@ -1666,6 +1671,9 @@ par ToyLineNetwork.node[2] dnsCacheSize 10000
 par ToyLineNetwork.node[2] dnsQueryTimeout 5s
 attr unit s
 par ToyLineNetwork.node[2] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[2] dnsDirectMode false
+par ToyLineNetwork.node[2] dnsBaseRtt 0s
+attr unit s
 par ToyLineNetwork.node[2] publishEids "\"\""
 par ToyLineNetwork.node[2] publishStartTime 1s
 attr unit s
@@ -2210,6 +2218,9 @@ par ToyLineNetwork.node[3] dnsCacheSize 10000
 par ToyLineNetwork.node[3] dnsQueryTimeout 5s
 attr unit s
 par ToyLineNetwork.node[3] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[3] dnsDirectMode false
+par ToyLineNetwork.node[3] dnsBaseRtt 0s
+attr unit s
 par ToyLineNetwork.node[3] publishEids "\"\""
 par ToyLineNetwork.node[3] publishStartTime 1s
 attr unit s
@@ -2756,6 +2767,9 @@ par ToyLineNetwork.node[4] dnsCacheSize 10000
 par ToyLineNetwork.node[4] dnsQueryTimeout 5s
 attr unit s
 par ToyLineNetwork.node[4] dnsMaxHierarchyDepth 5
+par ToyLineNetwork.node[4] dnsDirectMode false
+par ToyLineNetwork.node[4] dnsBaseRtt 0s
+attr unit s
 par ToyLineNetwork.node[4] publishEids "\"\""
 par ToyLineNetwork.node[4] publishStartTime 1s
 attr unit s

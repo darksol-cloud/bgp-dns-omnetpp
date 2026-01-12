@@ -67,6 +67,13 @@ void EidNode::initialize()
 
     scheduleInitialEvents();
 
+    // Estimate network diameter for direct mode
+    if (dnsDirectMode && dnsBaseRtt <= 0) {
+        networkDiameter = estimateNetworkDiameter();
+    } else {
+        networkDiameter = dnsBaseRtt;
+    }
+
     EV_INFO << "EidNode " << nodeId << " initialized"
             << " [publisher=" << isPublisher
             << ", client=" << isClient
@@ -74,6 +81,7 @@ void EidNode::initialize()
             << ", dns=" << dnsEnabled
             << ", resolver=" << isResolver
             << ", authority=" << isAuthority
+            << (dnsDirectMode ? ", directMode" : "")
             << "]" << endl;
 }
 
@@ -109,6 +117,8 @@ void EidNode::parseParameters()
     dnsCacheSize = par("dnsCacheSize").intValue();
     dnsQueryTimeout = par("dnsQueryTimeout").doubleValue();
     dnsMaxHierarchyDepth = par("dnsMaxHierarchyDepth").intValue();
+    dnsDirectMode = par("dnsDirectMode").boolValue();
+    dnsBaseRtt = par("dnsBaseRtt").doubleValue();
 
     publishEids = parseIntList(par("publishEids").stringValue());
     publishStartTime = par("publishStartTime").doubleValue();
@@ -681,7 +691,14 @@ void EidNode::dnsDeregisterEid(int eid)
 
 void EidNode::dnsQueryEid(int eid)
 {
-    EV_DEBUG << "Node " << nodeId << " querying EID " << eid << endl;
+    EV_DEBUG << "Node " << nodeId << " querying EID " << eid
+             << (dnsDirectMode ? " (direct mode)" : "") << endl;
+
+    // Use direct mode if enabled - simulates DNS over pre-routed network
+    if (dnsDirectMode) {
+        dnsQueryEidDirect(eid);
+        return;
+    }
 
     int queryId = nextQueryId++;
 
@@ -1124,6 +1141,218 @@ int EidNode::findGateToNode(int targetNodeId)
     }
 
     return -1;
+}
+
+// ============================================================================
+// Direct Mode Implementation (Fair Comparison)
+// ============================================================================
+
+EidNode* EidNode::findNodeModule(int targetNodeId)
+{
+    // Try various submodule naming conventions
+    cModule *parent = getParentModule();
+
+    // Try "node[targetNodeId]"
+    cModule *mod = parent->getSubmodule("node", targetNodeId);
+    if (mod) return dynamic_cast<EidNode*>(mod);
+
+    // Try "authority[x]" - need to iterate
+    for (int i = 0; ; i++) {
+        mod = parent->getSubmodule("authority", i);
+        if (!mod) break;
+        EidNode *node = dynamic_cast<EidNode*>(mod);
+        if (node && node->getNodeId() == targetNodeId) return node;
+    }
+
+    // Try "resolver[x]"
+    for (int i = 0; ; i++) {
+        mod = parent->getSubmodule("resolver", i);
+        if (!mod) break;
+        EidNode *node = dynamic_cast<EidNode*>(mod);
+        if (node && node->getNodeId() == targetNodeId) return node;
+    }
+
+    // Try "root"
+    mod = parent->getSubmodule("root");
+    if (mod) {
+        EidNode *node = dynamic_cast<EidNode*>(mod);
+        if (node && node->getNodeId() == targetNodeId) return node;
+    }
+
+    return nullptr;
+}
+
+void EidNode::dnsQueryEidDirect(int eid)
+{
+    // Direct mode: simulate DNS query going directly to resolver/authority
+    // This models DNS running over an already-routed IP network
+
+    simtime_t queryStartTime = simTime();
+
+    // Check local cache first
+    DnsCacheEntry *cached = dnsLookupCache(eid);
+    if (cached && !cached->isExpired()) {
+        emit(dnsCacheHitsSignal, 1L);
+
+        // Check staleness
+        if (groundTruth) {
+            bool isStale = !groundTruth->isRecordCurrent(eid, cached->endpoint, cached->recordTime);
+            if (isStale) {
+                emit(staleAnswersSignal, 1L);
+            } else {
+                emit(correctAnswersSignal, 1L);
+            }
+        }
+        return;
+    }
+
+    emit(dnsCacheMissesSignal, 1L);
+
+    // Find the target (resolver or authority)
+    int targetNodeId = -1;
+    EidNode *targetNode = nullptr;
+
+    if (resolverNodeId >= 0) {
+        targetNodeId = resolverNodeId;
+    } else {
+        targetNodeId = findAuthorityForEid(eid);
+    }
+
+    if (targetNodeId >= 0) {
+        targetNode = findNodeModule(targetNodeId);
+    }
+
+    if (!targetNode) {
+        EV_WARN << "Node " << nodeId << " cannot find target for direct DNS query" << endl;
+        return;
+    }
+
+    // Calculate RTT based on network diameter estimate
+    // In direct mode, we model the underlying IP network's latency
+    double rtt = networkDiameter > 0 ? networkDiameter : 0.04; // Default 40ms if not estimated
+
+    // Check if target is resolver (needs to query authority) or authority (direct answer)
+    bool found = false;
+    EndpointInfo endpoint;
+    int ttl = 0;
+    simtime_t recordTime = simTime();
+
+    if (targetNode->isResolver) {
+        // Resolver needs to check its cache or forward to authority
+        DnsCacheEntry *resolverCache = const_cast<std::map<int, DnsCacheEntry>&>(
+            targetNode->getDnsCache()).count(eid) ?
+            &const_cast<std::map<int, DnsCacheEntry>&>(targetNode->getDnsCache())[eid] : nullptr;
+
+        if (resolverCache && !resolverCache->isExpired()) {
+            // Resolver cache hit
+            emit(dnsCacheHitsSignal, 1L);
+            found = true;
+            endpoint = resolverCache->endpoint;
+            ttl = resolverCache->ttl;
+            recordTime = resolverCache->recordTime;
+        } else {
+            // Resolver cache miss - need to query authority
+            int authNodeId = targetNode->findAuthorityForEid(eid);
+            EidNode *authNode = authNodeId >= 0 ? findNodeModule(authNodeId) : nullptr;
+
+            if (authNode && authNode->isAuthority) {
+                auto authIt = authNode->getDnsAuthorityDb().find(eid);
+                if (authIt != authNode->getDnsAuthorityDb().end()) {
+                    found = true;
+                    endpoint = authIt->second.endpoint;
+                    ttl = authIt->second.ttl;
+                    recordTime = authIt->second.lastChangedTime;
+
+                    // Update resolver cache
+                    const_cast<EidNode*>(targetNode)->dnsAddToCache(
+                        eid, endpoint, ttl, recordTime, true);
+                }
+                // Extra RTT for resolver -> authority
+                rtt *= 2;
+            }
+        }
+    } else if (targetNode->isAuthority) {
+        // Direct to authority
+        auto authIt = targetNode->getDnsAuthorityDb().find(eid);
+        if (authIt != targetNode->getDnsAuthorityDb().end()) {
+            found = true;
+            endpoint = authIt->second.endpoint;
+            ttl = authIt->second.ttl;
+            recordTime = authIt->second.lastChangedTime;
+        }
+    }
+
+    // Record statistics
+    emit(dnsQueriesSentSignal, 1L);
+    emit(dnsResponsesReceivedSignal, 1L);
+    recordBytesSent(48);  // Query size
+    recordBytesReceived(80);  // Response size
+
+    // Simulate the RTT delay for latency measurement
+    simtime_t latency = SimTime(rtt, SIMTIME_S);
+    emit(dnsQueryLatencySignal, latency);
+    emit(discoveryLatencySignal, latency);
+
+    if (found) {
+        // Add to local cache if we're a resolver
+        if (isResolver) {
+            dnsAddToCache(eid, endpoint, ttl, recordTime, true);
+        }
+
+        // Check correctness
+        if (groundTruth) {
+            bool isStale = !groundTruth->isRecordCurrent(eid, endpoint, recordTime);
+            if (isStale) {
+                emit(staleAnswersSignal, 1L);
+            } else {
+                emit(correctAnswersSignal, 1L);
+            }
+        }
+    }
+}
+
+double EidNode::estimateNetworkDiameter()
+{
+    // Estimate network diameter based on topology
+    // This is used for direct mode RTT calculation
+    // For a grid of NxN, diameter is approximately 2*(N-1) hops
+    // For a line of N nodes, diameter is N-1 hops
+
+    cModule *parent = getParentModule();
+    int totalNodes = 0;
+
+    // Count nodes
+    for (int i = 0; ; i++) {
+        if (!parent->getSubmodule("node", i)) break;
+        totalNodes++;
+    }
+
+    if (totalNodes == 0) {
+        // Try counting other types
+        GroundTruth *gt = dynamic_cast<GroundTruth*>(parent->getSubmodule("groundTruth"));
+        if (gt) {
+            totalNodes = gt->par("totalNodes").intValue();
+        }
+    }
+
+    if (totalNodes <= 1) return 0.01;  // 10ms minimum
+
+    // Estimate based on sqrt(totalNodes) for grid-like topologies
+    // Assume 10ms per hop (from EidChannel default delay)
+    double hops = sqrt((double)totalNodes);
+    double hopDelay = 0.01;  // 10ms
+
+    // Get actual channel delay if possible
+    if (!neighborGates.empty()) {
+        cGate *outGate = gate("port$o", neighborGates[0]);
+        if (outGate && outGate->getChannel()) {
+            cChannel *ch = outGate->getChannel();
+            hopDelay = ch->par("delay").doubleValue();
+        }
+    }
+
+    // RTT = 2 * diameter * hopDelay
+    return 2 * hops * hopDelay;
 }
 
 // ============================================================================

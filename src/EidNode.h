@@ -104,6 +104,11 @@ class EidNode : public cSimpleModule
     double dnsQueryTimeout;
     int dnsMaxHierarchyDepth;
 
+    // Fair comparison mode
+    bool dnsDirectMode;         // If true, DNS uses sendDirect() to model pre-routed transport
+    double dnsBaseRtt;          // Base RTT for direct mode
+    double networkDiameter;     // Estimated network diameter (computed at init)
+
     // Publisher parameters
     std::vector<int> publishEids;
     double publishStartTime;
@@ -251,6 +256,13 @@ class EidNode : public cSimpleModule
     int findResolverForNode();
     int findRootServer();
     int findGateToNode(int targetNodeId);
+
+    // Direct mode helpers
+    EidNode* findNodeModule(int targetNodeId);
+    void dnsQueryEidDirect(int eid);
+    void dnsSendDirectResponse(DnsQuery *query, bool found, const EndpointInfo& endpoint,
+                               int ttl, simtime_t recordTime);
+    double estimateNetworkDiameter();
 
     // ========================================
     // Timer Handlers

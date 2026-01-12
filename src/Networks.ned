@@ -249,6 +249,45 @@ network GridNetwork
 }
 
 // ============================================================================
+// Fair Comparison Network
+// For comparing BGP vs DNS at the same abstraction level
+// Both protocols operate over the SAME physical topology
+// DNS additionally has logical "direct" connections to authority/resolver
+// ============================================================================
+network FairComparisonNetwork
+{
+    parameters:
+        int numNodes = default(25);           // Total nodes in the network
+        int gridWidth = default(5);           // For grid-like arrangement
+        int gridHeight = default(5);
+        int authorityNode = default(12);      // Central authority node
+        int resolverNode = default(11);       // Resolver near authority
+        @display("bgb=1000,1000");
+
+    submodules:
+        groundTruth: GroundTruth {
+            parameters:
+                totalNodes = parent.numNodes;
+                @display("p=50,50");
+        }
+
+        // All nodes participate in the network
+        // For BGP: all nodes run BGP protocol
+        // For DNS: only some nodes have special roles, but all can be clients
+        node[numNodes]: EidNode {
+        }
+
+    connections:
+        // Grid connections (physical topology - same for both protocols)
+        for y=0..gridHeight-1, for x=0..gridWidth-2 {
+            node[y*gridWidth + x].port++ <--> EidChannel <--> node[y*gridWidth + x + 1].port++;
+        }
+        for y=0..gridHeight-2, for x=0..gridWidth-1 {
+            node[y*gridWidth + x].port++ <--> EidChannel <--> node[(y+1)*gridWidth + x].port++;
+        }
+}
+
+// ============================================================================
 // Generic Configurable Network (topology from file or parameters)
 // ============================================================================
 network ConfigurableNetwork

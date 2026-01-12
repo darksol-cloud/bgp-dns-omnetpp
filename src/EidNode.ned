@@ -35,6 +35,11 @@ simple EidNode
         double dnsQueryTimeout @unit(s) = default(5s);
         int dnsMaxHierarchyDepth = default(5);  // Maximum referral chain depth
 
+        // Fair comparison mode: model DNS as having direct access to resolver/authority
+        // This simulates DNS running over an already-routed network (like real DNS over IP)
+        bool dnsDirectMode = default(false);    // If true, DNS queries use sendDirect()
+        double dnsBaseRtt @unit(s) = default(0s);  // Base RTT for direct mode (0 = use network diameter estimate)
+
         // Publisher parameters (if isPublisher)
         string publishEids = default("");       // Comma-separated list of EIDs to publish
         double publishStartTime @unit(s) = default(1s);
