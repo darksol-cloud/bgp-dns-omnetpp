@@ -1,116 +1,0 @@
-   
-
-
-
-Distributing DTN EID Reachability Information
-Juan A. Fraire
-DARKSOL
-
-BGP / DNS
-1
-
-Problem
-Problem Statement
-2
-In DTN, nodes are identified by EIDs. Applications must know which EIDs are reachable and how to forward bundles to them.
-
-A DTN Node Must Know:
-1) Which EIDs currently exist(e.g., new services, applications, or agents joining/ leaving)
-2) Which next-hop neighbor can forward toward each EID(“To reach EID X, send bundles to neighbor Y over CLA Z.”)
-3) What convergence layer parameters to use(CLA type, address, port, security keys, QoS attributes)
-4) When reachability becomes invalid(EIDs disappear, CLAs go down, applications terminate)
-
-Problem
-Challenge
-3
-❶ No continuous connectivityNodes may be offline for minutes–hours–days.
-❷ No broadcast or multicast “flooding”Not acceptable in DTN-over-IP or SSI-scale systems.
-❸ Multi-hop, transitive reachabilityA gateway may reach EIDs beyond the immediate neighbor.
-❹ Heterogeneous convergence layers at each hop.TCPCL, UDPCL, MTCP, QUIC, etc.
-
-Key Challenges
-
-Problem
-State-of-the-Art
-4
-Static EID tables, Static CLA configs., Preloaded topology.
-How is it done today?
-Configuration today is Manual
-This is not scalable for large-scale SSI/planetary networks or dynamic platforms (e.g., Kubernetes apps, drones, LEO gateways).
-What do we Need?
-A simple, automatic, IP-compatible mechanism to tell nodes:“These EIDs are reachable right now, and here is the next-hop CLA.”
-
-Opportunity
-What to Do?
-5
-Consider adapting/extending existing IP mechanisms to distributed EID reachability information to DTN instances in an IP network.
-BGP
-DNS
-Border Gateway Protocol is a path-vector routing protocol that continuously distributes reachability information across multiple administrative domains.
-Domain Name System is a hierarchical, distributed naming system that resolves identifiers to network endpoints through on-demand queries.
-
-The BGP Approach
-BGP-Based DTN EID Reachability Resolution
-[1] M. Feldmann, T. Tchilinguirian and F. Walter, "A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networks," 2025 IEEE International Conference on Wireless for Space and Extreme Environments (WiSEE), Halifax, NS, Canada, 2025, pp. 1-6, doi: 10.1109/WiSEE57913.2025.11229835. Uri: https://ieeexplore.ieee.org/document/11229835 
-6
-Extend the Internet’s BGP to carry DTN-specific NLRIs (Network Layer Reachability Information) for EIDs.
-Each NLRI carriesEID prefix, originator, next-hop CLA endpoint, optional metadata.
-BGP UPDATE messages propagate NLRIs following normal BGP rules.
-• Reachability propagates across multiple AS hops 
-• Changes announced incrementally with UPDATE/WITHDRAW
-Every BGP-enabled DTN router maintains a DTN-FIB mapping
-
-The DNS Approach
-BGP-Based DTN EID Reachability Resolution
-
-[1] The SVCB lookup Erik Kline had in mind for a QUIC CL would mirror the SRV lookup that he outlined in the ipn.arpa draft: https://datatracker.ietf.org/doc/html/draft-ek-dtn-ipn-arpa-00#section-3
-[2] Repos: https://github.com/ori-edge/k8s_gateway and https://github.com/k8s-gateway/k8s_gateway 
-7
-Resolve EID → CLA endpoint mappings on demand using DNS, without maintaining a distributed control-plane
-Hierarchical namespace: EIDs are mapped to DNS zones (e.g., 978879.ipn.arpa)
-Resolution via standard DNS queries: PTR, SRV/SVCB, A/AAAA
-A BP Agent can resolve any reachable EID using DNS lookups
-• On-demand resolution, Hierarchical authority
-• Decoupled from routing: DNS gives the BP endpoint, not paths
-
-BGP vs. DNS Approaches
-A Qualitative Comparison
-Aspect
-BGP Approach
-DNS Approach
-Mechanism
-Push routing state
-Pull resolution queries
-State Model
-Distributed, dynamic DTN-FIB
-Centralized, cached records
-Multi-hop
-Transitive (multi-hop)
-Non-Transitive (single-hop)
-Churn Handling
-Fast UPDATE/WITHDRAW
-Slow invalidation, TTL-based
-Overhead
-High (continuous)
-Low (on-demand)
-Disruption-Tolerance
-Medium (relies in TCP sessions)
-High (stateless client-side, UDP)
-Ideal Use
-Backbone, large domains
-Edge, service endpoints
-
-BGP vs. DNS Approaches
-A Quantitative Comparison
-First running simulation setup using INET’s Omnet++ Library
-Feeling for the moment: INET feels like overkill for the analysis(too complicated to configure, with multiple parameters down to the Link layer that makes evaluation very complicated)
-BGP relies on persistent TCP/QUIC sessions between neighbors. When links flap, gateways reboot, or intermittent connectivity appears, these sessions repeatedly reset, triggering slow reconvergence or long hold-times. UPDATE/WITHDRAW propagation pauses while sessions re-establish. BGP degrades under frequent outages or DTN-style disruption.
-
-DNS is fundamentally stateless on the client side. Queries are retried over multiple paths/resolvers and benefit from: Caching, Redundant authoritative servers, Store-and-forward UDP behavior.
-
-Distributing DTN EID Reachability Information
-Juan A. Fraire
-DARKSOL
-
-BGP / DNS
-10

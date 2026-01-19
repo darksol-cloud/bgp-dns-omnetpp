@@ -30,6 +30,6 @@ Makefile
 __pycache__/
 *.pyc
 
-# Simulation results (optional - remove if you want to track results)
+# Simulation results
 simulations/results/
 simulations/plots/
