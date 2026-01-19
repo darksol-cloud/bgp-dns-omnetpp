@@ -24,3 +24,12 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Simulation results (optional - remove if you want to track results)
+simulations/results/
+simulations/plots/

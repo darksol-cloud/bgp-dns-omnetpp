@@ -64,6 +64,7 @@ void EidNode::initialize()
     tableOperationCount = 0;
     nextQueryId = nodeId * 1000000;  // Unique query ID space per node
     queriesSent = 0;
+    publishIndex = 0;
 
     scheduleInitialEvents();
 
@@ -1361,8 +1362,6 @@ double EidNode::estimateNetworkDiameter()
 
 void EidNode::handlePublishTimer()
 {
-    static size_t publishIndex = 0;
-
     if (publishIndex < publishEids.size()) {
         int eid = publishEids[publishIndex];
 

@@ -115,6 +115,7 @@ class EidNode : public cSimpleModule
     double publishInterval;
     std::string claProtocol;
     int claPort;
+    size_t publishIndex;        // Current index for publishing EIDs
 
     // Client parameters
     std::vector<int> queryEids;
