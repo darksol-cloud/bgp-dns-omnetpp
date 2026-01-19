@@ -32,8 +32,8 @@ bgp-dns/
 │   ├── experiments.ini       # Experiment configurations (Exp 1-5)
 │   ├── run_experiments.sh    # Experiment execution script
 │   ├── experiment_plots.py   # Python analysis and plotting script
-│   ├── PLAN.md               # Detailed experiment plan
-│   ├── experiments_explanation.md  # Results explanation
+│   ├── experiment_plan.md               # Detailed experiment plan
+│   ├── experiment_explanation.md  # Results explanation
 │   └── results/              # Output files (scalar, vector, CSV)
 ├── Makefile                  # Build configuration
 └── README.md                 # This file
