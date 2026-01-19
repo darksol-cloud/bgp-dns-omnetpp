@@ -177,4 +177,4 @@ cd simulations
 
 ## License
 
-This simulation model is provided for research and educational purposes.
+This simulation model is provided for research and educational purposes. This development was funded by the [DARKSOL project](https://darksol.cloud/en/).
