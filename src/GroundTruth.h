@@ -35,6 +35,12 @@ struct ConvergenceState {
     int currentCorrectNodes;     // How many currently have correct info
     bool converged;
     simtime_t convergenceTime;   // When convergence was achieved
+
+    // Initial convergence tracking (separate from churn)
+    simtime_t initialPublishTime;    // When the EID was FIRST published
+    bool initialConverged;           // Whether initial convergence was recorded
+    simtime_t initialConvergenceTime; // When initial convergence occurred
+    bool isChurnEvent;               // True if current state is from churn, not initial publish
 };
 
 class GroundTruth : public cSimpleModule
@@ -62,6 +68,8 @@ class GroundTruth : public cSimpleModule
     simsignal_t globalBgpBytesSignal;
     simsignal_t globalDnsBytesSignal;
     simsignal_t globalConvergenceTimeSignal;
+    simsignal_t initialConvergenceTimeSignal;  // NEW: Initial convergence only
+    simsignal_t churnConvergenceTimeSignal;    // NEW: Churn-triggered convergence
     simsignal_t globalAccuracySignal;
     simsignal_t globalCoverageSignal;
     simsignal_t globalStaleRateSignal;

@@ -30,6 +30,8 @@ void GroundTruth::initialize()
     globalBgpBytesSignal = registerSignal("globalBgpBytes");
     globalDnsBytesSignal = registerSignal("globalDnsBytes");
     globalConvergenceTimeSignal = registerSignal("globalConvergenceTime");
+    initialConvergenceTimeSignal = registerSignal("initialConvergenceTime");
+    churnConvergenceTimeSignal = registerSignal("churnConvergenceTime");
     globalAccuracySignal = registerSignal("globalAccuracy");
     globalCoverageSignal = registerSignal("globalCoverage");
     globalStaleRateSignal = registerSignal("globalStaleRate");
@@ -129,6 +131,9 @@ void GroundTruth::recordEidPublish(int eid, int publisherId, const EndpointInfo&
     record.lastChangeTime = time;
     record.isActive = true;
 
+    // Check if this is the first publish for this EID
+    bool isFirstPublish = (groundTruthDb.find(eid) == groundTruthDb.end());
+
     auto it = groundTruthDb.find(eid);
     if (it != groundTruthDb.end()) {
         record.version = it->second.version + 1;
@@ -146,11 +151,34 @@ void GroundTruth::recordEidPublish(int eid, int publisherId, const EndpointInfo&
     state.currentCorrectNodes = 1;  // Publisher has it
     state.converged = false;
     state.convergenceTime = SIMTIME_ZERO;
+
+    // Track initial convergence separately
+    if (isFirstPublish) {
+        state.initialPublishTime = time;
+        state.initialConverged = false;
+        state.initialConvergenceTime = SIMTIME_ZERO;
+        state.isChurnEvent = false;
+    } else {
+        // Preserve initial convergence data from previous state if it exists
+        auto prevIt = convergenceStates.find(eid);
+        if (prevIt != convergenceStates.end()) {
+            state.initialPublishTime = prevIt->second.initialPublishTime;
+            state.initialConverged = prevIt->second.initialConverged;
+            state.initialConvergenceTime = prevIt->second.initialConvergenceTime;
+        } else {
+            state.initialPublishTime = time;
+            state.initialConverged = false;
+            state.initialConvergenceTime = SIMTIME_ZERO;
+        }
+        state.isChurnEvent = true;
+    }
+
     convergenceStates[eid] = state;
 
     if (verboseLogging) {
         EV_INFO << "GroundTruth: EID " << eid << " published by node " << publisherId
-                << " at " << time << " (version " << record.version << ")" << endl;
+                << " at " << time << " (version " << record.version
+                << ", isChurn=" << (state.isChurnEvent ? "yes" : "no") << ")" << endl;
     }
 }
 
@@ -162,7 +190,7 @@ void GroundTruth::recordEidWithdraw(int eid, int publisherId, simtime_t time)
         it->second.lastChangeTime = time;
         it->second.version++;
 
-        // Update convergence state
+        // Update convergence state, preserving initial convergence data
         ConvergenceState state;
         state.eid = eid;
         state.eventTime = time;
@@ -170,11 +198,25 @@ void GroundTruth::recordEidWithdraw(int eid, int publisherId, simtime_t time)
         state.currentCorrectNodes = 0;
         state.converged = false;
         state.convergenceTime = SIMTIME_ZERO;
+        state.isChurnEvent = true;  // Withdraw is always a churn event
+
+        // Preserve initial convergence data
+        auto prevIt = convergenceStates.find(eid);
+        if (prevIt != convergenceStates.end()) {
+            state.initialPublishTime = prevIt->second.initialPublishTime;
+            state.initialConverged = prevIt->second.initialConverged;
+            state.initialConvergenceTime = prevIt->second.initialConvergenceTime;
+        } else {
+            state.initialPublishTime = time;
+            state.initialConverged = false;
+            state.initialConvergenceTime = SIMTIME_ZERO;
+        }
+
         convergenceStates[eid] = state;
 
         if (verboseLogging) {
             EV_INFO << "GroundTruth: EID " << eid << " withdrawn by node " << publisherId
-                    << " at " << time << endl;
+                    << " at " << time << " (churn event)" << endl;
         }
     }
 }
@@ -308,10 +350,28 @@ void GroundTruth::checkConvergence()
             simtime_t convergenceLatency = simTime() - state.eventTime;
             emit(globalConvergenceTimeSignal, convergenceLatency);
 
-            if (verboseLogging || recordConvergenceEvents) {
-                EV_INFO << "GroundTruth: EID " << eid << " converged at " << simTime()
-                        << " (latency=" << convergenceLatency << "s, "
-                        << correctCount << "/" << totalNodes << " nodes)" << endl;
+            // Emit separate signals for initial vs churn convergence
+            if (!state.isChurnEvent && !state.initialConverged) {
+                // This is the INITIAL convergence for this EID
+                simtime_t initialLatency = simTime() - state.initialPublishTime;
+                state.initialConverged = true;
+                state.initialConvergenceTime = simTime();
+                emit(initialConvergenceTimeSignal, initialLatency);
+
+                if (verboseLogging || recordConvergenceEvents) {
+                    EV_INFO << "GroundTruth: EID " << eid << " INITIAL convergence at " << simTime()
+                            << " (latency=" << initialLatency << "s, "
+                            << correctCount << "/" << totalNodes << " nodes)" << endl;
+                }
+            } else {
+                // This is a CHURN-triggered convergence
+                emit(churnConvergenceTimeSignal, convergenceLatency);
+
+                if (verboseLogging || recordConvergenceEvents) {
+                    EV_INFO << "GroundTruth: EID " << eid << " churn convergence at " << simTime()
+                            << " (latency=" << convergenceLatency << "s, "
+                            << correctCount << "/" << totalNodes << " nodes)" << endl;
+                }
             }
         }
     }
@@ -489,15 +549,42 @@ void GroundTruth::finish()
 
     int convergedEids = 0;
     simtime_t totalConvergenceTime = SIMTIME_ZERO;
+    int initialConvergedEids = 0;
+    simtime_t totalInitialConvergenceTime = SIMTIME_ZERO;
+    int churnConvergedCount = 0;
+    simtime_t totalChurnConvergenceTime = SIMTIME_ZERO;
+
     for (auto& pair : convergenceStates) {
         if (pair.second.converged) {
             convergedEids++;
             totalConvergenceTime += (pair.second.convergenceTime - pair.second.eventTime);
         }
+        // Track initial convergence separately
+        if (pair.second.initialConverged) {
+            initialConvergedEids++;
+            totalInitialConvergenceTime += (pair.second.initialConvergenceTime - pair.second.initialPublishTime);
+        }
+        // Track churn convergence (current state is churn and converged)
+        if (pair.second.isChurnEvent && pair.second.converged) {
+            churnConvergedCount++;
+            totalChurnConvergenceTime += (pair.second.convergenceTime - pair.second.eventTime);
+        }
     }
     recordScalar("convergedEids", convergedEids);
     if (convergedEids > 0) {
         recordScalar("avgConvergenceTime", totalConvergenceTime.dbl() / convergedEids);
+    }
+
+    // Record INITIAL convergence statistics (the key metric!)
+    recordScalar("initialConvergedEids", initialConvergedEids);
+    if (initialConvergedEids > 0) {
+        recordScalar("avgInitialConvergenceTime", totalInitialConvergenceTime.dbl() / initialConvergedEids);
+    }
+
+    // Record churn convergence statistics
+    recordScalar("churnConvergedCount", churnConvergedCount);
+    if (churnConvergedCount > 0) {
+        recordScalar("avgChurnConvergenceTime", totalChurnConvergenceTime.dbl() / churnConvergedCount);
     }
 
     // Per-node final statistics

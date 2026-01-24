@@ -28,13 +28,15 @@ bgp-dns/
 │   ├── EidNode.h/cc          # Node implementation
 │   └── GroundTruth.h/cc      # Ground truth and metrics
 ├── simulations/
-│   ├── omnetpp.ini           # Basic simulation configurations
-│   ├── experiments.ini       # Experiment configurations (Exp 1-5)
-│   ├── run_experiments.sh    # Experiment execution script
-│   ├── experiment_plots.py   # Python analysis and plotting script
-│   ├── experiment_plan.md               # Detailed experiment plan
-│   ├── experiment_explanation.md  # Results explanation
-│   └── results/              # Output files (scalar, vector, CSV)
+│   ├── omnetpp.ini               # Basic simulation configurations
+│   ├── experiments.ini           # Experiment configurations (Exp 1-10)
+│   ├── run_experiments.sh        # Experiment execution script
+│   ├── experiment_plots.py       # Python analysis and plotting script
+│   ├── experiment_plan.md        # Detailed experiment plan
+│   ├── experiment_explanation.md # Results explanation
+│   ├── model_explanation.md      # Technical model documentation
+│   ├── results/                  # Output files (scalar, vector, CSV)
+│   └── plots/                    # Generated plots from analysis
 ├── Makefile                  # Build configuration
 └── README.md                 # This file
 ```
@@ -83,27 +85,34 @@ Both protocols operate over the same physical grid topology. DNS uses `dnsDirect
 
 ## Experiments
 
-Five experiments compare the protocols across different dimensions:
+Ten experiments compare the protocols across different dimensions:
 
 | Experiment | Goal | Key Parameter |
 |------------|------|---------------|
 | Exp 1: Baseline | Steady-state overhead | 100 nodes, 50 EIDs, 200 queries |
-| Exp 2: Network Scale | Overhead vs network size | 25 → 400 nodes |
+| Exp 2: Network Scale | Overhead vs network size | 25 → 400 nodes (5×5 to 20×20 grids) |
 | Exp 3: EID Scale | Overhead vs EID count | 10 → 500 EIDs |
 | Exp 4: Latency | Discovery time comparison | Time-to-first-answer |
 | Exp 5: Churn | Behavior under updates | 5s → 60s churn interval |
+| Exp 6: Staleness | Accuracy under churn | TTL vs freshness trade-off |
+| Exp 7: Query Patterns | DNS cache effectiveness | Cache size and hit rates |
+| Exp 8: Deep-Space | High-latency baseline | 1-20s propagation delays |
+| Exp 9: Deep-Space Cache | DNS caching under delay | Cache vs no-cache comparison |
+| Exp 10: Deep-Space Churn | Churn with high latency | Combined stress test |
 
 ### Running Experiments
 
 ```bash
 cd simulations
-source ../../setenv
 
-# Run all experiments (1-5)
+# Run all experiments (1-10)
 ./run_experiments.sh
 
-# Run a specific experiment (e.g., experiment 1)
-./run_experiments.sh 1
+# Run a specific experiment (e.g., experiment 3)
+./run_experiments.sh 3
+
+# Run only deep-space experiments (8-10)
+./run_experiments.sh deepspace
 
 # Export results to CSV only
 ./run_experiments.sh export
@@ -133,6 +142,8 @@ python3 experiment_plots.py
 | Discovery latency | 0.18s (once) | 0.20s (per query) | Tie |
 | Churn overhead (5s) | 5 MB | 24 KB | DNS |
 | Freshness under churn | 100% | TTL-dependent | BGP |
+| Deep-space latency (20s link) | 160s convergence | 400s per query | BGP |
+| Deep-space churn accuracy | 100% | 80-98% | BGP |
 
 ### Key Findings
 
@@ -141,22 +152,26 @@ python3 experiment_plots.py
 3. **EID Scale (Exp 3)**: BGP state explodes as N×E; DNS keeps state centralized at O(E)
 4. **Latency (Exp 4)**: Similar discovery times, but different timing models (upfront vs per-query)
 5. **Churn (Exp 5)**: BGP pays 20-200× more overhead to maintain consistency under churn
+6. **Staleness (Exp 6)**: DNS accuracy inversely proportional to TTL; BGP maintains 100% freshness
+7. **Query Patterns (Exp 7)**: DNS cache effectiveness depends on query skew (0.5-40% hit rate)
+8. **Deep-Space (Exp 8-10)**: BGP's proactive model dominates in high-delay environments—DNS per-query latency becomes prohibitive while BGP pays once and resolves instantly thereafter
 
-**Conclusion**: DNS-style pull model is more efficient for overhead and scalability, while BGP-style push model provides better consistency guarantees at higher network cost.
+**Conclusion**: DNS-style pull model is more efficient for overhead and scalability in terrestrial networks, while BGP-style push model provides better consistency guarantees and is essential for deep-space DTN where per-query latency is unacceptable.
 
 ## Running Individual Configurations
 
 ```bash
-cd simulations
+# From project root (after sourcing setenv)
+source ../../setenv
 
-# Run a specific experiment configuration
-../out/clang-release/bgp-dns -u Cmdenv -c Exp1_Baseline_Bgp -n ../src -f experiments.ini
+# Run a specific configuration headless
+./bgp-dns -u Cmdenv -c Exp1_Baseline_Bgp -n src -f simulations/experiments.ini
 
 # Run with GUI
-../out/clang-release/bgp-dns -u Qtenv -c Exp1_Baseline_Dns -n ../src -f experiments.ini
+./bgp-dns -u Qtenv -c Exp1_Baseline_Dns -n src -f simulations/experiments.ini
 
 # Quick comparison on small network
-../out/clang-release/bgp-dns -u Cmdenv -c Exp_QuickCompare -n ../src -f experiments.ini
+./bgp-dns -u Cmdenv -c Exp_QuickCompare -n src -f simulations/experiments.ini
 ```
 
 ## Metrics Collected

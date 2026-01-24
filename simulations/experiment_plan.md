@@ -171,31 +171,25 @@ All experiments use `dnsDirectMode=true` for fair comparison (DNS over pre-route
 ### Phase 1: Baseline & Latency (Quick validation)
 ```bash
 # Run baseline experiments first to validate setup
-./bgp-dns -u Cmdenv -c Exp1_Baseline_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp1_Baseline_Dns -n ../src
-./bgp-dns -u Cmdenv -c Exp4_Latency_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp4_Latency_Dns -n ../src
+./run_experiments.sh 1
+./run_experiments.sh 4
 ```
 
 ### Phase 2: Scalability Sweeps
 ```bash
-./bgp-dns -u Cmdenv -c Exp2_Scale_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp2_Scale_Dns -n ../src
-./bgp-dns -u Cmdenv -c Exp3_Eids_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp3_Eids_Dns -n ../src
+./run_experiments.sh 2
+./run_experiments.sh 3
 ```
 
 ### Phase 3: Churn & Staleness
 ```bash
-./bgp-dns -u Cmdenv -c Exp5_Churn_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp5_Churn_Dns -n ../src
-./bgp-dns -u Cmdenv -c Exp6_Stale_Bgp -n ../src
-./bgp-dns -u Cmdenv -c Exp6_Stale_Dns -n ../src
+./run_experiments.sh 5
+./run_experiments.sh 6
 ```
 
 ### Phase 4: DNS-specific Analysis
 ```bash
-./bgp-dns -u Cmdenv -c Exp7_QueryPattern_Dns -n ../src
+./run_experiments.sh 7
 ```
 
 ---
@@ -222,8 +216,8 @@ Results will be in `results/` as `.sca` (scalars) and `.vec` (vectors) files.
 
 Use OMNeT++ Analysis Tool or export to CSV:
 ```bash
-scavetool export -o results.csv results/*.sca
-scavetool export -o vectors.csv results/*.vec
+opp_scavetool export -o results.csv results/*.sca
+opp_scavetool export -o vectors.csv results/*.vec
 ```
 
 ---
@@ -241,3 +235,179 @@ Based on theoretical analysis:
 | Latency (fresh EID) | Convergence time | Single query RTT |
 | Churn overhead | High (re-propagation) | Low (re-query on miss) |
 | Staleness | Low (fast updates) | Depends on TTL |
+
+---
+
+## Deep-Space Experiments (8-10)
+
+These experiments explore protocol behavior under high-latency conditions typical of deep-space networks (lunar, Mars, outer planets).
+
+### Experiment 8: Deep-Space Baseline Latency
+
+**Goal**: Compare discovery and lookup latency as link delay increases from terrestrial to deep-space scenarios.
+
+| Parameter | Values |
+|-----------|--------|
+| Network | 5x5 grid (25 nodes) - smaller for faster simulation |
+| Link delay | 10ms, 100ms, 1s, 5s, 10s, 20s |
+| EIDs | 20 |
+| Queries | 50 per client (after convergence) |
+| Churn | None |
+| Repetitions | 3 |
+
+**Link Delay Scenarios**:
+
+| Delay | Real-World Scenario | Network Diameter (8 hops) |
+|-------|---------------------|---------------------------|
+| 10ms | Terrestrial | 80ms one-way |
+| 100ms | Intercontinental/LEO | 800ms one-way |
+| 1s | GEO satellite | 8s one-way |
+| 5s | Lunar | 40s one-way |
+| 10s | Lunar far-side | 80s one-way |
+| 20s | Mars (close approach) | 160s one-way |
+
+**Metrics**:
+- **Convergence time** (BGP): Time until client FIB has all EIDs
+- **First-query latency** (DNS): Time for first successful query
+- **Subsequent lookup latency**: Time for queries after convergence/first-query
+- **Total campaign time**: Time to complete all 50 queries
+
+**Expected Results**:
+
+| Delay | BGP Convergence | DNS First Query | BGP Lookup | DNS Lookup (no cache) |
+|-------|-----------------|-----------------|------------|----------------------|
+| 10ms | ~80ms | ~160ms | ~0 | ~160ms |
+| 1s | ~8s | ~16s | ~0 | ~16s |
+| 20s | ~160s | ~320s | ~0 | ~320s |
+
+**Hypothesis**: BGP's local FIB provides massive advantage for subsequent lookups. At 20s delay, DNS pays 320s per uncached query vs ~0 for BGP.
+
+**Configurations**: `Exp8_DeepSpace_Bgp`, `Exp8_DeepSpace_Dns`
+
+---
+
+### Experiment 9: Deep-Space DNS Caching Impact
+
+**Goal**: Measure how DNS caching mitigates the high-latency penalty.
+
+| Parameter | Values |
+|-----------|--------|
+| Network | 5×5 grid (25 nodes) |
+| Link delay | 1s, 5s, 10s, 20s |
+| EIDs | 20 |
+| Queries | 100 per client |
+| Query distribution | Zipf α=1.0 (realistic skew) |
+| DNS TTL | 300s (long, to maximize cache benefit) |
+| DNS caching | Enabled vs Disabled |
+| Churn | None |
+| Repetitions | 3 |
+
+**Metrics**:
+- **Cache hit rate**: Percentage of queries served from cache
+- **Average query latency**: Mean time per query
+- **Total campaign time**: Time to complete all queries
+- **Authority load**: Number of queries reaching authority
+
+**Expected Results**:
+
+| Delay | DNS (no cache) Total | DNS (with cache) Total | Speedup |
+|-------|----------------------|------------------------|---------|
+| 1s | 100 × 16s = 1600s | ~20 queries × 16s = 320s | 5× |
+| 20s | 100 × 320s = 32000s | ~20 queries × 320s = 6400s | 5× |
+
+With Zipf α=1.0, expect ~80% cache hit rate after warmup, reducing authority queries by ~5×.
+
+**Hypothesis**: Caching transforms DNS from "pay per query" to "pay per unique EID", making it competitive with BGP for repeated queries even at extreme latencies.
+
+**Configurations**: `Exp9_DeepSpace_DnsCache`, `Exp9_DeepSpace_DnsNoCache`
+
+---
+
+### Experiment 10: Deep-Space Churn Resilience
+
+**Goal**: Compare protocol behavior when EIDs change in high-latency environments.
+
+| Parameter | Values |
+|-----------|--------|
+| Network | 5x5 grid (25 nodes) |
+| Link delay | 5s, 10s, 20s |
+| EIDs | 10 |
+| Churn interval | 20s, 60s, 120s |
+| Churn probability | 0.5 |
+| Queries | 50 per client |
+| DNS TTL | 60s |
+| Simulation time | 800s-2400s (scales with delay) |
+| Repetitions | 3 |
+
+**Churn Scenarios**:
+- **60s churn**: Frequent changes (challenging for both protocols)
+- **120s churn**: Moderate changes
+- **300s churn**: Infrequent changes (easier to track)
+
+**Metrics**:
+- **Re-convergence time** (BGP): Time to propagate updates across network
+- **Answer accuracy**: Percentage of queries returning current information
+- **Overhead**: Bytes transmitted for updates/re-queries
+- **Staleness window**: Duration during which stale answers are returned
+
+**Expected Results**:
+
+| Delay | Churn | Conv/Churn Ratio | BGP Accuracy | DNS Accuracy (TTL=60s) |
+|-------|-------|------------------|--------------|------------------------|
+| 5s | 20s | 2.0 | ~100% | ~80% |
+| 5s | 60s | 0.67 | ~100% | ~95% |
+| 10s | 20s | 4.0 | ~100% | ~80% |
+| 10s | 60s | 1.33 | ~100% | ~95% |
+| 20s | 20s | 8.0 | ~100% | ~85% |
+| 20s | 120s | 1.33 | ~100% | ~97% |
+
+**Key Insight**: At extreme latencies with churn:
+- **BGP** maintains 100% accuracy even when convergence > churn interval (updates propagate incrementally)
+- **DNS** accuracy degrades when conv/churn ratio exceeds 1-2
+- The critical threshold is when `convergence_time > churn_interval`
+
+**Hypothesis**: BGP's incremental update propagation maintains correctness even when global convergence is slow, while DNS's TTL-based cache invalidation struggles when changes outpace propagation.
+
+**Configurations**: `Exp10_DeepSpace_Churn_Bgp`, `Exp10_DeepSpace_Churn_Dns`
+
+---
+
+## Deep-Space Experiment Summary
+
+| Experiment | Focus | Key Question |
+|------------|-------|--------------|
+| Exp8 | Baseline latency | How does lookup latency scale with link delay? |
+| Exp9 | DNS caching | Can caching make DNS competitive at high latencies? |
+| Exp10 | Churn at high delay | Which protocol handles churn better when convergence is slow? |
+
+### Expected Conclusions
+
+1. **Exp8**: BGP wins decisively for subsequent lookups (local FIB vs RTT penalty)
+2. **Exp9**: DNS caching provides consistent ~12% latency reduction regardless of delay
+3. **Exp10**: BGP maintains 100% accuracy even under high conv/churn ratios; DNS degrades when ratio > 1-2
+
+### Simulation Time Estimates
+
+| Experiment | Configs | Runs | Est. Time per Run | Total |
+|------------|---------|------|-------------------|-------|
+| Exp8 | 12 (6 delays × 2 protocols) | 3 | ~10 min | ~6 hours |
+| Exp9 | 8 (4 delays × 2 cache modes) | 3 | ~15 min | ~6 hours |
+| Exp10 | 18 (3 delays × 3 churns × 2 protocols) | 3 | ~20 min | ~18 hours |
+
+**Total estimated runtime**: ~30 hours (can be parallelized)
+
+---
+
+## Execution Plan (Updated)
+
+### Phase 5: Deep-Space Experiments
+```bash
+# Experiment 8: Baseline latency sweep
+./run_experiments.sh 8
+
+# Experiment 9: DNS caching impact
+./run_experiments.sh 9
+
+# Experiment 10: Churn at high latency
+./run_experiments.sh 10
+```
