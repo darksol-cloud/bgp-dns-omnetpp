@@ -32,3 +32,16 @@ __pycache__/
 
 # Simulation results
 simulations/results/
+
+# LaTeX auxiliary files (keep .tex, .bib, .pdf)
+doc/*.aux
+doc/*.log
+doc/*.out
+doc/*.bbl
+doc/*.blg
+doc/*.toc
+doc/*.lof
+doc/*.lot
+doc/*.fls
+doc/*.fdb_latexmk
+doc/*.synctex.gz

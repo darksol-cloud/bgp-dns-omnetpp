@@ -1,10 +1,11 @@
 #!/bin/bash
-# run_experiments.sh - Execute BGP vs DNS comparison experiments 1-10
+# run_experiments.sh - Execute BGP vs DNS comparison experiments 1-13
 #
 # Usage: ./run_experiments.sh [experiment_number]
-#   No argument: runs all experiments 1-10
+#   No argument: runs all experiments 1-13
 #   With number: runs only that experiment (e.g., ./run_experiments.sh 1)
 #   "deepspace": runs only deep-space experiments (8-10)
+#   "realistic": runs only realistic scenario experiments (11-13)
 #   "export": exports results to CSV only
 
 set -e
@@ -35,6 +36,11 @@ declare -a EXP8=("Exp8_DeepSpace_Bgp" "Exp8_DeepSpace_Dns")
 declare -a EXP9=("Exp9_DeepSpace_DnsCache" "Exp9_DeepSpace_DnsNoCache")
 declare -a EXP10=("Exp10_DeepSpace_Churn_Bgp" "Exp10_DeepSpace_Churn_Dns")
 
+# Realistic scenario experiments
+declare -a EXP11=("Exp11_Terrestrial_Bgp" "Exp11_Terrestrial_Dns")
+declare -a EXP12=("Exp12_Lunar_Bgp" "Exp12_Lunar_Dns")
+declare -a EXP13=("Exp13_Mars_Bgp" "Exp13_Mars_Dns")
+
 run_config() {
     local config=$1
     echo "========================================"
@@ -64,6 +70,9 @@ run_experiment() {
         8) for config in "${EXP8[@]}"; do run_config "$config"; done ;;
         9) for config in "${EXP9[@]}"; do run_config "$config"; done ;;
         10) for config in "${EXP10[@]}"; do run_config "$config"; done ;;
+        11) for config in "${EXP11[@]}"; do run_config "$config"; done ;;
+        12) for config in "${EXP12[@]}"; do run_config "$config"; done ;;
+        13) for config in "${EXP13[@]}"; do run_config "$config"; done ;;
     esac
 }
 
@@ -105,11 +114,11 @@ if [ ! -f "$SIM_BINARY" ]; then
 fi
 
 if [ $# -eq 0 ]; then
-    # Run all experiments 1-10
-    echo "Running all experiments (1-10)..."
+    # Run all experiments 1-13
+    echo "Running all experiments (1-13)..."
     echo ""
 
-    for i in 1 2 3 4 5 6 7 8 9 10; do
+    for i in 1 2 3 4 5 6 7 8 9 10 11 12 13; do
         run_experiment $i
     done
 
@@ -140,11 +149,27 @@ elif [ "$1" == "deepspace" ]; then
     echo "DEEP-SPACE EXPERIMENTS COMPLETED"
     echo "========================================"
 
+elif [ "$1" == "realistic" ]; then
+    # Run only realistic scenario experiments (11-13)
+    echo "Running realistic scenario experiments (11-13)..."
+    echo ""
+
+    for i in 11 12 13; do
+        run_experiment $i
+    done
+
+    export_results
+
+    echo ""
+    echo "========================================"
+    echo "REALISTIC SCENARIO EXPERIMENTS COMPLETED"
+    echo "========================================"
+
 else
     # Run specific experiment
     exp_num=$1
-    if [[ ! "$exp_num" =~ ^([1-9]|10)$ ]]; then
-        echo "Error: Invalid experiment number. Use 1-10, 'deepspace', or 'export'"
+    if [[ ! "$exp_num" =~ ^([1-9]|1[0-3])$ ]]; then
+        echo "Error: Invalid experiment number. Use 1-13, 'deepspace', 'realistic', or 'export'"
         exit 1
     fi
 

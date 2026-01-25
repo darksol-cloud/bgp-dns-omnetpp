@@ -155,7 +155,7 @@ void EidNode::initializeNeighbors()
                 if (remoteModule) {
                     EidNode *neighbor = dynamic_cast<EidNode*>(remoteModule);
                     if (neighbor) {
-                        gateToNodeId[i] = neighbor->getIndex();
+                        gateToNodeId[i] = neighbor->getNodeId();
                     }
                 }
             }
@@ -620,6 +620,31 @@ void EidNode::dnsRegisterEid(int eid)
         return;
     }
 
+    // In direct mode, register directly with the authority module
+    if (dnsDirectMode) {
+        EidNode *authNodeMod = findNodeModule(authNode);
+        if (authNodeMod && authNodeMod->isAuthority) {
+            DnsAuthorityRecord record;
+            record.eid = eid;
+            record.publisherId = nodeId;
+            record.endpoint = endpoint;
+            record.ttl = dnsTtl;
+            record.version = version;
+            record.lastChangedTime = simTime();
+            const_cast<std::map<int, DnsAuthorityRecord>&>(authNodeMod->getDnsAuthorityDb())[eid] = record;
+
+            emit(dnsRegistrationsSentSignal, 1L);
+            recordBytesSent(80);  // Simulated message size
+
+            if (groundTruth) {
+                groundTruth->recordEidPublish(eid, nodeId, endpoint, simTime());
+            }
+        } else {
+            EV_WARN << "Node " << nodeId << " cannot find authority module " << authNode << endl;
+        }
+        return;
+    }
+
     DnsRegister *reg = new DnsRegister("DnsRegister");
     reg->setEid(eid);
     reg->setPublisherId(nodeId);
@@ -668,6 +693,20 @@ void EidNode::dnsDeregisterEid(int eid)
     // Send deregistration to authority
     int authNode = findAuthorityForEid(eid);
     if (authNode < 0) {
+        return;
+    }
+
+    // In direct mode, deregister directly from the authority module
+    if (dnsDirectMode) {
+        EidNode *authNodeMod = findNodeModule(authNode);
+        if (authNodeMod && authNodeMod->isAuthority) {
+            const_cast<std::map<int, DnsAuthorityRecord>&>(authNodeMod->getDnsAuthorityDb()).erase(eid);
+            recordBytesSent(48);  // Simulated message size
+
+            if (groundTruth) {
+                groundTruth->recordEidWithdraw(eid, nodeId, simTime());
+            }
+        }
         return;
     }
 
@@ -1077,13 +1116,9 @@ int EidNode::findAuthorityForEid(int eid)
         return authorityNodeId;
     }
 
-    // Look for authority among neighbors
+    // Look for authority among neighbors using generic approach
     for (auto& pair : gateToNodeId) {
-        cModule *mod = getParentModule()->getSubmodule("node", pair.second);
-        if (!mod) mod = getParentModule()->getSubmodule("authority", pair.second);
-        if (!mod) continue;
-
-        EidNode *node = dynamic_cast<EidNode*>(mod);
+        EidNode *node = findNodeModule(pair.second);
         if (node && node->isAuthority) {
             return pair.second;
         }
@@ -1098,13 +1133,9 @@ int EidNode::findResolverForNode()
         return resolverNodeId;
     }
 
-    // Look for resolver among neighbors
+    // Look for resolver among neighbors using generic approach
     for (auto& pair : gateToNodeId) {
-        cModule *mod = getParentModule()->getSubmodule("node", pair.second);
-        if (!mod) mod = getParentModule()->getSubmodule("resolver", pair.second);
-        if (!mod) continue;
-
-        EidNode *node = dynamic_cast<EidNode*>(mod);
+        EidNode *node = findNodeModule(pair.second);
         if (node && node->isResolver) {
             return pair.second;
         }
@@ -1150,34 +1181,20 @@ int EidNode::findGateToNode(int targetNodeId)
 
 EidNode* EidNode::findNodeModule(int targetNodeId)
 {
-    // Try various submodule naming conventions
     cModule *parent = getParentModule();
 
-    // Try "node[targetNodeId]"
+    // Fast path: Try "node[targetNodeId]" for grid networks
     cModule *mod = parent->getSubmodule("node", targetNodeId);
     if (mod) return dynamic_cast<EidNode*>(mod);
 
-    // Try "authority[x]" - need to iterate
-    for (int i = 0; ; i++) {
-        mod = parent->getSubmodule("authority", i);
-        if (!mod) break;
-        EidNode *node = dynamic_cast<EidNode*>(mod);
-        if (node && node->getNodeId() == targetNodeId) return node;
-    }
-
-    // Try "resolver[x]"
-    for (int i = 0; ; i++) {
-        mod = parent->getSubmodule("resolver", i);
-        if (!mod) break;
-        EidNode *node = dynamic_cast<EidNode*>(mod);
-        if (node && node->getNodeId() == targetNodeId) return node;
-    }
-
-    // Try "root"
-    mod = parent->getSubmodule("root");
-    if (mod) {
-        EidNode *node = dynamic_cast<EidNode*>(mod);
-        if (node && node->getNodeId() == targetNodeId) return node;
+    // Generic approach: iterate over all submodules of the network
+    // This handles custom network topologies with named modules like
+    // command, relay[i], team[i], drone[i], earthDsn, gateway, rover[i], etc.
+    for (cModule::SubmoduleIterator it(parent); !it.end(); ++it) {
+        EidNode *node = dynamic_cast<EidNode*>(*it);
+        if (node && node->getNodeId() == targetNodeId) {
+            return node;
+        }
     }
 
     return nullptr;
@@ -1290,7 +1307,9 @@ void EidNode::dnsQueryEidDirect(int eid)
     recordBytesReceived(80);  // Response size
 
     // Simulate the RTT delay for latency measurement
-    simtime_t latency = SimTime(rtt, SIMTIME_S);
+    // Round RTT to millisecond precision to avoid simtime_t precision issues
+    double rttMs = round(rtt * 1000.0) / 1000.0;
+    simtime_t latency = SimTime(rttMs, SIMTIME_S);
     emit(dnsQueryLatencySignal, latency);
     emit(discoveryLatencySignal, latency);
 
@@ -1353,7 +1372,9 @@ double EidNode::estimateNetworkDiameter()
     }
 
     // RTT = 2 * diameter * hopDelay
-    return 2 * hops * hopDelay;
+    // Round to millisecond precision to avoid simtime_t precision issues
+    double rtt = 2 * hops * hopDelay;
+    return round(rtt * 1000.0) / 1000.0;
 }
 
 // ============================================================================
@@ -1362,6 +1383,22 @@ double EidNode::estimateNetworkDiameter()
 
 void EidNode::handlePublishTimer()
 {
+    // If publishInterval is 0, publish all EIDs at once
+    if (publishInterval <= 0) {
+        while (publishIndex < publishEids.size()) {
+            int eid = publishEids[publishIndex];
+            if (bgpEnabled) {
+                bgpPublishEid(eid);
+            }
+            if (dnsEnabled) {
+                dnsRegisterEid(eid);
+            }
+            publishIndex++;
+        }
+        return;
+    }
+
+    // Otherwise publish one EID at a time with interval
     if (publishIndex < publishEids.size()) {
         int eid = publishEids[publishIndex];
 
@@ -1376,7 +1413,7 @@ void EidNode::handlePublishTimer()
     }
 
     // Schedule next publish
-    if (publishInterval > 0 && publishIndex < publishEids.size()) {
+    if (publishIndex < publishEids.size()) {
         scheduleAt(simTime() + publishInterval, publishTimer);
     }
 }

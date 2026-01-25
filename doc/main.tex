@@ -1,0 +1,415 @@
+\documentclass[journal,twocolumn]{IEEEtran}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% Todo notes
+\usepackage{xcolor}
+\usepackage[textsize=scriptsize]{todonotes}
+\usepackage[utf8]{inputenc}
+\setlength{\marginparwidth}{13mm}
+% Juan
+\definecolor{jblue}{RGB}{0, 72, 119}
+\newcommand{\jf}[2][]{\todo[author=JF, color=jblue, textcolor=white, #1]{#2}}
+\newcommand{\jfil}[2][]{\todo[author=JF, inline, color=jblue, textcolor=white, #1]{#2}}
+
+\title{TBD}
+
+% Authors
+\author{%
+  Author 1,~\IEEEmembership{Member,~IEEE}
+  Author 2,~\IEEEmembership{Senior Member,~IEEE}...\\
+  \vspace{-0.5cm}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\begin{IEEEkeywords}
+Keywords
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec_intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Reference~\cite{alhilal2019sky}
+
+This paper is organized as follows.
+Section~\ref{sec_background}...
+Section~\ref{sec_model}...
+Section~\ref{sec_evaluation}...
+Section~\ref{sec_conclusions}...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\label{sec_background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model}
+\label{sec_model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section presents the simulation models for comparing proactive (BGP-like) and reactive (DNS-like) approaches for distributing Endpoint Identifier (EID) reachability information in Delay-Tolerant Networks (DTNs). Both protocols are implemented in OMNeT++~\cite{varga2010omnet} and operate over identical physical topologies to ensure a fair comparison.
+
+\subsection{System Model}
+\label{sec_system_model}
+
+We consider a DTN consisting of $N$ nodes interconnected by links with propagation delay $d_{ij}$ between nodes $i$ and $j$. Each node may host Bundle Protocol (BP) agents identified by unique EIDs~\cite{rfc9171}. The fundamental problem is: \emph{how should nodes discover the Convergence-Layer Adapter (CLA) endpoint responsible for a given EID?}
+
+Let $\mathcal{E} = \{e_1, e_2, \ldots, e_M\}$ denote the set of EIDs in the network. For each EID $e_k$, there exists exactly one authoritative endpoint binding:
+\begin{equation}
+\text{endpoint}(e_k) = \langle \text{nodeId}, \text{claProtocol}, \text{port} \rangle
+\end{equation}
+
+The goal is to enable any node $i$ to resolve $\text{endpoint}(e_k)$ with:
+\begin{itemize}
+    \item \textbf{Correctness}: The resolved endpoint matches the current authoritative binding
+    \item \textbf{Timeliness}: Resolution completes within acceptable latency bounds
+    \item \textbf{Efficiency}: Minimal network overhead and state distribution
+\end{itemize}
+
+Nodes in the network can assume different roles:
+\begin{itemize}
+    \item \textbf{Publishers}: Nodes that originate EID bindings and announce them to the network
+    \item \textbf{Clients}: Nodes that need to resolve EIDs to their endpoint bindings
+    \item \textbf{Resolvers} (DNS only): Caching intermediaries that handle client queries
+    \item \textbf{Authorities} (DNS only): Nodes that store authoritative EID records
+\end{itemize}
+
+\subsection{Network Model}
+\label{sec_network_model}
+
+The primary experimental topology is a two-dimensional grid network:
+\begin{equation}
+G = (V, E) \text{ where } |V| = w \times h
+\end{equation}
+
+Nodes are indexed $v_{i,j}$ for $i \in [0, w-1], j \in [0, h-1]$, with edges connecting adjacent nodes:
+\begin{equation}
+E = \{(v_{i,j}, v_{i',j'}) : |i-i'| + |j-j'| = 1\}
+\end{equation}
+
+The network diameter (maximum shortest path) for a $w \times h$ grid is $D = w + h - 2$. For a 10$\times$10 grid, $D = 18$ hops.
+
+All links are modeled as delay channels with configurable propagation delay $d$. The default delay is $d = 10$~ms for terrestrial links, while deep-space scenarios use $d \in \{1, 5, 10, 20\}$~s. The channel model abstracts transmission time, focusing on propagation delay as appropriate for control-plane traffic with small message sizes.
+
+For realistic scenarios, we model hierarchical topologies representing terrestrial disaster response (5--30~ms delays), lunar exploration networks (5~ms to 1.3~s delays), and Mars exploration networks (1~s to 720~s delays). These topologies include specialized channel types such as Earth-Moon links (1.3~s one-way light delay), Mars orbital relay channels (60~s), and interplanetary channels (720~s average).
+
+\subsection{BGP-like Push Model}
+\label{sec_bgp_model}
+
+The BGP-like model implements a path-vector routing protocol inspired by BGP-4~\cite{rfc4271}. EID bindings are proactively flooded to all nodes upon publication, ensuring that each node maintains a local routing table with all known EIDs.
+
+\subsubsection{Data Structures}
+
+Each node maintains a routing table indexed by EID:
+\begin{equation}
+\text{bgpTable}: \mathbb{Z}^+ \to \text{BgpEntry}
+\end{equation}
+
+where each entry contains:
+\begin{itemize}
+    \item $\text{eid}$: The Endpoint Identifier
+    \item $\text{originId}$: Publishing node ID
+    \item $\text{nextHop}$: Gate index for forwarding
+    \item $\text{pathLength}$: Distance in hops from the origin
+    \item $\text{version}$: Update sequence number for churn handling
+    \item $\text{endpoint}$: CLA binding information
+    \item $\text{path}$: Full path vector for loop detection
+\end{itemize}
+
+\subsubsection{Message Types}
+
+The protocol defines two message types:
+\begin{itemize}
+    \item \textbf{BgpAnnounce} (64 + $4|\text{path}|$ bytes): Propagates EID reachability with path vector
+    \item \textbf{BgpWithdraw} (32 bytes): Removes EID reachability
+\end{itemize}
+
+\subsubsection{Publication Algorithm}
+
+When node $p$ publishes EID $e$ with endpoint $\epsilon$:
+
+\begin{enumerate}
+    \item Create local table entry with $\text{pathLength} = 0$ and $\text{path} = [p]$
+    \item Increment version: $v \leftarrow \text{publishedVersions}[e] + 1$
+    \item Construct announcement: $m \leftarrow \text{BgpAnnounce}(e, p, 0, v, \epsilon, t_{\text{now}}, [p])$
+    \item Flood to all neighbors: $\forall g \in \text{neighborGates}: \text{send}(m, g)$
+\end{enumerate}
+
+\subsubsection{Announcement Processing}
+
+Upon receiving announcement $m$ at node $n$ from gate $g_{\text{in}}$:
+
+\textbf{Step 1: Loop Detection.} If $n \in m.\text{path}$, discard the message.
+
+\textbf{Step 2: Path Extension.} Compute $\text{path}' \leftarrow m.\text{path} \cup \{n\}$ and $\text{pathLength}' \leftarrow m.\text{pathLength} + 1$.
+
+\textbf{Step 3: Acceptance Decision.} Let $\text{existing} = \text{bgpTable}[m.\text{eid}]$. Accept if any condition holds:
+\begin{equation}
+\text{accept}(m) = \begin{cases}
+\text{true} & \text{if } \nexists \text{existing} \\
+\text{true} & \text{if } m.\text{originId} = \text{existing}.\text{originId} \\
+           & \quad \land\ m.\text{version} > \text{existing}.\text{version} \\
+\text{true} & \text{if } \text{pathLength}' < \text{existing}.\text{pathLength} \\
+\text{true} & \text{if } \text{pathLength}' = \text{existing}.\text{pathLength} \\
+           & \quad \land\ m.\text{originId} < \text{existing}.\text{originId} \\
+\text{false} & \text{otherwise}
+\end{cases}
+\end{equation}
+
+\textbf{Step 4: Table Update and Forwarding.} If accepted, update the local table and forward to all neighbors except the arrival gate.
+
+\subsubsection{Withdrawal Processing}
+
+Withdrawal $w$ for EID $e$ is processed only if $w.\text{originId}$ matches the current entry's origin and $w.\text{version} \geq \text{existing}.\text{version}$. Upon acceptance, the entry is removed and the withdrawal is forwarded.
+
+\subsubsection{Complexity Analysis}
+
+\textbf{Convergence Time:} For a network with diameter $D$ and link delay $d$:
+\begin{equation}
+T_{\text{conv}}^{\text{BGP}} = D \cdot d
+\end{equation}
+
+For a 10$\times$10 grid with $d = 10$~ms: $T_{\text{conv}}^{\text{BGP}} = 18 \times 0.01 = 0.18$~s.
+
+\textbf{State Complexity:} Per-node state is $O(M)$ where $M$ is the number of EIDs. Network-wide state is $O(N \cdot M)$---full replication.
+
+\textbf{Message Complexity:} $O(N)$ messages per EID publication in a grid topology.
+
+\subsection{DNS-like Pull Model}
+\label{sec_dns_model}
+
+The DNS-like model implements an on-demand resolution protocol inspired by the Domain Name System~\cite{rfc1035}. EID bindings are stored at authoritative servers and resolved via queries with optional caching.
+
+\subsubsection{Data Structures}
+
+\textbf{Authority Record} (at authority nodes):
+\begin{itemize}
+    \item $\text{eid}$: The Endpoint Identifier
+    \item $\text{publisherId}$: Publisher node ID
+    \item $\text{endpoint}$: CLA binding information
+    \item $\text{ttl}$: Time-to-live in seconds
+    \item $\text{version}$: Update sequence number
+    \item $\text{lastChangedTime}$: Timestamp of last modification
+\end{itemize}
+
+\textbf{Cache Entry} (at resolver nodes):
+\begin{itemize}
+    \item $\text{eid}$: The Endpoint Identifier
+    \item $\text{endpoint}$: Cached CLA binding
+    \item $\text{ttl}$: Original TTL value
+    \item $\text{expiryTime}$: When the cache entry expires
+    \item $\text{recordTime}$: Authority's lastChangedTime (for staleness detection)
+\end{itemize}
+
+\subsubsection{Message Types}
+
+\begin{itemize}
+    \item \textbf{DnsQuery} (48 bytes): Client query for an EID
+    \item \textbf{DnsResponse} (80 bytes): Response with endpoint binding
+    \item \textbf{DnsRegister} (72 bytes): Publisher registration at authority
+    \item \textbf{DnsDeregister} (24 bytes): Publisher withdrawal
+\end{itemize}
+
+\subsubsection{Registration}
+
+When publisher $p$ registers EID $e$ at authority $a$:
+
+If $p = a$ (local authority), the record is stored directly. Otherwise, a \texttt{DnsRegister} message is sent to the authority.
+
+Authority assignment uses modular hashing:
+\begin{equation}
+a = (e \mod |\mathcal{A}|) + a_{\text{first}}
+\end{equation}
+where $\mathcal{A}$ is the set of authority nodes.
+
+\subsubsection{Query Resolution}
+
+Client-initiated query for EID $e$:
+
+\begin{enumerate}
+    \item \textbf{Local Cache Check:} If $e \in \text{dnsCache}$ and not expired, return cache hit
+    \item \textbf{Cache Miss:} Create query and forward to resolver
+    \item \textbf{Resolver Processing:} Check resolver cache; if miss, forward to authority
+    \item \textbf{Authority Processing:} Look up record and return response
+    \item \textbf{Response Path:} Response traverses back, with resolvers caching the result
+\end{enumerate}
+
+\subsubsection{Caching Mechanism}
+
+Cache entries are inserted with expiry time $t_{\text{now}} + \tau$ where $\tau$ is the TTL. When the cache exceeds capacity, expired entries are removed first, then the entry with earliest expiry time is evicted.
+
+The cache hit rate is:
+\begin{equation}
+\text{hitRate} = \frac{\sum \text{cacheHits}}{\sum \text{cacheHits} + \sum \text{cacheMisses}}
+\end{equation}
+
+\subsubsection{Complexity Analysis}
+
+\textbf{Query Latency (cache miss):}
+\begin{equation}
+L_{\text{query}} \approx 2 \cdot D \cdot d
+\end{equation}
+
+\textbf{State Complexity:} Authority state is $O(M)$. Resolver cache is $O(\min(M, C))$ where $C$ is cache capacity. Network-wide state is $O(M)$---centralized.
+
+\textbf{Message Complexity:} $O(1)$ messages per registration; $O(1)$ per query.
+
+\subsection{Fair Comparison Design}
+\label{sec_fair_comparison}
+
+To ensure a fair comparison, both protocols operate over the same physical grid topology. However, DNS in practice runs over an already-routed IP network, whereas BGP-like flooding operates at the network layer. To account for this, we implement a ``direct mode'' for DNS.
+
+\subsubsection{Direct Mode}
+
+In direct mode (\texttt{dnsDirectMode=true}), DNS queries use OMNeT++'s \texttt{sendDirect()} mechanism with RTT-based delays:
+\begin{equation}
+\text{RTT}_{\text{DNS}} = 2 \cdot D \cdot d
+\end{equation}
+
+This models DNS running over a pre-routed IP underlay, isolating the protocol comparison from routing convergence effects. The approach ensures that:
+\begin{itemize}
+    \item BGP announcements propagate through the physical topology hop-by-hop
+    \item DNS queries logically traverse: Client $\to$ Resolver $\to$ Authority $\to$ Resolver $\to$ Client
+    \item Both protocols experience comparable network latencies
+\end{itemize}
+
+\subsection{Staleness and Accuracy Model}
+\label{sec_staleness}
+
+A central \texttt{GroundTruth} module maintains authoritative records for all EIDs, enabling correctness verification.
+
+\subsubsection{BGP Accuracy}
+
+A node's BGP entry for EID $e$ is \emph{correct} if:
+\begin{equation}
+\text{correct}_{\text{BGP}}(n, e) = \begin{cases}
+\text{bgpTable}[e].\text{endpoint} = \text{GT}[e].\text{endpoint} & \text{if active} \\
+e \notin \text{bgpTable} & \text{if withdrawn}
+\end{cases}
+\end{equation}
+
+Network-wide BGP accuracy:
+\begin{equation}
+\text{Accuracy}_{\text{BGP}}(e) = \frac{|\{n : \text{correct}_{\text{BGP}}(n, e)\}|}{N}
+\end{equation}
+
+\subsubsection{DNS Staleness}
+
+A DNS response is \emph{stale} if the cached record predates the last authoritative change:
+\begin{equation}
+\text{stale}(r) = r.\text{recordTime} < \text{GT}[r.\text{eid}].\text{lastChangeTime}
+\end{equation}
+
+Under churn with interval $\Delta_{\text{churn}}$:
+\begin{equation}
+P(\text{stale}) \approx \frac{\Delta_{\text{churn}}}{\tau} \text{ for } \tau > \Delta_{\text{churn}}
+\end{equation}
+where $\tau$ is the TTL.
+
+\subsubsection{Convergence Detection}
+
+Convergence for EID $e$ occurs when $\geq$99\% of nodes have correct information:
+\begin{equation}
+\text{converged}(e, t) = \frac{|\{n : \text{correct}(n, e, t)\}|}{N} \geq 0.99
+\end{equation}
+
+We distinguish \emph{initial convergence} (first publication) from \emph{churn convergence} (subsequent updates).
+
+\subsection{Query Distribution Model}
+\label{sec_query_distribution}
+
+Query patterns follow Zipf's law~\cite{breslau1999web}:
+\begin{equation}
+P(\text{query for EID } e_k) \propto \frac{1}{k^\alpha}
+\end{equation}
+where $k$ is the rank (1 = most popular) and $\alpha$ is the skewness parameter. Values of $\alpha = 0$ yield uniform distribution, while $\alpha = 1.0$ approximates typical web traffic patterns.
+
+\subsection{Metrics Summary}
+\label{sec_metrics}
+
+Table~\ref{tab:metrics} summarizes the key metrics collected during simulation.
+
+\begin{table}[t]
+\centering
+\caption{Simulation Metrics}
+\label{tab:metrics}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Category} & \textbf{Metric} & \textbf{Unit} \\
+\midrule
+\multirow{2}{*}{Overhead} & Total bytes sent & bytes \\
+                          & Total messages & count \\
+\midrule
+\multirow{3}{*}{Latency} & Discovery latency & seconds \\
+                         & Convergence time & seconds \\
+                         & Query latency & seconds \\
+\midrule
+\multirow{3}{*}{Accuracy} & BGP accuracy & [0, 1] \\
+                          & DNS accuracy & [0, 1] \\
+                          & Stale rate & [0, 1] \\
+\midrule
+\multirow{2}{*}{State} & BGP table size & entries \\
+                       & DNS cache size & entries \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Complexity Comparison}
+\label{sec_complexity}
+
+Table~\ref{tab:complexity} compares the theoretical complexity of both approaches.
+
+\begin{table}[t]
+\centering
+\caption{Protocol Complexity Comparison}
+\label{tab:complexity}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Aspect} & \textbf{BGP (Push)} & \textbf{DNS (Pull)} \\
+\midrule
+State per node & $O(M)$ & $O(1)$ client, $O(C)$ resolver \\
+Network state & $O(N \cdot M)$ & $O(M)$ \\
+Publication cost & $O(N)$ messages & $O(1)$ messages \\
+Query cost & $O(1)$ (local) & $O(D)$ hops \\
+Churn cost & $O(N)$ per change & $O(1)$ per change \\
+Convergence time & $O(D \cdot d)$ & N/A (on-demand) \\
+Discovery latency & $D \cdot d$ & $2 \cdot D \cdot d$ \\
+Resolution latency & $\approx 0$ (local) & $2 \cdot D \cdot d$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evaluation}
+\label{sec_evaluation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\label{sec_conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+
+\end{document}
