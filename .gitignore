@@ -18,6 +18,7 @@ out/
 .DS_Store
 .idea/
 .vscode/
+.settings/
 
 # CMake / Make
 CMakeFiles/
