@@ -401,6 +401,134 @@ Resolution latency & $\approx 0$ (local) & $2 \cdot D \cdot d$ \\
 \label{sec_evaluation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+This section presents the evaluation methodology and experimental scenarios used to compare BGP-like and DNS-like protocols across different network environments.
+
+\subsection{Realistic Deployment Scenarios}
+\label{sec_realistic_scenarios}
+
+Beyond synthetic grid topologies, we evaluate three realistic DTN deployment scenarios spanning the latency spectrum from terrestrial to interplanetary networks. Each scenario represents a plausible use case with hierarchical topology and heterogeneous link delays.
+
+\subsubsection{Experiment 11: Terrestrial Disaster Response}
+
+This scenario models a disaster response network with mobile command centers, relay vehicles, field teams, and reconnaissance drones. The network exhibits low latency (5--30~ms) and moderate churn as teams move through the affected area.
+
+\textbf{Topology:} 22 nodes in a 4-tier hierarchy:
+\begin{itemize}
+    \item Tier 1: Command Center (central authority/resolver)
+    \item Tier 2: 3 Mobile Relay Vehicles
+    \item Tier 3: 6 Field Teams (publishers)
+    \item Tier 4: 12 Drones/Sensors (publishers)
+\end{itemize}
+
+Table~\ref{tab:terrestrial_rtt} shows the DNS query round-trip times from each node type to the authority at the Command Center.
+
+\begin{table}[t]
+\centering
+\caption{Terrestrial Network: DNS RTT to Authority}
+\label{tab:terrestrial_rtt}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Node Type} & \textbf{Path to Command} & \textbf{RTT} \\
+\midrule
+Command & Local & 0 ms \\
+Relay & 10 ms $\times$ 2 & 20 ms \\
+Team & (20 + 10) ms $\times$ 2 & 60 ms \\
+Drone & (5 + 20 + 10) ms $\times$ 2 & 70 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Expected outcome:} DNS should outperform BGP due to low query latency ($<$100~ms RTT) and reduced overhead under churn.
+
+\subsubsection{Experiment 12: Lunar Artemis Network}
+
+This scenario models a lunar exploration network supporting the Artemis program, connecting Earth ground stations, the Lunar Gateway orbital relay, and surface assets. The key challenge is the 1.3~s Earth-Moon light delay combined with near-instantaneous surface communications.
+
+\textbf{Topology:} 12 nodes spanning Earth and Moon:
+\begin{itemize}
+    \item Tier 0: Earth DSN (Earth authority)
+    \item Tier 1: Lunar Gateway (lunar authority/resolver)
+    \item Tier 2: 2 Surface Bases (South Pole, Equatorial)
+    \item Tier 3: 4 Rovers
+    \item Tier 4: 4 EVA suits/Drones
+\end{itemize}
+
+Table~\ref{tab:lunar_rtt} shows the DNS query RTT to the Lunar Gateway authority.
+
+\begin{table}[t]
+\centering
+\caption{Lunar Network: DNS RTT to Gateway Authority}
+\label{tab:lunar_rtt}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Node Type} & \textbf{Path to Gateway} & \textbf{RTT} \\
+\midrule
+Gateway & Local & 0 s \\
+Earth DSN & 1.3 s $\times$ 2 & 2.6 s \\
+Surface Base & 250 ms $\times$ 2 & 0.5 s \\
+Rover & (250 + 10) ms $\times$ 2 & 0.52 s \\
+Field Asset & (250 + 10 + 5) ms $\times$ 2 & 0.53 s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Expected outcome:} This is the crossover point. For lunar-local queries ($\sim$0.5~s RTT), DNS may be acceptable. For Earth-involved queries ($>$2.6~s RTT), BGP's proactive model becomes attractive.
+
+\subsubsection{Experiment 13: Mars Exploration Network}
+
+This scenario models a Mars exploration network with 12-minute average Earth-Mars delay and significant surface relay delays. Per-query DNS latency becomes prohibitive.
+
+\textbf{Topology:} 10 nodes spanning Earth and Mars:
+\begin{itemize}
+    \item Tier 0: Earth DSN (Earth authority)
+    \item Tier 1: Mars Relay Orbiter (Mars authority/resolver)
+    \item Tier 2: 2 Surface Habitats (Jezero, Olympus)
+    \item Tier 3: 4 Rovers
+    \item Tier 4: 2 Deployed Instruments
+\end{itemize}
+
+Table~\ref{tab:mars_rtt} shows the DNS query RTT to the Mars Orbiter authority.
+
+\begin{table}[t]
+\centering
+\caption{Mars Network: DNS RTT to Orbiter Authority}
+\label{tab:mars_rtt}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Node Type} & \textbf{Path to Orbiter} & \textbf{RTT} \\
+\midrule
+Mars Orbiter & Local & 0 s \\
+Earth DSN & 720 s $\times$ 2 & 1440 s (24 min) \\
+Habitat & 60 s $\times$ 2 & 120 s \\
+Rover & (60 + 5) s $\times$ 2 & 130 s \\
+Instrument & (60 + 5 + 1) s $\times$ 2 & 132 s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Expected outcome:} BGP should decisively outperform DNS. Even Mars-local DNS queries require $\sim$2 minutes RTT, while BGP convergence pays once and enables instant local lookups thereafter.
+
+\subsection{Summary of Realistic Scenarios}
+
+Table~\ref{tab:scenario_summary} summarizes the three realistic scenarios and their key characteristics.
+
+\begin{table}[t]
+\centering
+\caption{Realistic Scenario Summary}
+\label{tab:scenario_summary}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Terrestrial} & \textbf{Lunar} & \textbf{Mars} \\
+\midrule
+Nodes & 22 & 12 & 10 \\
+Link delays & 5--30 ms & 5 ms--1.3 s & 1--720 s \\
+Max DNS RTT & 70 ms & 2.6 s & 24 min \\
+Churn interval & 30--60 s & 120 s & 300 s \\
+DNS TTL & 30 s & 60 s & 120 s \\
+Expected winner & DNS & Contested & BGP \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
