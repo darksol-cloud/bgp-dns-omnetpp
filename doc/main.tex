@@ -25,10 +25,11 @@ A Quantitative Push-vs-Pull Analysis}
 % Authors
 \author{%
   Juan~A.~Fraire,~\IEEEmembership{Senior Member,~IEEE,}
+  Tobias~Nöthlich,
   Marius~Feldmann,
   and~Felix~Walter\\
   \thanks{J.~A.~Fraire is with Inria, INSA Lyon, CITI, UR3720, 69621 Villeurbanne, France, and also with CONICET -- Universidad Nacional de C\'ordoba, C\'ordoba, Argentina and consultant at D3TN GmbH.}%
-  \thanks{M.~Feldmann and F.~Walter are with D3TN GmbH.}%
+  \thanks{T.~Nöthlich, M.~Feldmann and F.~Walter are with D3TN GmbH.}%
 }
 
 \begin{document}
@@ -114,6 +115,13 @@ A critical open problem in these deployments is \emph{EID-to-CLA resolution}: ho
 In small, static networks, this mapping can be pre-configured. 
 However, as DTN deployments scale to tens or hundreds of mobile nodes with dynamic services, a distributed, automated resolution mechanism becomes essential~\cite{fraire2021space}. 
 This is the space-networking analogue of the IP layer's routing and naming functions---precisely the roles that BGP and DNS serve in the terrestrial Internet.
+
+A key architectural distinction is that DTN employs \emph{late binding}: the resolution of a bundle's destination EID into a concrete next-hop CLA address is deferred until forwarding time, rather than being fixed when the bundle is created~\cite{fall2003dtn}.
+In IP networks, destination-to-next-hop resolution occurs immediately against a relatively stable routing table.
+In DTN, a bundle carries only a destination EID; the full mapping---EID $\to$ reachable node $\to$ next scheduled contact $\to$ convergence-layer peer---is resolved at each hop when the node actually forwards the bundle, possibly long after its creation.
+Late binding is essential because contacts in space networks are intermittent and time-varying: the ``right'' next hop depends on which links are available at the moment of forwarding.
+If DTN is viewed as a delay-tolerant overlay interconnecting islands of conventional (non-delay-tolerant) networks, then at each island---where IP connectivity is available---a service such as BGP or DNS can assist in resolving the next-hop CLA parameters within that local domain.
+The push-vs-pull question studied in this paper therefore concerns how these per-domain resolution services should operate under the extreme and heterogeneous delays characteristic of space DTN deployments.
 
 \subsection{BGP: Inter-Domain Routing in the Internet}
 \label{sec_bgp_background}
