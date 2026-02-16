@@ -2076,41 +2076,56 @@
        transform="matrix(0.95999996,0,0,0.95999996,0.47999998,0.47999998)"
        clip-path="url(#clipPath31)" />
     <g
-       id="g9">
+       id="g3">
+      <path
+         id="path22"
+         d="m 51,144 h 200 v 14 H 51 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         transform="scale(0.95999996)"
+         clip-path="url(#clipPath23)" />
       <g
-         id="g3">
+         id="g2">
         <path
-           id="path22"
-           d="m 51,144 h 200 v 14 H 51 Z"
+           id="path27"
+           d="m 124,144 h 194 v 14 H 124 Z"
            style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
            transform="scale(0.95999996)"
-           clip-path="url(#clipPath23)" />
-        <g
-           id="g2">
-          <path
-             id="path27"
-             d="m 124,144 h 194 v 14 H 124 Z"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             transform="scale(0.95999996)"
-             clip-path="url(#clipPath28)" />
-          <path
-             id="path32"
-             d="m 190,144 h 200 v 14 H 190 Z"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             transform="scale(0.95999996)"
-             clip-path="url(#clipPath33)" />
-        </g>
+           clip-path="url(#clipPath28)" />
+        <path
+           id="path32"
+           d="m 190,144 h 200 v 14 H 190 Z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           transform="scale(0.95999996)"
+           clip-path="url(#clipPath33)" />
       </g>
-      <text
-         id="text33"
-         xml:space="preserve"
-         transform="translate(196.98726,147.96875)"
-         clip-path="url(#clipPath34)"><tspan
-           id="tspan33"
-           style="font-variant:normal;font-weight:bold;font-size:10.56px;font-family:Helvetica;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-           x="0"
-           y="0">15 ms</tspan></text>
     </g>
+    <text
+       id="text1"
+       xml:space="preserve"
+       transform="translate(263.39141,147.96875)"
+       clip-path="url(#clipPath34)"><tspan
+         id="tspan1"
+         style="font-variant:normal;font-weight:bold;font-size:10.56px;font-family:Helvetica;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         y="0">15 ms</tspan></text>
+    <text
+       id="text2"
+       xml:space="preserve"
+       transform="translate(130.9604,147.96875)"
+       clip-path="url(#clipPath34)"><tspan
+         id="tspan2"
+         style="font-variant:normal;font-weight:bold;font-size:10.56px;font-family:Helvetica;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         y="0">15 ms</tspan></text>
+    <text
+       id="text33"
+       xml:space="preserve"
+       transform="translate(196.98726,147.96875)"
+       clip-path="url(#clipPath34)"><tspan
+         id="tspan33"
+         style="font-variant:normal;font-weight:bold;font-size:10.56px;font-family:Helvetica;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         y="0">15 ms</tspan></text>
     <path
        id="path35"
        d="m 24.5,280 h 56 c 0.596733,0 1.170761,0.11417 1.722069,0.34253 0.551315,0.22836 1.037948,0.5535 1.459907,0.97546 0.421952,0.42194 0.747109,0.90857 0.975479,1.4599 0.228356,0.5513 0.342537,1.12534 0.342545,1.72211 v 21 c -8e-6,0.59671 -0.114189,1.17075 -0.342545,1.72208 -0.22837,0.5513 -0.553527,1.03793 -0.975479,1.4599 -0.421959,0.42196 -0.908592,0.7471 -1.459907,0.97546 C 81.670761,309.8858 81.096733,310 80.5,310 h -56 c -0.596739,0 -1.170765,-0.1142 -1.722078,-0.34256 -0.551314,-0.22836 -1.037947,-0.5535 -1.459904,-0.97546 -0.421957,-0.42197 -0.747118,-0.9086 -0.975479,-1.4599 C 20.114178,306.67075 19.999998,306.09671 20,305.5 v -21 c -2e-6,-0.59677 0.114178,-1.17081 0.342539,-1.72211 0.228361,-0.55133 0.553522,-1.03796 0.975479,-1.4599 0.421957,-0.42196 0.908592,-0.7471 1.459906,-0.97546 C 23.329235,280.11417 23.903261,280 24.5,280 Z"
