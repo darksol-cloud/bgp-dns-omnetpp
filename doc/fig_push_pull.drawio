@@ -1,0 +1,136 @@
+<mxfile host="app.diagrams.net" modified="2026-02-15" type="device">
+  <diagram name="Push vs Pull" id="push-pull">
+    <mxGraphModel dx="1100" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- BGP Panel Title -->
+        <mxCell id="bgp_title" value="&lt;b&gt;BGP Push Model&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="140" y="10" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- BGP Panel Border -->
+        <mxCell id="bgp_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="40" width="540" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- BGP Nodes -->
+        <mxCell id="bgp_pub" value="&lt;b&gt;Publisher&lt;/b&gt;&lt;br&gt;(Node A)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="70" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_n1" value="Node B&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;bgpTable: {A}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="70" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_n2" value="Node C&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;bgpTable: {A}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="190" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_n3" value="Node D&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;bgpTable: {A}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="190" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_n4" value="Node E&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;bgpTable: {A}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="170" y="310" width="110" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- BGP Flood Arrows -->
+        <mxCell id="bgp_e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E6550D;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="bgp_pub" target="bgp_n1" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_e1_label" value="&lt;font color=&quot;#E6550D&quot; style=&quot;font-size:9px&quot;&gt;ANNOUNCE&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=bottom;" vertex="1" connectable="0" parent="bgp_e1">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="bgp_e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E6550D;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="bgp_pub" target="bgp_n2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E6550D;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="bgp_n1" target="bgp_n3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E6550D;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="bgp_n2" target="bgp_n4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bgp_e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E6550D;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="bgp_n3" target="bgp_n4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- BGP Cost Label -->
+        <mxCell id="bgp_cost" value="&lt;font style=&quot;font-size:11px&quot;&gt;✦ One-time cost: &lt;i&gt;D · d&lt;/i&gt;&lt;br&gt;✦ All nodes store full table: &lt;i&gt;O(N · M)&lt;/i&gt;&lt;br&gt;✦ Lookup: &lt;i&gt;O(1)&lt;/i&gt; local read&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=#FFF2CC;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="230" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- DNS Panel Title -->
+        <mxCell id="dns_title" value="&lt;b&gt;DNS Pull Model&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="10" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- DNS Panel Border -->
+        <mxCell id="dns_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="560" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- DNS Nodes -->
+        <mxCell id="dns_pub" value="&lt;b&gt;Publisher&lt;/b&gt;&lt;br&gt;(Node A)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="630" y="70" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_auth" value="&lt;b&gt;Authority&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;db: {A→endpoint}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="870" y="70" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_resolver" value="&lt;b&gt;Resolver&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;cache: {A→endpoint}&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="190" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_client" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;(Node E)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="630" y="310" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_n3" value="Node C&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;(no state)&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="960" y="250" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_n4" value="Node D&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;(no state)&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="960" y="140" width="110" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- DNS Registration Arrow -->
+        <mxCell id="dns_reg" style="rounded=1;strokeColor=#6BAA75;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" edge="1" source="dns_pub" target="dns_auth" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_reg_label" value="&lt;font color=&quot;#6BAA75&quot; style=&quot;font-size:9px&quot;&gt;REGISTER&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=bottom;" vertex="1" connectable="0" parent="dns_reg">
+          <mxGeometry relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- DNS Query/Response Flow -->
+        <mxCell id="dns_q1" style="rounded=1;strokeColor=#3B82F6;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="dns_client" target="dns_resolver" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_q1_label" value="&lt;font color=&quot;#3B82F6&quot; style=&quot;font-size:9px&quot;&gt;① QUERY&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=bottom;" vertex="1" connectable="0" parent="dns_q1">
+          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="dns_q2" style="rounded=1;strokeColor=#3B82F6;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="dns_resolver" target="dns_auth" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="dns_q2_label" value="&lt;font color=&quot;#3B82F6&quot; style=&quot;font-size:9px&quot;&gt;② QUERY&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=bottom;" vertex="1" connectable="0" parent="dns_q2">
+          <mxGeometry relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="dns_r1" style="rounded=1;strokeColor=#EF4444;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" edge="1" source="dns_auth" target="dns_resolver" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="980" y="180"/><mxPoint x="920" y="220"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dns_r1_label" value="&lt;font color=&quot;#EF4444&quot; style=&quot;font-size:9px&quot;&gt;③ RESPONSE&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=top;" vertex="1" connectable="0" parent="dns_r1">
+          <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="dns_r2" style="rounded=1;strokeColor=#EF4444;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" edge="1" source="dns_resolver" target="dns_client" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="720" y="300"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dns_r2_label" value="&lt;font color=&quot;#EF4444&quot; style=&quot;font-size:9px&quot;&gt;④ RESPONSE&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=top;" vertex="1" connectable="0" parent="dns_r2">
+          <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- DNS Cost Label -->
+        <mxCell id="dns_cost" value="&lt;font style=&quot;font-size:11px&quot;&gt;✦ Per-query cost: &lt;i&gt;2 · D · d&lt;/i&gt;&lt;br&gt;✦ State only at authority + cache: &lt;i&gt;O(M)&lt;/i&gt;&lt;br&gt;✦ Lookup: round-trip to authority&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=#FFF2CC;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="660" y="390" width="270" height="60" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

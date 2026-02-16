@@ -1,0 +1,140 @@
+<mxfile host="app.diagrams.net" modified="2026-02-15" type="device">
+  <diagram name="Delay-Driven Regime Map" id="regime-map">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b style=&quot;font-size:14px&quot;&gt;Delay-Driven Protocol Regime Map&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="15" width="400" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Delay axis arrow -->
+        <mxCell id="axis" value="" style="endArrow=block;endFill=1;strokeColor=#333333;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="310" as="sourcePoint"/>
+            <mxPoint x="1040" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="axis_label" value="&lt;b&gt;One-way link delay &lt;i&gt;d&lt;/i&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="430" y="315" width="200" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Delay ticks -->
+        <mxCell id="tick1" value="&lt;font style=&quot;font-size:9px&quot;&gt;5 ms&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="315" width="40" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="tick2" value="&lt;font style=&quot;font-size:9px&quot;&gt;50 ms&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="250" y="315" width="45" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="tick3" value="&lt;font style=&quot;font-size:9px&quot;&gt;1 s&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="445" y="315" width="30" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="tick4" value="&lt;font style=&quot;font-size:9px&quot;&gt;3 s&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="575" y="315" width="30" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="tick5" value="&lt;font style=&quot;font-size:9px&quot;&gt;60 s&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="780" y="315" width="40" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="tick6" value="&lt;font style=&quot;font-size:9px&quot;&gt;720 s&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="960" y="315" width="45" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== THREE REGIME BANDS ========== -->
+
+        <!-- Terrestrial Band (Green) -->
+        <mxCell id="band_terr" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=60;" vertex="1" parent="1">
+          <mxGeometry x="70" y="60" width="380" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_terr_title" value="&lt;b style=&quot;font-size:13px;color:#2D6A2E&quot;&gt;DNS Preferred&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="160" y="65" width="180" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_terr_h" value="&lt;font style=&quot;font-size:11px;color:#2D6A2E&quot;&gt;&lt;b&gt;H1 confirmed&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="175" y="92" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="terr_bullets" value="&lt;font style=&quot;font-size:10px&quot;&gt;• 9–141× lower overhead&lt;br&gt;• Sub-200 ms query latency&lt;br&gt;• Centralized state: &lt;i&gt;O(M)&lt;/i&gt;&lt;br&gt;• &lt;i&gt;O(1)&lt;/i&gt; publication cost&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="115" width="200" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Cislunar Band (Yellow) -->
+        <mxCell id="band_cis" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;opacity=60;" vertex="1" parent="1">
+          <mxGeometry x="450" y="60" width="170" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_cis_title" value="&lt;b style=&quot;font-size:13px;color:#8C6D1F&quot;&gt;Contested&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="470" y="65" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_cis_h" value="&lt;font style=&quot;font-size:11px;color:#8C6D1F&quot;&gt;&lt;b&gt;H3 confirmed&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="470" y="92" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="cis_bullets" value="&lt;font style=&quot;font-size:10px&quot;&gt;• DNS: 3.8× less BW&lt;br&gt;• BGP amortizes&lt;br&gt;&amp;nbsp;&amp;nbsp;after ~3 queries&lt;br&gt;• Hybrid optimal&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="465" y="115" width="150" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Deep-Space Band (Red) -->
+        <mxCell id="band_deep" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;opacity=60;" vertex="1" parent="1">
+          <mxGeometry x="620" y="60" width="400" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_deep_title" value="&lt;b style=&quot;font-size:13px;color:#8B1A1A&quot;&gt;BGP Required&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="740" y="65" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="band_deep_h" value="&lt;font style=&quot;font-size:11px;color:#8B1A1A&quot;&gt;&lt;b&gt;H2 confirmed&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="740" y="92" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="deep_bullets" value="&lt;font style=&quot;font-size:10px&quot;&gt;• BGP converges once (&lt;i&gt;D·d&lt;/i&gt;)&lt;br&gt;• DNS: minutes per query&lt;br&gt;• Break-even after 1 query&lt;br&gt;• Instant post-convergence lookup&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="115" width="250" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== SCENARIO MARKERS ========== -->
+
+        <!-- Terrestrial scenario marker -->
+        <mxCell id="sc_terr" value="&lt;b style=&quot;font-size:10px&quot;&gt;Exp 11&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Disaster Response&lt;br&gt;22 nodes&lt;/font&gt;" style="shape=mxgraph.flowchart.annotation_2;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left;pointerEvents=1;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="100" y="210" width="110" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Lunar scenario marker -->
+        <mxCell id="sc_lunar" value="&lt;b style=&quot;font-size:10px&quot;&gt;Exp 12&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Lunar Artemis&lt;br&gt;12 nodes&lt;/font&gt;" style="shape=mxgraph.flowchart.annotation_2;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;align=left;pointerEvents=1;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="475" y="210" width="110" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Mars scenario marker -->
+        <mxCell id="sc_mars" value="&lt;b style=&quot;font-size:10px&quot;&gt;Exp 13&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Mars Exploration&lt;br&gt;10 nodes&lt;/font&gt;" style="shape=mxgraph.flowchart.annotation_2;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;align=left;pointerEvents=1;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="870" y="210" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== H4 CROSS-CUTTING ========== -->
+        <mxCell id="h4_arrow" value="" style="endArrow=block;endFill=1;strokeColor=#7B2D8B;strokeWidth=2;dashed=1;dashPattern=5 3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="400" as="sourcePoint"/>
+            <mxPoint x="1000" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h4_label" value="&lt;font style=&quot;font-size:11px;color:#7B2D8B&quot;&gt;&lt;b&gt;H4 (cross-cutting):&lt;/b&gt; DNS accuracy degrades as convergence-to-churn ratio &lt;i&gt;R&lt;/i&gt; increases — from 98% (&lt;i&gt;R&lt;/i&gt;=0.33) to 30% (&lt;i&gt;R&lt;/i&gt;=12). BGP maintains 100% at all &lt;i&gt;R&lt;/i&gt;.&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="170" y="410" width="700" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Boundary lines -->
+        <mxCell id="boundary1" value="" style="endArrow=none;strokeColor=#999999;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="55" as="sourcePoint"/>
+            <mxPoint x="450" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boundary1_label" value="&lt;font style=&quot;font-size:9px;color:#999&quot;&gt;~50 ms&lt;br&gt;(100 ms RTT)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=bottom;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="415" y="340" width="80" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="boundary2" value="" style="endArrow=none;strokeColor=#999999;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="55" as="sourcePoint"/>
+            <mxPoint x="620" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boundary2_label" value="&lt;font style=&quot;font-size:9px;color:#999&quot;&gt;~1.5 s&lt;br&gt;(3 s RTT)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=bottom;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="585" y="340" width="80" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,232 @@
+<mxfile host="app.diagrams.net" modified="2026-02-15" type="device">
+  <diagram name="Realistic Topologies" id="topologies">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ============ PANEL A: TERRESTRIAL ============ -->
+        <mxCell id="t_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="420" height="640" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_title" value="&lt;b&gt;(a) Terrestrial Disaster Response&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;22 nodes · 5–30 ms delays&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="70" y="20" width="300" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Command Center -->
+        <mxCell id="t_cc" value="&lt;b&gt;Command&lt;br&gt;Center&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="160" y="70" width="120" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Relay Vehicles -->
+        <mxCell id="t_r1" value="Relay 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="180" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_r2" value="Relay 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="180" y="180" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_r3" value="Relay 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="310" y="180" width="80" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Relay links -->
+        <mxCell id="t_cc_r1" value="&lt;font style=&quot;font-size:8px&quot;&gt;10 ms&lt;/font&gt;" style="rounded=1;strokeColor=#82b366;strokeWidth=1;endArrow=none;" edge="1" source="t_cc" target="t_r1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_cc_r2" value="&lt;font style=&quot;font-size:8px&quot;&gt;5 ms&lt;/font&gt;" style="rounded=1;strokeColor=#82b366;strokeWidth=1;endArrow=none;" edge="1" source="t_cc" target="t_r2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_cc_r3" value="&lt;font style=&quot;font-size:8px&quot;&gt;15 ms&lt;/font&gt;" style="rounded=1;strokeColor=#82b366;strokeWidth=1;endArrow=none;" edge="1" source="t_cc" target="t_r3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Field Teams -->
+        <mxCell id="t_f1" value="Team 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="280" width="65" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_f2" value="Team 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="100" y="280" width="65" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_f3" value="Team 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="180" y="280" width="65" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_f4" value="Team 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="260" y="280" width="65" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_f5" value="Team 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="340" y="280" width="65" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_f6" value="Team 6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="340" y="330" width="65" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Field links -->
+        <mxCell id="t_r1f1" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r1" target="t_f1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_r1f2" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r1" target="t_f2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_r2f3" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r2" target="t_f3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_r2f4" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r2" target="t_f4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_r3f5" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r3" target="t_f5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_r3f6" style="strokeColor=#d6b656;strokeWidth=1;endArrow=none;" edge="1" source="t_r3" target="t_f6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Drones/Sensors -->
+        <mxCell id="t_d1" value="D1" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="20" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_d2" value="D2" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="70" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_d3" value="D3" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="120" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_d4" value="D4" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="170" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_d5" value="S1" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="220" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="t_d6" value="S2" style="shape=mxgraph.flowchart.display;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="270" y="370" width="40" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Drone links -->
+        <mxCell id="t_f1d1" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f1" target="t_d1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_f1d2" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f2" target="t_d2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_f2d3" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f2" target="t_d3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_f3d4" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f3" target="t_d4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_f4d5" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f4" target="t_d5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t_f5d6" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="t_f5" target="t_d6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Terrestrial Legend -->
+        <mxCell id="t_legend" value="&lt;font style=&quot;font-size:9px&quot;&gt;■ Command · ■ Relay · ■ Field Team · ■ Drone/Sensor&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="420" width="340" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- Terrestrial delay label -->
+        <mxCell id="t_delay_label" value="&lt;font style=&quot;font-size:9px;color:#666&quot;&gt;All links: 5–30 ms · Max DNS RTT: 70 ms&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="440" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ PANEL B: LUNAR ============ -->
+        <mxCell id="l_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="10" width="420" height="640" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_title" value="&lt;b&gt;(b) Lunar Artemis Network&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;12 nodes · 5 ms–1.3 s delays&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="520" y="20" width="280" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Earth DSN -->
+        <mxCell id="l_dsn" value="&lt;b&gt;Earth DSN&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="590" y="70" width="120" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Earth-Moon link (prominent) -->
+        <mxCell id="l_em_link" value="&lt;b&gt;&lt;font color=&quot;#CC0000&quot; style=&quot;font-size:10px&quot;&gt;1.3 s&lt;/font&gt;&lt;/b&gt;" style="rounded=0;strokeColor=#CC0000;strokeWidth=4;endArrow=none;dashed=1;dashPattern=8 4;" edge="1" source="l_dsn" target="l_gw" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Lunar Gateway -->
+        <mxCell id="l_gw" value="&lt;b&gt;Lunar&lt;br&gt;Gateway&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="590" y="210" width="120" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Surface Bases -->
+        <mxCell id="l_base1" value="Base α" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="490" y="310" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_base2" value="Base β" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="310" width="80" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="l_gw_b1" value="&lt;font style=&quot;font-size:8px&quot;&gt;5 ms&lt;/font&gt;" style="strokeColor=#6c8ebf;strokeWidth=1;endArrow=none;" edge="1" source="l_gw" target="l_base1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l_gw_b2" value="&lt;font style=&quot;font-size:8px&quot;&gt;5 ms&lt;/font&gt;" style="strokeColor=#6c8ebf;strokeWidth=1;endArrow=none;" edge="1" source="l_gw" target="l_base2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Rovers -->
+        <mxCell id="l_rov1" value="Rover 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="470" y="395" width="60" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_rov2" value="Rover 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="545" y="395" width="60" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_rov3" value="Rover 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="700" y="395" width="60" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_rov4" value="Rover 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="775" y="395" width="60" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="l_b1r1" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="l_base1" target="l_rov1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l_b1r2" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="l_base1" target="l_rov2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l_b2r3" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="l_base2" target="l_rov3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l_b2r4" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="l_base2" target="l_rov4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lunar delay label -->
+        <mxCell id="l_delay_label" value="&lt;font style=&quot;font-size:9px;color:#CC0000&quot;&gt;Earth–Moon: 1.3 s one-way light delay&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#666&quot;&gt;Lunar surface: 5 ms · Max DNS RTT: 2.6 s&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="440" width="280" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ PANEL C: MARS ============ -->
+        <mxCell id="m_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="10" width="420" height="640" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_title" value="&lt;b&gt;(c) Mars Exploration Network&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;10 nodes · 1–720 s delays&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="960" y="20" width="280" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Earth DSN Mars -->
+        <mxCell id="m_dsn" value="&lt;b&gt;Earth DSN&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="70" width="120" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Earth-Mars link -->
+        <mxCell id="m_em_link" value="&lt;b&gt;&lt;font color=&quot;#CC0000&quot; style=&quot;font-size:10px&quot;&gt;720 s (~12 min)&lt;/font&gt;&lt;/b&gt;" style="rounded=0;strokeColor=#CC0000;strokeWidth=5;endArrow=none;dashed=1;dashPattern=12 6;" edge="1" source="m_dsn" target="m_orbiter" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Mars Relay Orbiter -->
+        <mxCell id="m_orbiter" value="&lt;b&gt;Mars Relay&lt;br&gt;Orbiter&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="220" width="120" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Mars Habitats -->
+        <mxCell id="m_hab1" value="Habitat 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="320" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_hab2" value="Habitat 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="320" width="80" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m_o_h1" value="&lt;font style=&quot;font-size:8px&quot;&gt;60 s&lt;/font&gt;" style="strokeColor=#6c8ebf;strokeWidth=2;endArrow=none;" edge="1" source="m_orbiter" target="m_hab1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m_o_h2" value="&lt;font style=&quot;font-size:8px&quot;&gt;60 s&lt;/font&gt;" style="strokeColor=#6c8ebf;strokeWidth=2;endArrow=none;" edge="1" source="m_orbiter" target="m_hab2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Mars Rovers -->
+        <mxCell id="m_rov1" value="Rover 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="910" y="405" width="55" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_rov2" value="Rover 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="975" y="405" width="55" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_rov3" value="Rover 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="405" width="55" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_rov4" value="Rover 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="405" width="55" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m_h1r1" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="m_hab1" target="m_rov1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m_h1r2" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="m_hab1" target="m_rov2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m_h2r3" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="m_hab2" target="m_rov3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m_h2r4" style="strokeColor=#b85450;strokeWidth=1;endArrow=none;" edge="1" source="m_hab2" target="m_rov4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Mars Instruments -->
+        <mxCell id="m_inst1" value="Instr. 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="405" width="55" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_inst2" value="Instr. 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="365" width="55" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="m_h1i1" style="strokeColor=#9673a6;strokeWidth=1;endArrow=none;" edge="1" source="m_hab1" target="m_inst1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m_h2i2" style="strokeColor=#9673a6;strokeWidth=1;endArrow=none;" edge="1" source="m_hab2" target="m_inst2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Mars delay label -->
+        <mxCell id="m_delay_label" value="&lt;font style=&quot;font-size:9px;color:#CC0000&quot;&gt;Earth–Mars: 720 s (~12 min) one-way&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#666&quot;&gt;Orbit–surface: 60 s · Max DNS RTT: 24 min&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="940" y="450" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

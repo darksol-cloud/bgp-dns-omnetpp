@@ -8,18 +8,20 @@
   number={8},
   pages={22--32},
   year={2019},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi={10.1109/MAES.2019.2927897}
 }
 
 % Simulation framework
 
-@inproceedings{varga2010omnet,
+@incollection{varga2010omnet,
   title={{OMNeT++}},
   author={Varga, Andr{\'a}s},
   booktitle={Modeling and Tools for Network Simulation},
   pages={35--59},
   year={2010},
-  publisher={Springer}
+  publisher={Springer},
+  doi={10.1007/978-3-642-12331-3_3}
 }
 
 % Protocol standards
@@ -30,7 +32,8 @@
   howpublished={RFC 4271},
   year={2006},
   month={January},
-  publisher={IETF}
+  publisher={IETF},
+  doi={10.17487/RFC4271}
 }
 
 @misc{rfc1035,
@@ -39,7 +42,8 @@
   howpublished={RFC 1035},
   year={1987},
   month={November},
-  publisher={IETF}
+  publisher={IETF},
+  doi={10.17487/RFC1035}
 }
 
 @misc{rfc9171,
@@ -48,7 +52,8 @@
   howpublished={RFC 9171},
   year={2022},
   month={January},
-  publisher={IETF}
+  publisher={IETF},
+  doi={10.17487/RFC9171}
 }
 
 @misc{rfc4838,
@@ -57,7 +62,8 @@
   howpublished={RFC 4838},
   year={2007},
   month={April},
-  publisher={IETF}
+  publisher={IETF},
+  doi={10.17487/RFC4838}
 }
 
 % Foundational papers
@@ -68,7 +74,8 @@
   booktitle={Proceedings of the 2003 conference on Applications, technologies, architectures, and protocols for computer communications},
   pages={27--34},
   year={2003},
-  organization={ACM}
+  organization={ACM},
+  doi={10.1145/863955.863960}
 }
 
 @inproceedings{breslau1999web,
@@ -78,7 +85,8 @@
   volume={1},
   pages={126--134},
   year={1999},
-  organization={IEEE}
+  organization={IEEE},
+  doi={10.1109/INFCOM.1999.749260}
 }
 
 % BGP for DTN
@@ -93,13 +101,14 @@
 
 % DNS for DTN
 
-@misc{kline2024ipnarpa,
+@misc{kline2025ipnarpa,
   author={Erik Kline},
-  title={{The ipn.arpa Zone}},
+  title={{The ipn.arpa Zone and IPN DNS Operations}},
   howpublished={Internet-Draft draft-ek-dtn-ipn-arpa-00},
-  year={2024},
-  month={July},
-  publisher={IETF}
+  year={2025},
+  month={November},
+  publisher={IETF},
+  note={Work in Progress}
 }
 
 % Additional relevant references
@@ -112,27 +121,153 @@
   number={11},
   pages={1980--1997},
   year={2011},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi={10.1109/JPROC.2011.2158378}
 }
 
 @article{burleigh2003interplanetary,
-  title={Interplanetary Internet},
-  author={Burleigh, Scott and Hooke, Adrian and Torgerson, Leigh and Fall, Kevin and Cerf, Vint and Durst, Bob and Scott, Keith and Weiss, Howard},
-  journal={Communications of the ACM},
-  volume={46},
-  number={2},
-  pages={51--55},
+  title={{Delay-Tolerant Networking: An Approach to Interplanetary Internet}},
+  author={Burleigh, Scott and Hooke, Adrian and Torgerson, Leigh and Fall, Kevin and Cerf, Vint and Durst, Bob and Scott, Keith},
+  journal={IEEE Communications Magazine},
+  volume={41},
+  number={6},
+  pages={128--136},
   year={2003},
-  publisher={ACM}
+  publisher={IEEE},
+  doi={10.1109/MCOM.2003.1204759}
 }
 
-@inproceedings{araniti2015contact,
+@article{araniti2015contact,
   title={Contact graph routing in DTN space networks: Overview, enhancements and performance},
   author={Araniti, Giuseppe and Bezirgiannidis, Nikolaos and Birrane, Edward and Bisio, Igor and Burleigh, Scott and Caini, Carlo and Feldmann, Marius and Marchese, Mario and Segui, John and Suzuki, Kiyohisa},
-  booktitle={IEEE Communications Magazine},
+  journal={IEEE Communications Magazine},
   volume={53},
   number={3},
   pages={38--46},
   year={2015},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi={10.1109/MCOM.2015.7060480}
+}
+
+@software{darksol_bgp_dns_omnetpp_2026,
+  author  = {Darksol Project},
+  title   = {{bgp-dns-omnetpp}: OMNeT++ models for DNS vs. BGP EID reachability comparison},
+  year    = {2026},
+  version = {f3c6ac1},
+  url     = {https://github.com/darksol-cloud/bgp-dns-omnetpp},
+  note    = {Accessed: 2026-02-15}
+}
+
+% Space networking and Solar System Internet
+
+@article{fraire2021space,
+  title={{Routing in the Space Internet: A contact graph routing tutorial}},
+  author={Fraire, Juan A. and De Jonck{\`e}re, Olivier and Burleigh, Scott C.},
+  journal={Journal of Network and Computer Applications},
+  volume={173},
+  pages={102884},
+  year={2021},
+  publisher={Elsevier},
+  doi={10.1016/j.jnca.2020.102884}
+}
+
+@techreport{consultative2015ccsds,
+  title={{CCSDS Bundle Protocol Specification}},
+  author={{CCSDS}},
+  number={CCSDS 734.2-B-1},
+  year={2015},
+  institution={Consultative Committee for Space Data Systems},
+  address={Washington, D.C.}
+}
+
+@misc{rfc5050,
+  author={K. Scott and S. Burleigh},
+  title={{Bundle Protocol Specification}},
+  howpublished={RFC 5050},
+  year={2007},
+  month={November},
+  publisher={IETF},
+  doi={10.17487/RFC5050}
+}
+
+@misc{rfc9174,
+  author={B. Sipos and M. Demmer and J. Ott and S. Perreault},
+  title={{Delay-Tolerant Networking TCP Convergence-Layer Protocol Version 4}},
+  howpublished={RFC 9174},
+  year={2022},
+  month={January},
+  publisher={IETF},
+  doi={10.17487/RFC9174}
+}
+
+@inproceedings{israel2020lunanet,
+  title={{LunaNet: A Flexible and Extensible Lunar Exploration Communications and Navigation Infrastructure}},
+  author={Israel, David J. and Mauldin, Kendall D. and Roberts, Christopher J. and Mitchell, Jason W. and Pulkkinen, Antti A. and Cooper, La Vida A. and Johnson, Michael A. and Christe, Steven D. and Gramling, Cheryl J.},
+  booktitle={2020 IEEE Aerospace Conference},
+  pages={1--14},
+  year={2020},
+  organization={IEEE},
+  doi={10.1109/AERO47225.2020.9172509}
+}
+
+@misc{rfc9172,
+  author={E. Birrane III and K. McKeever},
+  title={{Bundle Protocol Security (BPSec)}},
+  howpublished={RFC 9172},
+  year={2022},
+  month={January},
+  publisher={IETF},
+  doi={10.17487/RFC9172}
+}
+
+@book{fraire2018dtnsn,
+  title={{Delay-Tolerant Satellite Networks}},
+  author={Fraire, Juan A. and Finochietto, Jorge M. and Burleigh, Scott C.},
+  year={2018},
+  publisher={Artech House},
+  isbn={978-1-63081-344-4}
+}
+
+% Internet protocols background
+
+@misc{rfc4632,
+  author={V. Fuller and T. Li},
+  title={{Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan}},
+  howpublished={RFC 4632},
+  year={2006},
+  publisher={IETF},
+  doi={10.17487/RFC4632}
+}
+
+@article{labovitz2001delayed,
+  title={Delayed Internet routing convergence},
+  author={Labovitz, Craig and Ahuja, Abha and Bose, Abhijit and Jahanian, Farnam},
+  journal={IEEE/ACM Transactions on Networking},
+  volume={9},
+  number={3},
+  pages={293--306},
+  year={2001},
+  publisher={IEEE},
+  doi={10.1109/90.929852}
+}
+
+@article{jung2002dns,
+  title={{DNS Performance and the Effectiveness of Caching}},
+  author={Jung, Jaeyeon and Sit, Emil and Balakrishnan, Hari and Morris, Robert},
+  journal={IEEE/ACM Transactions on Networking},
+  volume={10},
+  number={5},
+  pages={589--603},
+  year={2002},
+  publisher={IEEE},
+  doi={10.1109/TNET.2002.803905}
+}
+
+@misc{rfc8484,
+  author={P. Hoffman and P. McManus},
+  title={{DNS Queries over HTTPS (DoH)}},
+  howpublished={RFC 8484},
+  year={2018},
+  publisher={IETF},
+  doi={10.17487/RFC8484}
 }
