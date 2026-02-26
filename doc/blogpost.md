@@ -29,7 +29,7 @@ The two paradigms solve the same problem in opposite ways.
 **BGP-like (Push):** When a node publishes an EID, it floods the binding to every other node in the network.
 After convergence, every lookup is an instantaneous local table read. You pay once, use forever.
 The cost: O(N) messages per EID publication, and full replication of all state across all nodes.
-This approach has been proposed by Feldmann et al. in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networkss*](https://ieeexplore.ieee.org/document/10812345) (IEEE WiSEE 2025).
+This approach has been proposed by Feldmann et al. in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networkss*](https://github.com/darksol-cloud/bgp-dns-omnetpp/m86281-feldmann%20final.pdf) (IEEE WiSEE 2025, In Press).
 
 **DNS-like (Pull):** EID bindings are stored at an authority node.
 When a client needs to resolve an EID, it queries a resolver, which fetches the answer from the authority and caches it.
