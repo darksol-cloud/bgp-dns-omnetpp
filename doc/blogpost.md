@@ -10,7 +10,7 @@ The Internet resolved this pragmatically, but space networking is forcing engine
 
 As NASA's Artemis program builds out a cislunar communications network and future missions push toward Mars, the nodes in these networks need a way to find each other. 
 In Delay-Tolerant Networking (DTN) — the architecture designed for intermittent, high-latency space links — each node is identified by an **Endpoint Identifier (EID)**, something like `ipn:13.1` or `dtn://mars-hab1/telemetry`. 
-Before a bundle of data can be sent, a node must resolve that EID into a concrete underlying network address. 
+DTN uses **late binding**: bundles carry only the destination EID, and address resolution is deferred to each forwarding hop. At every intermediate node, once the routing decision is made, the chosen next-hop EID must be resolved into a concrete Convergence-Layer (CL) address before the transmission can actually occur.
 Currently, this is done by hand, with statically pre-configured tables. 
 That approach won't scale to dozens of mobile, multi-agency nodes spanning the solar system.
 
@@ -29,13 +29,19 @@ The two paradigms solve the same problem in opposite ways.
 **BGP-like (Push):** When a node publishes an EID, it floods the binding to every other node in the network.
 After convergence, every lookup is an instantaneous local table read. You pay once, use forever.
 The cost: O(N) messages per EID publication, and full replication of all state across all nodes.
-This approach has been proposed by Feldmann et al. in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networkss*](https://github.com/darksol-cloud/bgp-dns-omnetpp/blob/main/doc/m86281-feldmann%20final.pdf) (IEEE WiSEE 2025, In Press).
+This approach has been proposed by Feldmann et al. in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networks*](https://github.com/darksol-cloud/bgp-dns-omnetpp/blob/main/doc/m86281-feldmann%20final.pdf) (IEEE WiSEE 2025, In Press).
 
 **DNS-like (Pull):** EID bindings are stored at an authority node.
 When a client needs to resolve an EID, it queries a resolver, which fetches the answer from the authority and caches it.
 No traffic unless someone actually asks.
 The cost: a round-trip to the authority on every cache miss, which scales with propagation delay.
 Kline's [*The ipn.arpa Zone and IPN DNS Operations*](https://datatracker.ietf.org/doc/draft-ek-dtn-ipn-arpa/) (IETF Internet-Draft, November 2025) lays out how standard DNS infrastructure can serve as the resolution back-end for DTN EIDs.
+
+A natural question arises: couldn't you simply replicate the DNS zone to Mars, so lookups are served locally and round-trips become irrelevant?
+Yes — but the moment you synchronize state across planetary distances, you are doing *push* distribution.
+Every EID update must propagate to all remote replicas over the interplanetary link to keep them fresh, reintroducing BGP-like overhead.
+The push-versus-pull distinction is therefore a **paradigm**, not a technology choice: any system that guarantees low-latency local lookups at remote sites must proactively distribute state, whether via BGP UPDATE messages or DNS zone transfers.
+(In practice, a Mars network is also likely its own DTN administrative region with locally managed EIDs, where queries for Mars-local EIDs are served by local authorities with no Earth round-trip required.)
 
 In terrestrial networks, this is a mild trade-off. In space, it becomes existential.
 
@@ -128,7 +134,7 @@ The key insight from our work is that **both solutions are right — for differe
 For DTN architects, the practical takeaways are:
 
 - **Terrestrial and tactical DTN networks** (disaster response, battlefield communications, urban sensor meshes): deploy DNS-like pull resolution. The bandwidth savings are enormous and latency is acceptable.
-- **Deep-space networks** (Mars, outer planets, deep-space probes): deploy BGP-like flooding. The per-query cost of DNS is prohibitive, and BGP's convergence cost amortizes instantly.
+- **Deep-space networks** (Mars, outer planets, deep-space probes): deploy BGP-like flooding. The per-query cost of DNS is prohibitive, and BGP's convergence cost amortizes after just one query.
 - **Cislunar networks** (Lunar Gateway, Artemis surface operations): design a hybrid. The contested zone calls for context-aware protocol selection — perhaps DNS for surface-local queries within a lunar base, BGP for anything crossing the Earth–Moon link.
 
 The simulation code, all 13 experiment configurations, and the analysis pipeline are [publicly available](https://github.com/darksol/bgp-dns-omnetpp) for anyone building on these results.
@@ -138,7 +144,7 @@ The simulation code, all 13 experiment configurations, and the analysis pipeline
 ## Further Reading
 
 The full technical paper — *"On the Distribution of DTN Reachability Information: A Quantitative Push-vs-Pull Analysis"* — covers the complete simulation models, formal complexity analysis, and detailed per-experiment results. 
-The work is funded by the [DARKSOL project](https://darksol.cloud/en/) and the EU Horizon 2020 MISSION programme.
+The work is funded by the [DARKSOL project](https://darksol.cloud/en/), co-financed by the project partners, the European Union, and the Free State of Saxony.
 
 The two proposals that inspired the simulated protocols are also worth reading directly:
 

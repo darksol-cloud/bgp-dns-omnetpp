@@ -152,6 +152,11 @@ DNS's pull model offers two advantages over push approaches: \emph{minimal backg
 
 The adaptation of DNS to DTN has been explored through the \texttt{ipn.arpa} zone proposal~\cite{kline2025ipnarpa}, which maps \texttt{ipn}-scheme EIDs to DNS resource records. This enables standard DNS infrastructure to serve as the resolution back-end for DTN EIDs, potentially allowing space networks to reuse the operational tooling and expertise of the global DNS ecosystem.
 
+One might ask whether DNS \emph{zone replication}---distributing synchronized copies of the authority database to remote sites via zone transfer---could eliminate per-query latency by serving lookups from a local replica.
+However, this would transform DNS into a push model: every EID binding change must be propagated across interplanetary links to keep all replicas current, reintroducing the network-wide synchronization overhead that characterizes BGP.
+The push-versus-pull tradeoff is therefore a paradigm-level distinction, not a technological one: any mechanism that guarantees low-latency local lookups at remote sites must proactively distribute state---whether via BGP UPDATE messages or DNS zone transfers.
+Furthermore, deeply remote networks such as a Mars surface mesh are likely to constitute a separate DTN administrative domain with locally managed EID namespaces, where most queries are served by local authorities without any interplanetary round-trip.
+
 \subsection{The EID Resolution Gap}
 \label{sec_eid_gap}
 
@@ -800,7 +805,7 @@ Several directions remain open. First, the hybrid cislunar strategy identified b
 
 \section*{Acknowledgment}
 
-This work was funded by the DARKSOL project (\url{https://darksol.cloud/en/}), co-financed by the project partners, the European Union, and the Free State of Saxony. It was also developed within the framework of the European Union’s Horizon 2020 research and innovation programme under the Marie Sk\l{}odowska-Curie grant agreement \href{https://doi.org/10.3030/101008233}{No.~101008233} (\href{https://mission-project.eu/}{MISSION}).
+This work was funded by the DARKSOL project (\url{https://darksol.cloud/en/}), co-financed by the project partners, the European Union, and the Free State of Saxony.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
