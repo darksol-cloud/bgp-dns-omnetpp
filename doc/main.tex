@@ -67,13 +67,14 @@ As NASA's Artemis program~\cite{israel2020lunanet} and future Mars architectures
 
 Recent proposals have begun to fill this gap from both directions.
 Feldmann et~al.~\cite{feldmann2025bgp} extend BGP UPDATE messages to carry DTN EID reachability, leveraging BGP's path-vector machinery for loop-free flooding.
+The original scope of this work targets \emph{edge BPA configuration}: how a Bundle Protocol Agent is configured by its immediate gateway---analogous to how a DSL modem receives routing information from its telco provider---rather than flooding EID bindings across a general multi-hop mesh.
 Kline~\cite{kline2025ipnarpa} proposes the \texttt{ipn.arpa} DNS zone to resolve \texttt{ipn}-scheme EIDs through the existing DNS hierarchy.
 Both approaches are technically sound, but they inherit fundamentally different cost structures: BGP pays $O(N)$ messages per EID change for $O(1)$ lookups; DNS pays $O(1)$ per registration but $O(D \cdot d)$ latency per query, where $D$ is the network diameter and $d$ the link delay.
 In terrestrial networks, where $d$ is milliseconds, this difference is negligible.
 In space, where $d$ ranges from 1.3\,s (Earth--Moon) to 12\,min (Earth--Mars), the choice is existential.
 
-No prior work has systematically compared push and pull EID resolution across the full DTN delay spectrum.
-This paper closes that gap with three contributions:
+No prior work has systematically compared push and pull EID resolution across the full DTN delay spectrum as a \emph{general} multi-hop problem.
+This paper closes that gap---deliberately broadening the scope beyond the edge-gateway configuration originally targeted by~\cite{feldmann2025bgp}---with three contributions:
 
 \begin{enumerate}
     \item \textbf{Simulation models.} We develop OMNeT++ implementations of a BGP-like path-vector protocol and a DNS-like query-response protocol with caching, operating over identical topologies for a fair comparison. Both models, along with all experiment configurations, are publicly available~\cite{darksol_bgp_dns_omnetpp_2026}.
@@ -138,8 +139,14 @@ The key strengths of BGP's push model are \emph{instant lookup} (once converged,
 The weaknesses are \emph{state explosion} (every router stores the full routing table, currently $\sim$1~million entries) and \emph{update storms} (each prefix change triggers network-wide propagation). 
 In the DTN context, these characteristics are amplified: convergence time scales with propagation delay ($D \cdot d$ for diameter $D$), but post-convergence lookups remain instantaneous.
 
-Recent work has proposed adapting BGP for DTN EID distribution~\cite{feldmann2025bgp}, carrying EID reachability information in BGP UPDATE messages extended with DTN-specific attributes. 
-This approach leverages BGP's mature path-vector machinery for loop prevention and policy routing, but inherits its overhead characteristics---an important consideration when network links may be bandwidth-constrained or intermittent.
+Recent work has proposed adapting BGP for DTN EID distribution~\cite{feldmann2025bgp}, carrying EID reachability information in BGP UPDATE messages extended with DTN-specific attributes.
+This approach leverages BGP's path-vector machinery for loop prevention and policy routing, but inherits its overhead characteristics---an important consideration when network links may be bandwidth-constrained or intermittent.
+
+A key distinction must be drawn regarding the \emph{intended application domain} of this BGP extension.
+Its core use case is the \emph{configuration of end-user-facing BPAs by their gateways}: a BPA at the edge of a DTN domain learns EID reachability from its directly connected gateway, much as a DSL router receives prefix information from its telco provider.
+In this edge-gateway model, the path-vector properties serve to configure local forwarding state at a single administrative boundary, not to flood bindings transitively across a multi-hop network.
+The present paper generalizes this push paradigm to multi-hop DTN deployments in order to enable a systematic, head-to-head comparison with the DNS pull approach---a deliberate broadening of scope.
+Readers should therefore interpret our overhead and latency results for the BGP model as characterizing this \emph{generalized} multi-hop flooding behavior; conclusions about BGP's applicability in terrestrial regimes do not directly invalidate the original, narrower edge-gateway use case.
 
 \subsection{DNS: The Internet's Naming System}
 \label{sec_dns_background}
@@ -243,9 +250,11 @@ The channel model abstracts away transmission time, focusing on propagation dela
 
 \subsubsection{Realistic Hierarchical Topologies}
 
-To validate findings from the grid experiments, we model three hierarchical topologies spanning the DTN latency spectrum: terrestrial disaster response (22 nodes, 5--30~ms delays), lunar exploration (12 nodes, 5~ms to 1.3~s delays), and Mars exploration (10 nodes, 1~s to 720~s delays). 
-These topologies include specialized channel types such as Earth-Moon links (1.3~s one-way light delay), Mars orbital relay channels (60~s), and interplanetary channels (720~s average). 
+To validate findings from the grid experiments, we model three hierarchical topologies spanning the DTN latency spectrum: terrestrial disaster response (22 nodes, 5--30~ms delays), lunar exploration (12 nodes, 5~ms to 1.3~s delays), and Mars exploration (10 nodes, 1~s to 720~s delays).
+These topologies include specialized channel types such as Earth-Moon links (1.3~s one-way light delay), Mars orbital relay channels (60~s), and interplanetary channels (720~s average).
 The scenarios are detailed in Section~\ref{sec_realistic_scenarios}.
+
+An important modeling assumption applies to all three realistic scenarios: all links are modeled as \emph{stable, always-on delay channels}---there are no link disruptions, contact schedules, or intermittency. This is a deliberate simplification that isolates the \emph{control-plane overhead question} (how much traffic does each protocol generate to distribute EID bindings?) from the \emph{disruption-tolerance question} (how does DTN handle link outages?). The results therefore characterize protocol behavior given \emph{established connectivity}, not during link failures. Real deployments---especially disaster response and deep-space networks---will involve intermittent contacts and scheduled link windows; integrating contact-plan-aware routing with EID resolution is left as future work (see Section~\ref{sec_conclusions}).
 
 \subsection{BGP-like Push Model}
 \label{sec_bgp_model}
@@ -691,6 +700,9 @@ DNS TTL & 30 s & 60 s & 120 s \\
 \subsubsection{Terrestrial Disaster Response (Exp.~11)}
 
 This scenario models a disaster-response network with 22 nodes in a 4-tier hierarchy: a central Command Center, 3 mobile relay vehicles, 6 field teams, and 12 drones/sensors, with link delays of 5--30~ms.
+Links are modeled as stable delay channels, representing a network in which IP connectivity between tiers has already been established---for example, via deployed mesh radios or satellite uplinks.
+The scenario therefore asks: \emph{given that the field network is operational, which EID resolution paradigm is more efficient?} It does not model the disruptions and store-carry-forward behavior that DTN is designed to handle at a lower layer.
+In practice, disaster-response networks may also exhibit intermittent links (e.g., mobile units moving out of radio range), which would affect both protocols; that aspect is not captured here.
 
 Fig.~\ref{fig:realistic}a shows the overhead results. 
 Under 30~s churn, BGP generates 212.8~KB (13$\times$ more than DNS's 16.4~KB). 
@@ -701,8 +713,10 @@ The reduction in overhead makes DNS the preferred choice for this scenario.
 
 \subsubsection{Lunar Artemis Network (Exp.~12)}
 
-The lunar scenario comprises 12 nodes spanning Earth and Moon: an Earth DSN ground station, a Lunar Gateway orbital relay, 2 surface bases, 4 rovers, and 4 field assets. 
+The lunar scenario comprises 12 nodes spanning Earth and Moon: an Earth DSN ground station, a Lunar Gateway orbital relay, 2 surface bases, 4 rovers, and 4 field assets.
 The 1.3~s Earth--Moon one-way delay creates an interesting tradeoff.
+As with the terrestrial scenario, all links are modeled as stable delay channels; the Earth--Moon and intra-lunar links are assumed to be continuously available.
+In a real Artemis deployment, Earth--Moon visibility windows are intermittent and surface rovers operate with duty-cycled radios; these factors would reduce the effective query frequency and may shift the break-even point between the two protocols.
 
 Fig.~\ref{fig:realistic}b shows the amortized latency cost. 
 BGP converges in $\sim$1.6~s (a one-time cost), while DNS pays $\sim$0.6~s per lunar-local query and $\sim$2.8~s for Earth-involved queries. 
@@ -713,6 +727,9 @@ This contested regime suggests that a hybrid approach---DNS for infrequent lunar
 \subsubsection{Mars Exploration Network (Exp.~13)}
 
 The Mars scenario models 10 nodes with a 12-minute average Earth--Mars one-way delay: an Earth DSN station, a Mars Relay Orbiter, 2 surface habitats, 4 rovers, and 2 deployed instruments.
+Consistent with the other scenarios, all links are modeled as stable delay channels with fixed one-way propagation delays (720~s Earth--Mars, 60~s orbit-to-surface).
+Real Mars operations involve highly intermittent Earth--Mars visibility (typically a few hours per day) and relay-dependent surface connectivity; under such a contact schedule, BGP convergence would be further deferred to the next available contact window, while DNS queries would be queued and serviced on the same schedule.
+The stable-link assumption thus provides a best-case latency baseline for both protocols; intermittent contacts would increase absolute values but are not expected to alter the qualitative ranking.
 
 Fig.~\ref{fig:realistic}c shows the cumulative query time. 
 BGP converges in $\sim$2~minutes (one-time), after which all lookups are instantaneous. 
@@ -791,7 +808,7 @@ Hypothesis H4 is confirmed across all deep-space churn experiments (Fig.~\ref{fi
 
 This paper presented the first systematic comparison of push (BGP-like) and pull (DNS-like) paradigms for distributing EID reachability in Delay-Tolerant Networks, spanning one-way delays from 5\,ms to 12\,min across 13~experiments on synthetic and realistic topologies. All four hypotheses formulated in Section~\ref{sec_complexity} were confirmed:
 
-\textbf{H1---DNS dominates at low latency.} In terrestrial regimes ($2Dd < 1$\,s), DNS achieves 9--141$\times$ lower overhead than BGP with sub-200\,ms query latency. Its $O(1)$ publication cost and centralized $O(M)$ state make it the clear choice for bandwidth-constrained disaster-response and tactical DTN deployments.
+\textbf{H1---DNS dominates at low latency.} In terrestrial regimes ($2Dd < 1$\,s), DNS achieves 9--141$\times$ lower overhead than BGP with sub-200\,ms query latency. Its $O(1)$ publication cost and centralized $O(M)$ state make it the clear choice for general, multi-hop EID resolution in bandwidth-constrained disaster-response and tactical DTN deployments. We emphasize that this conclusion applies to the generalized flooding model evaluated here; the BGP extension of~\cite{feldmann2025bgp} was originally designed for the more constrained problem of edge gateway-to-BPA configuration, which is structurally different from network-wide multi-hop flooding and is not directly addressed by this comparison.
 
 \textbf{H2---BGP dominates at high latency.} Beyond $\sim$3\,s RTT, BGP's one-time convergence cost ($D \cdot d$) amortizes after a single query. At Mars distances, each DNS resolution takes $\sim$25\,min for Earth-involved lookups, while BGP converges once in $\sim$2\,min and serves all subsequent lookups instantaneously. BGP is the only viable option for interplanetary networks.
 
