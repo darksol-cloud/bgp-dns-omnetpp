@@ -139,8 +139,9 @@ The key strengths of BGP's push model are \emph{instant lookup} (once converged,
 The weaknesses are \emph{state explosion} (every router stores the full routing table, currently $\sim$1~million entries) and \emph{update storms} (each prefix change triggers network-wide propagation). 
 In the DTN context, these characteristics are amplified: convergence time scales with propagation delay ($D \cdot d$ for diameter $D$), but post-convergence lookups remain instantaneous.
 
-Recent work has proposed adapting BGP for DTN EID distribution~\cite{feldmann2025bgp}, carrying EID reachability information in BGP UPDATE messages extended with DTN-specific attributes.
-This approach leverages BGP's path-vector machinery for loop prevention and policy routing, but inherits its overhead characteristics---an important consideration when network links may be bandwidth-constrained or intermittent.
+Recent work has proposed adapting BGP for DTN EID distribution~\cite{feldmann2025bgp}, extending BGP UPDATE messages with DTN-specific attributes to carry EID reachability information.
+In this approach, BGP's message format and session model are reused to deliver EID bindings from a gateway to its attached BPA---not for transitive, network-wide propagation, but for the single-hop edge interface at which a BPA is configured by its upstream provider.
+The approach inherits BGP's overhead characteristics, an important consideration when links are bandwidth-constrained or intermittent.
 
 A key distinction must be drawn regarding the \emph{intended application domain} of this BGP extension.
 Its core use case is the \emph{configuration of end-user-facing BPAs by their gateways}: a BPA at the edge of a DTN domain learns EID reachability from its directly connected gateway, much as a DSL router receives prefix information from its telco provider.
