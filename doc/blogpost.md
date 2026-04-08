@@ -29,7 +29,9 @@ The two paradigms solve the same problem in opposite ways.
 **BGP-like (Push):** When a node publishes an EID, it floods the binding to every other node in the network.
 After convergence, every lookup is an instantaneous local table read. You pay once, use forever.
 The cost: O(N) messages per EID publication, and full replication of all state across all nodes.
-This approach has been proposed by Feldmann et al. in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networks*](https://github.com/darksol-cloud/bgp-dns-omnetpp/blob/main/doc/m86281-feldmann%20final.pdf) (IEEE WiSEE 2025, In Press).
+Feldmann et al. proposed a BGP extension for DTN EIDs in [*A Border Gateway Protocol Extension for Distributing Endpoint Identifier Reachability Information in Delay-tolerant Networks*](https://github.com/darksol-cloud/bgp-dns-omnetpp/blob/main/doc/m86281-feldmann%20final.pdf) (IEEE WiSEE 2025, In Press).
+An important note on scope: the original design targets **edge BPA configuration** — how a Bundle Protocol Agent is configured by its upstream gateway, much like a home router receiving routing information from a telco provider — rather than network-wide flooding across a multi-hop mesh.
+Our simulation study generalises this push paradigm to multi-hop DTN deployments for a systematic comparison; that is a deliberate broadening beyond the mechanism's original intent.
 
 **DNS-like (Pull):** EID bindings are stored at an authority node.
 When a client needs to resolve an EID, it queries a resolver, which fetches the answer from the authority and caches it.
@@ -133,7 +135,7 @@ The key insight from our work is that **both solutions are right — for differe
 
 For DTN architects, the practical takeaways are:
 
-- **Terrestrial and tactical DTN networks** (disaster response, battlefield communications, urban sensor meshes): deploy DNS-like pull resolution. The bandwidth savings are enormous and latency is acceptable.
+- **Terrestrial and tactical DTN networks** (disaster response, battlefield communications, urban sensor meshes): for general, multi-hop EID resolution, deploy DNS-like pull resolution. The bandwidth savings are enormous and latency is acceptable. Note that BGP-based approaches remain well-suited for their original domain: configuring BPAs at the edge of a DTN domain via their gateways, a complementary and more constrained problem that our comparison does not displace.
 - **Deep-space networks** (Mars, outer planets, deep-space probes): deploy BGP-like flooding. The per-query cost of DNS is prohibitive, and BGP's convergence cost amortizes after just one query.
 - **Cislunar networks** (Lunar Gateway, Artemis surface operations): design a hybrid. The contested zone calls for context-aware protocol selection — perhaps DNS for surface-local queries within a lunar base, BGP for anything crossing the Earth–Moon link.
 
