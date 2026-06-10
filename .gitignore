@@ -48,3 +48,4 @@ doc/*.fdb_latexmk
 doc/*.synctex.gz
 
 Notes.txt
+paper/
