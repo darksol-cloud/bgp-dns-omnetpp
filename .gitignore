@@ -46,3 +46,5 @@ doc/*.lot
 doc/*.fls
 doc/*.fdb_latexmk
 doc/*.synctex.gz
+
+Notes.txt
