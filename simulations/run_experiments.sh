@@ -41,6 +41,9 @@ declare -a EXP11=("Exp11_Terrestrial_Bgp" "Exp11_Terrestrial_Dns")
 declare -a EXP12=("Exp12_Lunar_Bgp" "Exp12_Lunar_Dns")
 declare -a EXP13=("Exp13_Mars_Bgp" "Exp13_Mars_Dns")
 
+# Intermittency experiments (journal extension)
+declare -a EXP14=("Exp14_Lunar_Int_Bgp" "Exp14_Lunar_Int_Dns" "Exp14_Mars_Int_Bgp" "Exp14_Mars_Int_Dns")
+
 run_config() {
     local config=$1
     echo "========================================"
@@ -73,6 +76,7 @@ run_experiment() {
         11) for config in "${EXP11[@]}"; do run_config "$config"; done ;;
         12) for config in "${EXP12[@]}"; do run_config "$config"; done ;;
         13) for config in "${EXP13[@]}"; do run_config "$config"; done ;;
+        14) for config in "${EXP14[@]}"; do run_config "$config"; done ;;
     esac
 }
 

@@ -1,0 +1,611 @@
+file 172032 1781062512                                          
+version 3
+run Exp14_Mars_Int_Dns-14-20260610-00:35:12-12445
+attr configname Exp14_Mars_Int_Dns
+attr datetime 20260610-00:35:12
+attr datetimef 20260610-003512
+attr experiment Exp14_Mars_Int_Dns
+attr inifile simulations/experiments.ini
+attr iterationvars $duty=0.75
+attr iterationvarsd duty=0.75
+attr iterationvarsf duty=0.75-
+attr measurement $duty=0.75
+attr network bgpdns.MarsExplorationNetwork
+attr processid 12445
+attr repetition 4
+attr replication #4
+attr resultdir simulations/results
+attr runnumber 14
+attr seedset 4
+itervar duty 0.75
+config cmdenv-express-mode true
+config result-dir simulations/results
+config extends Exp13_Mars_Dns
+config description "Experiment 14: Mars network with intermittent Earth-Mars trunk - DNS"
+config *.jezeroHabitat.queryEids "\"1-3\""
+config *.jezeroHabitat.queryCount 8
+config *.jezeroHabitat.queryInterval 300s
+config *.jezeroHabitat.queryStartTime 100s
+config *.jezeroHabitat.dnsBaseRtt 1560s
+config *.jezeroHabitat.dnsTrunkContactPeriod 1800s
+config *.jezeroHabitat.dnsTrunkContactDuty 0.75
+config *.earthDsn.isClient true
+config *.earthDsn.queryEids "\"4-12\""
+config *.earthDsn.queryCount 8
+config *.earthDsn.queryInterval 300s
+config *.earthDsn.queryStartTime 150s
+config *.earthDsn.resolverNodeId 1
+config *.earthDsn.dnsTrunkContactPeriod 1800s
+config *.earthDsn.dnsTrunkContactDuty 0.75
+config extends Exp13_Mars_Base
+config description "Experiment 13: Mars exploration network - DNS"
+config *.earthDsn.isPublisher true
+config *.earthDsn.publishEids "\"1-3\""
+config *.earthDsn.publishStartTime 5s
+config *.earthDsn.authorityNodeId 0
+config *.jezeroHabitat.isPublisher true
+config *.jezeroHabitat.publishEids "\"4-6\""
+config *.jezeroHabitat.publishStartTime 10s
+config *.jezeroHabitat.authorityNodeId 1
+config *.olympusOutpost.isPublisher true
+config *.olympusOutpost.publishEids "\"7-8\""
+config *.olympusOutpost.publishStartTime 15s
+config *.olympusOutpost.authorityNodeId 1
+config *.rover[0].isPublisher true
+config *.rover[0].publishEids "\"9\""
+config *.rover[2].isPublisher true
+config *.rover[2].publishEids "\"10\""
+config *.rover[*].publishStartTime 20s
+config *.rover[*].authorityNodeId 1
+config *.instrument[0].isPublisher true
+config *.instrument[0].publishEids "\"11\""
+config *.instrument[1].isPublisher true
+config *.instrument[1].publishEids "\"12\""
+config *.instrument[*].publishStartTime 30s
+config *.instrument[*].authorityNodeId 1
+config *.rover[*].churnInterval 300s
+config *.rover[*].churnProbability 0.1
+config *.marsOrbiter.isAuthority true
+config *.marsOrbiter.isResolver true
+config *.earthDsn.isAuthority true
+config *.rover[0].isClient true
+config *.rover[0].queryEids "\"4-12\""
+config *.rover[0].queryCount 40
+config *.rover[0].queryInterval 20s
+config *.rover[0].queryStartTime 200s
+config *.rover[0].resolverNodeId 1
+config *.rover[0].authorityNodeId 1
+config *.jezeroHabitat.isClient true
+config *.jezeroHabitat.queryEids "\"1-12\""
+config *.jezeroHabitat.queryCount 30
+config *.jezeroHabitat.queryInterval 30s
+config *.jezeroHabitat.queryStartTime 300s
+config *.jezeroHabitat.resolverNodeId 1
+config *.jezeroHabitat.authorityNodeId 1
+config *.marsOrbiter.isClient true
+config *.marsOrbiter.queryEids "\"1-12\""
+config *.marsOrbiter.queryCount 25
+config *.marsOrbiter.queryInterval 40s
+config *.marsOrbiter.queryStartTime 250s
+config *.marsOrbiter.resolverNodeId 1
+config *.marsOrbiter.authorityNodeId 1
+config *.earthDsn.bgpEnabled false
+config *.marsOrbiter.bgpEnabled false
+config *.jezeroHabitat.bgpEnabled false
+config *.olympusOutpost.bgpEnabled false
+config *.rover[*].bgpEnabled false
+config *.instrument[*].bgpEnabled false
+config *.earthDsn.dnsEnabled true
+config *.marsOrbiter.dnsEnabled true
+config *.jezeroHabitat.dnsEnabled true
+config *.olympusOutpost.dnsEnabled true
+config *.rover[*].dnsEnabled true
+config *.instrument[*].dnsEnabled true
+config *.earthDsn.dnsDirectMode true
+config *.marsOrbiter.dnsDirectMode true
+config *.jezeroHabitat.dnsDirectMode true
+config *.olympusOutpost.dnsDirectMode true
+config *.rover[*].dnsDirectMode true
+config *.instrument[*].dnsDirectMode true
+config *.earthDsn.dnsBaseRtt 1440s
+config *.marsOrbiter.dnsBaseRtt 0s
+config *.jezeroHabitat.dnsBaseRtt 120s
+config *.olympusOutpost.dnsBaseRtt 120s
+config *.rover[*].dnsBaseRtt 130s
+config *.instrument[*].dnsBaseRtt 132s
+config *.earthDsn.dnsTtl 120s
+config *.marsOrbiter.dnsTtl 120s
+config *.jezeroHabitat.dnsTtl 120s
+config *.olympusOutpost.dnsTtl 120s
+config *.rover[*].dnsTtl 120s
+config *.instrument[*].dnsTtl 120s
+config network bgpdns.MarsExplorationNetwork
+config sim-time-limit 3600s
+config repeat 5
+config *.earthDsn.nodeId 0
+config *.marsOrbiter.nodeId 1
+config *.jezeroHabitat.nodeId 2
+config *.olympusOutpost.nodeId 3
+config *.rover[*].nodeId "4 + index"
+config *.instrument[*].nodeId "8 + index"
+config *.groundTruth.totalNodes 10
+config *.groundTruth.snapshotInterval 120s
+config network bgpdns.FairComparisonNetwork
+config sim-time-limit 120s
+config warmup-period 2s
+config output-scalar-file simulations/results/Exp14_Mars_Int_Dns-duty=0.75-
+config output-vector-file simulations/results/Exp14_Mars_Int_Dns-duty=0.75-
+config seed-set 4
+config **.result-recording-modes default,+histogram
+config **.channel.delay 10ms
+
+vector 0 MarsExplorationNetwork.groundTruth globalBgpMessages:vector ETV
+attr recordingmode vector
+vector 1 MarsExplorationNetwork.groundTruth globalDnsMessages:vector ETV
+attr recordingmode vector
+vector 2 MarsExplorationNetwork.groundTruth globalBgpBytes:vector ETV
+attr recordingmode vector
+vector 3 MarsExplorationNetwork.groundTruth globalDnsBytes:vector ETV
+attr recordingmode vector
+vector 4 MarsExplorationNetwork.groundTruth globalConvergenceTime:vector ETV
+attr recordingmode vector
+vector 5 MarsExplorationNetwork.groundTruth globalAccuracy:vector ETV
+attr recordingmode vector
+vector 6 MarsExplorationNetwork.groundTruth globalCoverage:vector ETV
+attr recordingmode vector
+vector 7 MarsExplorationNetwork.groundTruth globalStaleRate:vector ETV
+attr recordingmode vector
+vector 8 MarsExplorationNetwork.groundTruth avgBgpTableSize:vector ETV
+attr recordingmode vector
+vector 9 MarsExplorationNetwork.groundTruth avgDnsCacheSize:vector ETV
+attr recordingmode vector
+vector 10 MarsExplorationNetwork.groundTruth totalTableOperations:vector ETV
+attr recordingmode vector
+vector 11 MarsExplorationNetwork.earthDsn bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 12 MarsExplorationNetwork.earthDsn bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 13 MarsExplorationNetwork.earthDsn bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 14 MarsExplorationNetwork.earthDsn bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 15 MarsExplorationNetwork.earthDsn bgpTableSize:vector ETV
+attr recordingmode vector
+vector 16 MarsExplorationNetwork.earthDsn bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 17 MarsExplorationNetwork.earthDsn dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 18 MarsExplorationNetwork.earthDsn dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 19 MarsExplorationNetwork.earthDsn dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 20 MarsExplorationNetwork.earthDsn dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 21 MarsExplorationNetwork.earthDsn dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 22 MarsExplorationNetwork.earthDsn dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 23 MarsExplorationNetwork.earthDsn dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 24 MarsExplorationNetwork.earthDsn dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 25 MarsExplorationNetwork.earthDsn dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 26 MarsExplorationNetwork.earthDsn messageBytesSent:vector ETV
+attr recordingmode vector
+vector 27 MarsExplorationNetwork.earthDsn messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 28 MarsExplorationNetwork.earthDsn tableOperations:vector ETV
+attr recordingmode vector
+vector 29 MarsExplorationNetwork.earthDsn discoveryLatency:vector ETV
+attr recordingmode vector
+vector 30 MarsExplorationNetwork.marsOrbiter bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 31 MarsExplorationNetwork.marsOrbiter bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 32 MarsExplorationNetwork.marsOrbiter bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 33 MarsExplorationNetwork.marsOrbiter bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 34 MarsExplorationNetwork.marsOrbiter bgpTableSize:vector ETV
+attr recordingmode vector
+vector 35 MarsExplorationNetwork.marsOrbiter bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 36 MarsExplorationNetwork.marsOrbiter dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 37 MarsExplorationNetwork.marsOrbiter dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 38 MarsExplorationNetwork.marsOrbiter dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 39 MarsExplorationNetwork.marsOrbiter dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 40 MarsExplorationNetwork.marsOrbiter dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 41 MarsExplorationNetwork.marsOrbiter dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 42 MarsExplorationNetwork.marsOrbiter dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 43 MarsExplorationNetwork.marsOrbiter dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 44 MarsExplorationNetwork.marsOrbiter dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 45 MarsExplorationNetwork.marsOrbiter messageBytesSent:vector ETV
+attr recordingmode vector
+vector 46 MarsExplorationNetwork.marsOrbiter messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 47 MarsExplorationNetwork.marsOrbiter tableOperations:vector ETV
+attr recordingmode vector
+vector 48 MarsExplorationNetwork.marsOrbiter discoveryLatency:vector ETV
+attr recordingmode vector
+vector 49 MarsExplorationNetwork.jezeroHabitat bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 50 MarsExplorationNetwork.jezeroHabitat bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 51 MarsExplorationNetwork.jezeroHabitat bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 52 MarsExplorationNetwork.jezeroHabitat bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 53 MarsExplorationNetwork.jezeroHabitat bgpTableSize:vector ETV
+attr recordingmode vector
+vector 54 MarsExplorationNetwork.jezeroHabitat bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 55 MarsExplorationNetwork.jezeroHabitat dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 56 MarsExplorationNetwork.jezeroHabitat dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 57 MarsExplorationNetwork.jezeroHabitat dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 58 MarsExplorationNetwork.jezeroHabitat dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 59 MarsExplorationNetwork.jezeroHabitat dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 60 MarsExplorationNetwork.jezeroHabitat dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 61 MarsExplorationNetwork.jezeroHabitat dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 62 MarsExplorationNetwork.jezeroHabitat dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 63 MarsExplorationNetwork.jezeroHabitat dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 64 MarsExplorationNetwork.jezeroHabitat messageBytesSent:vector ETV
+attr recordingmode vector
+vector 65 MarsExplorationNetwork.jezeroHabitat messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 66 MarsExplorationNetwork.jezeroHabitat tableOperations:vector ETV
+attr recordingmode vector
+vector 67 MarsExplorationNetwork.jezeroHabitat discoveryLatency:vector ETV
+attr recordingmode vector
+vector 68 MarsExplorationNetwork.olympusOutpost bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 69 MarsExplorationNetwork.olympusOutpost bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 70 MarsExplorationNetwork.olympusOutpost bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 71 MarsExplorationNetwork.olympusOutpost bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 72 MarsExplorationNetwork.olympusOutpost bgpTableSize:vector ETV
+attr recordingmode vector
+vector 73 MarsExplorationNetwork.olympusOutpost bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 74 MarsExplorationNetwork.olympusOutpost dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 75 MarsExplorationNetwork.olympusOutpost dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 76 MarsExplorationNetwork.olympusOutpost dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 77 MarsExplorationNetwork.olympusOutpost dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 78 MarsExplorationNetwork.olympusOutpost dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 79 MarsExplorationNetwork.olympusOutpost dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 80 MarsExplorationNetwork.olympusOutpost dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 81 MarsExplorationNetwork.olympusOutpost dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 82 MarsExplorationNetwork.olympusOutpost dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 83 MarsExplorationNetwork.olympusOutpost messageBytesSent:vector ETV
+attr recordingmode vector
+vector 84 MarsExplorationNetwork.olympusOutpost messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 85 MarsExplorationNetwork.olympusOutpost tableOperations:vector ETV
+attr recordingmode vector
+vector 86 MarsExplorationNetwork.olympusOutpost discoveryLatency:vector ETV
+attr recordingmode vector
+vector 87 MarsExplorationNetwork.rover[0] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 88 MarsExplorationNetwork.rover[0] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 89 MarsExplorationNetwork.rover[0] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 90 MarsExplorationNetwork.rover[0] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 91 MarsExplorationNetwork.rover[0] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 92 MarsExplorationNetwork.rover[0] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 93 MarsExplorationNetwork.rover[0] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 94 MarsExplorationNetwork.rover[0] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 95 MarsExplorationNetwork.rover[0] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 96 MarsExplorationNetwork.rover[0] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 97 MarsExplorationNetwork.rover[0] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 98 MarsExplorationNetwork.rover[0] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 99 MarsExplorationNetwork.rover[0] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 100 MarsExplorationNetwork.rover[0] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 101 MarsExplorationNetwork.rover[0] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 102 MarsExplorationNetwork.rover[0] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 103 MarsExplorationNetwork.rover[0] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 104 MarsExplorationNetwork.rover[0] tableOperations:vector ETV
+attr recordingmode vector
+vector 105 MarsExplorationNetwork.rover[0] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 106 MarsExplorationNetwork.rover[1] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 107 MarsExplorationNetwork.rover[1] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 108 MarsExplorationNetwork.rover[1] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 109 MarsExplorationNetwork.rover[1] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 110 MarsExplorationNetwork.rover[1] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 111 MarsExplorationNetwork.rover[1] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 112 MarsExplorationNetwork.rover[1] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 113 MarsExplorationNetwork.rover[1] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 114 MarsExplorationNetwork.rover[1] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 115 MarsExplorationNetwork.rover[1] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 116 MarsExplorationNetwork.rover[1] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 117 MarsExplorationNetwork.rover[1] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 118 MarsExplorationNetwork.rover[1] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 119 MarsExplorationNetwork.rover[1] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 120 MarsExplorationNetwork.rover[1] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 121 MarsExplorationNetwork.rover[1] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 122 MarsExplorationNetwork.rover[1] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 123 MarsExplorationNetwork.rover[1] tableOperations:vector ETV
+attr recordingmode vector
+vector 124 MarsExplorationNetwork.rover[1] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 125 MarsExplorationNetwork.rover[2] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 126 MarsExplorationNetwork.rover[2] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 127 MarsExplorationNetwork.rover[2] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 128 MarsExplorationNetwork.rover[2] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 129 MarsExplorationNetwork.rover[2] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 130 MarsExplorationNetwork.rover[2] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 131 MarsExplorationNetwork.rover[2] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 132 MarsExplorationNetwork.rover[2] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 133 MarsExplorationNetwork.rover[2] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 134 MarsExplorationNetwork.rover[2] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 135 MarsExplorationNetwork.rover[2] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 136 MarsExplorationNetwork.rover[2] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 137 MarsExplorationNetwork.rover[2] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 138 MarsExplorationNetwork.rover[2] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 139 MarsExplorationNetwork.rover[2] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 140 MarsExplorationNetwork.rover[2] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 141 MarsExplorationNetwork.rover[2] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 142 MarsExplorationNetwork.rover[2] tableOperations:vector ETV
+attr recordingmode vector
+vector 143 MarsExplorationNetwork.rover[2] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 144 MarsExplorationNetwork.rover[3] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 145 MarsExplorationNetwork.rover[3] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 146 MarsExplorationNetwork.rover[3] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 147 MarsExplorationNetwork.rover[3] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 148 MarsExplorationNetwork.rover[3] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 149 MarsExplorationNetwork.rover[3] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 150 MarsExplorationNetwork.rover[3] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 151 MarsExplorationNetwork.rover[3] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 152 MarsExplorationNetwork.rover[3] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 153 MarsExplorationNetwork.rover[3] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 154 MarsExplorationNetwork.rover[3] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 155 MarsExplorationNetwork.rover[3] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 156 MarsExplorationNetwork.rover[3] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 157 MarsExplorationNetwork.rover[3] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 158 MarsExplorationNetwork.rover[3] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 159 MarsExplorationNetwork.rover[3] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 160 MarsExplorationNetwork.rover[3] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 161 MarsExplorationNetwork.rover[3] tableOperations:vector ETV
+attr recordingmode vector
+vector 162 MarsExplorationNetwork.rover[3] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 163 MarsExplorationNetwork.instrument[0] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 164 MarsExplorationNetwork.instrument[0] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 165 MarsExplorationNetwork.instrument[0] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 166 MarsExplorationNetwork.instrument[0] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 167 MarsExplorationNetwork.instrument[0] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 168 MarsExplorationNetwork.instrument[0] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 169 MarsExplorationNetwork.instrument[0] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 170 MarsExplorationNetwork.instrument[0] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 171 MarsExplorationNetwork.instrument[0] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 172 MarsExplorationNetwork.instrument[0] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 173 MarsExplorationNetwork.instrument[0] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 174 MarsExplorationNetwork.instrument[0] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 175 MarsExplorationNetwork.instrument[0] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 176 MarsExplorationNetwork.instrument[0] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 177 MarsExplorationNetwork.instrument[0] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 178 MarsExplorationNetwork.instrument[0] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 179 MarsExplorationNetwork.instrument[0] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 180 MarsExplorationNetwork.instrument[0] tableOperations:vector ETV
+attr recordingmode vector
+vector 181 MarsExplorationNetwork.instrument[0] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 182 MarsExplorationNetwork.instrument[1] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 183 MarsExplorationNetwork.instrument[1] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 184 MarsExplorationNetwork.instrument[1] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 185 MarsExplorationNetwork.instrument[1] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 186 MarsExplorationNetwork.instrument[1] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 187 MarsExplorationNetwork.instrument[1] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 188 MarsExplorationNetwork.instrument[1] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 189 MarsExplorationNetwork.instrument[1] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 190 MarsExplorationNetwork.instrument[1] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 191 MarsExplorationNetwork.instrument[1] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 192 MarsExplorationNetwork.instrument[1] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 193 MarsExplorationNetwork.instrument[1] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 194 MarsExplorationNetwork.instrument[1] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 195 MarsExplorationNetwork.instrument[1] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 196 MarsExplorationNetwork.instrument[1] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 197 MarsExplorationNetwork.instrument[1] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 198 MarsExplorationNetwork.instrument[1] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 199 MarsExplorationNetwork.instrument[1] tableOperations:vector ETV
+attr recordingmode vector
+vector 200 MarsExplorationNetwork.instrument[1] discoveryLatency:vector ETV
+attr recordingmode vector
+5	25152 15 36142 36142 3600 3600 1 0 0 0 0
+6	25167 15 36142 36142 3600 3600 1 0 0 0 0
+7	25182 15 36142 36142 3600 3600 1 0 0 0 0
+10	25197 16 36142 36142 3600 3600 1 0 0 0 0
+15	25213 16 36142 36142 3600 3600 1 0 0 0 0
+17	25229 122 1510 22620 150 2250 8 1 1 8 8
+20	25351 122 1510 22620 150 2250 8 1 1 8 8
+22	25473 16 36142 36142 3600 3600 1 0 0 0 0
+23	25489 14 4534 4534 450 450 1 1 1 1 1
+24	25503 122 1510 22620 150 2250 8 1 1 8 8
+25	25625 146 1510 22620 150 2250 8 1440 3330 22200 63815400
+26	25771 130 1510 22620 150 2250 8 48 48 384 18432
+27	25901 130 1510 22620 150 2250 8 80 80 640 51200
+28	26031 30 51 51 5 5 3 1 3 6 14
+29	26061 146 1510 22620 150 2250 8 1440 3330 22200 63815400
+34	26207 16 36142 36142 3600 3600 1 0 0 0 0
+36	26223 274 2515 12196 250 1210 19 1 1 19 19
+39	26497 274 2515 12196 250 1210 19 1 1 19 19
+41	26771 762 1510 36142 150 3600 53 1 9 428 3654
+42	27533 88 2918 11393 290 1130 6 1 1 6 6
+43	27621 274 2515 12196 250 1210 19 1 1 19 19
+44	27895 350 2515 12196 250 1210 19 0.126 0.126 2.394 0.301644
+45	28245 293 2515 12196 250 1210 19 48 48 912 43776
+46	28538 293 2515 12196 250 1210 19 80 80 1520 121600
+47	28831 1052 1510 22620 150 2250 69 1 69 2415 111895
+48	29883 350 2515 12196 250 1210 19 0.126 0.126 2.394 0.301644
+53	30233 16 36142 36142 3600 3600 1 0 0 0 0
+55	30249 122 1008 22119 100 2200 8 1 1 8 8
+58	30371 122 1008 22119 100 2200 8 1 1 8 8
+59	30493 36 102 102 10 10 3 1 1 3 3
+60	30529 16 36142 36142 3600 3600 1 0 0 0 0
+62	30545 122 1008 22119 100 2200 8 1 1 8 8
+63	30667 146 1008 22119 100 2200 8 3120 3320 25160 79163200
+64	30813 169 102 22119 10 2200 11 48 80 624 37632
+65	30982 130 1008 22119 100 2200 8 80 80 640 51200
+67	31112 146 1008 22119 100 2200 8 3120 3320 25160 79163200
+72	31258 16 36142 36142 3600 3600 1 0 0 0 0
+78	31274 24 153 153 15 15 2 1 1 2 2
+79	31298 16 36142 36142 3600 3600 1 0 0 0 0
+83	31314 26 153 153 15 15 2 80 80 160 12800
+91	31340 16 36142 36142 3600 3600 1 0 0 0 0
+93	31356 560 2011 9886 200 980 40 1 1 40 40
+96	31916 560 2011 9886 200 980 40 1 1 40 40
+97	32476 58 204 21316 20 2120 4 1 1 4 4
+98	32534 16 36142 36142 3600 3600 1 0 0 0 0
+99	32550 266 2616 9684 260 960 19 1 1 19 19
+100	32816 600 2011 9886 200 980 40 1 1 40 40
+101	33416 680 2011 9886 200 980 40 130 260 7930 1740700
+102	34096 706 204 21316 20 2120 44 48 80 2240 117760
+103	34802 640 2011 9886 200 980 40 80 80 3200 256000
+105	35442 680 2011 9886 200 980 40 130 260 7930 1740700
+110	36122 17 36142 36142 3600 3600 1 0 0 0 0
+117	36139 17 36142 36142 3600 3600 1 0 0 0 0
+129	36156 17 36142 36142 3600 3600 1 0 0 0 0
+135	36173 28 205 9279 20 920 2 1 1 2 2
+136	36201 17 36142 36142 3600 3600 1 0 0 0 0
+140	36218 30 205 9279 20 920 2 80 80 160 12800
+148	36248 17 36142 36142 3600 3600 1 0 0 0 0
+155	36265 17 36142 36142 3600 3600 1 0 0 0 0
+167	36282 17 36142 36142 3600 3600 1 0 0 0 0
+173	36299 13 306 306 30 30 1 1 1 1 1
+174	36312 17 36142 36142 3600 3600 1 0 0 0 0
+178	36329 14 306 306 30 30 1 80 80 80 6400
+186	36343 17 36142 36142 3600 3600 1 0 0 0 0
+192	36360 13 307 307 30 30 1 1 1 1 1
+193	36373 17 36142 36142 3600 3600 1 0 0 0 0
+197	36390 14 307 307 30 30 1 80 80 80 6400
+

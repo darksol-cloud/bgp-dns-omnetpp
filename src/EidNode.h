@@ -107,6 +107,9 @@ class EidNode : public cSimpleModule
     // Fair comparison mode
     bool dnsDirectMode;         // If true, DNS uses sendDirect() to model pre-routed transport
     double dnsBaseRtt;          // Base RTT for direct mode
+    double dnsTrunkContactPeriod;  // Contact schedule of the trunk link crossed by this
+    double dnsTrunkContactDuty;    // node's direct-mode queries (period 0 = always-on)
+    double dnsTrunkContactPhase;
     double networkDiameter;     // Estimated network diameter (computed at init)
 
     // Publisher parameters

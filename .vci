@@ -1,0 +1,1095 @@
+file 397312 1781062362                                          
+version 3
+run Exp_QuickCompare-5-20260610-00:32:42-11087
+attr configname Exp_QuickCompare
+attr datetime 20260610-00:32:42
+attr datetimef 20260610-003242
+attr experiment Exp_QuickCompare
+attr inifile simulations/experiments.ini
+attr iterationvars "$bgp=false, $dns=true"
+attr iterationvarsd bgp=false/dns=true
+attr iterationvarsf bgp=false,dns=true-
+attr measurement "$bgp=false, $dns=true"
+attr network bgpdns.FairComparisonNetwork
+attr processid 11087
+attr repetition 2
+attr replication #2
+attr resultdir /tmp/bgpdns_sanity
+attr runnumber 5
+attr seedset 2
+itervar bgp false
+itervar dns true
+config result-dir /tmp/bgpdns_sanity
+config description "Quick comparison: BGP vs DNS on small network"
+config repeat 3
+config sim-time-limit 60s
+config *.numNodes 25
+config *.gridWidth 5
+config *.gridHeight 5
+config *.node[0].isPublisher true
+config *.node[0].isAuthority true
+config *.node[0].publishEids "\"1-10\""
+config *.node[0].publishStartTime 3s
+config *.node[12].isResolver true
+config *.node[12].authorityNodeId 0
+config *.node[24].isClient true
+config *.node[24].queryEids "\"1-10\""
+config *.node[24].queryCount 50
+config *.node[24].queryInterval 0.5s
+config *.node[24].queryStartTime 5s
+config *.node[24].resolverNodeId 12
+config *.node[24].authorityNodeId 0
+config *.node[*].bgpEnabled false
+config *.node[*].dnsEnabled true
+config *.node[*].dnsDirectMode true
+config *.node[*].dnsBaseRtt 0s
+config *.node[*].dnsTtl 60s
+config *.groundTruth.verboseLogging true
+config *.groundTruth.snapshotInterval 5s
+config network bgpdns.FairComparisonNetwork
+config sim-time-limit 120s
+config warmup-period 2s
+config output-scalar-file /tmp/bgpdns_sanity/Exp_QuickCompare-bgp=false,dns=true-
+config output-vector-file /tmp/bgpdns_sanity/Exp_QuickCompare-bgp=false,dns=true-
+config seed-set 2
+config **.result-recording-modes default,+histogram
+config **.channel.delay 10ms
+
+vector 0 FairComparisonNetwork.groundTruth globalBgpMessages:vector ETV
+attr recordingmode vector
+vector 1 FairComparisonNetwork.groundTruth globalDnsMessages:vector ETV
+attr recordingmode vector
+vector 2 FairComparisonNetwork.groundTruth globalBgpBytes:vector ETV
+attr recordingmode vector
+vector 3 FairComparisonNetwork.groundTruth globalDnsBytes:vector ETV
+attr recordingmode vector
+vector 4 FairComparisonNetwork.groundTruth globalConvergenceTime:vector ETV
+attr recordingmode vector
+vector 5 FairComparisonNetwork.groundTruth globalAccuracy:vector ETV
+attr recordingmode vector
+vector 6 FairComparisonNetwork.groundTruth globalCoverage:vector ETV
+attr recordingmode vector
+vector 7 FairComparisonNetwork.groundTruth globalStaleRate:vector ETV
+attr recordingmode vector
+vector 8 FairComparisonNetwork.groundTruth avgBgpTableSize:vector ETV
+attr recordingmode vector
+vector 9 FairComparisonNetwork.groundTruth avgDnsCacheSize:vector ETV
+attr recordingmode vector
+vector 10 FairComparisonNetwork.groundTruth totalTableOperations:vector ETV
+attr recordingmode vector
+vector 11 FairComparisonNetwork.node[0] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 12 FairComparisonNetwork.node[0] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 13 FairComparisonNetwork.node[0] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 14 FairComparisonNetwork.node[0] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 15 FairComparisonNetwork.node[0] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 16 FairComparisonNetwork.node[0] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 17 FairComparisonNetwork.node[0] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 18 FairComparisonNetwork.node[0] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 19 FairComparisonNetwork.node[0] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 20 FairComparisonNetwork.node[0] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 21 FairComparisonNetwork.node[0] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 22 FairComparisonNetwork.node[0] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 23 FairComparisonNetwork.node[0] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 24 FairComparisonNetwork.node[0] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 25 FairComparisonNetwork.node[0] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 26 FairComparisonNetwork.node[0] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 27 FairComparisonNetwork.node[0] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 28 FairComparisonNetwork.node[0] tableOperations:vector ETV
+attr recordingmode vector
+vector 29 FairComparisonNetwork.node[0] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 30 FairComparisonNetwork.node[1] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 31 FairComparisonNetwork.node[1] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 32 FairComparisonNetwork.node[1] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 33 FairComparisonNetwork.node[1] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 34 FairComparisonNetwork.node[1] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 35 FairComparisonNetwork.node[1] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 36 FairComparisonNetwork.node[1] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 37 FairComparisonNetwork.node[1] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 38 FairComparisonNetwork.node[1] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 39 FairComparisonNetwork.node[1] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 40 FairComparisonNetwork.node[1] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 41 FairComparisonNetwork.node[1] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 42 FairComparisonNetwork.node[1] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 43 FairComparisonNetwork.node[1] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 44 FairComparisonNetwork.node[1] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 45 FairComparisonNetwork.node[1] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 46 FairComparisonNetwork.node[1] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 47 FairComparisonNetwork.node[1] tableOperations:vector ETV
+attr recordingmode vector
+vector 48 FairComparisonNetwork.node[1] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 49 FairComparisonNetwork.node[2] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 50 FairComparisonNetwork.node[2] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 51 FairComparisonNetwork.node[2] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 52 FairComparisonNetwork.node[2] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 53 FairComparisonNetwork.node[2] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 54 FairComparisonNetwork.node[2] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 55 FairComparisonNetwork.node[2] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 56 FairComparisonNetwork.node[2] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 57 FairComparisonNetwork.node[2] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 58 FairComparisonNetwork.node[2] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 59 FairComparisonNetwork.node[2] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 60 FairComparisonNetwork.node[2] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 61 FairComparisonNetwork.node[2] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 62 FairComparisonNetwork.node[2] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 63 FairComparisonNetwork.node[2] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 64 FairComparisonNetwork.node[2] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 65 FairComparisonNetwork.node[2] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 66 FairComparisonNetwork.node[2] tableOperations:vector ETV
+attr recordingmode vector
+vector 67 FairComparisonNetwork.node[2] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 68 FairComparisonNetwork.node[3] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 69 FairComparisonNetwork.node[3] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 70 FairComparisonNetwork.node[3] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 71 FairComparisonNetwork.node[3] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 72 FairComparisonNetwork.node[3] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 73 FairComparisonNetwork.node[3] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 74 FairComparisonNetwork.node[3] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 75 FairComparisonNetwork.node[3] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 76 FairComparisonNetwork.node[3] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 77 FairComparisonNetwork.node[3] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 78 FairComparisonNetwork.node[3] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 79 FairComparisonNetwork.node[3] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 80 FairComparisonNetwork.node[3] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 81 FairComparisonNetwork.node[3] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 82 FairComparisonNetwork.node[3] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 83 FairComparisonNetwork.node[3] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 84 FairComparisonNetwork.node[3] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 85 FairComparisonNetwork.node[3] tableOperations:vector ETV
+attr recordingmode vector
+vector 86 FairComparisonNetwork.node[3] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 87 FairComparisonNetwork.node[4] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 88 FairComparisonNetwork.node[4] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 89 FairComparisonNetwork.node[4] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 90 FairComparisonNetwork.node[4] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 91 FairComparisonNetwork.node[4] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 92 FairComparisonNetwork.node[4] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 93 FairComparisonNetwork.node[4] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 94 FairComparisonNetwork.node[4] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 95 FairComparisonNetwork.node[4] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 96 FairComparisonNetwork.node[4] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 97 FairComparisonNetwork.node[4] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 98 FairComparisonNetwork.node[4] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 99 FairComparisonNetwork.node[4] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 100 FairComparisonNetwork.node[4] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 101 FairComparisonNetwork.node[4] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 102 FairComparisonNetwork.node[4] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 103 FairComparisonNetwork.node[4] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 104 FairComparisonNetwork.node[4] tableOperations:vector ETV
+attr recordingmode vector
+vector 105 FairComparisonNetwork.node[4] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 106 FairComparisonNetwork.node[5] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 107 FairComparisonNetwork.node[5] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 108 FairComparisonNetwork.node[5] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 109 FairComparisonNetwork.node[5] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 110 FairComparisonNetwork.node[5] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 111 FairComparisonNetwork.node[5] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 112 FairComparisonNetwork.node[5] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 113 FairComparisonNetwork.node[5] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 114 FairComparisonNetwork.node[5] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 115 FairComparisonNetwork.node[5] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 116 FairComparisonNetwork.node[5] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 117 FairComparisonNetwork.node[5] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 118 FairComparisonNetwork.node[5] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 119 FairComparisonNetwork.node[5] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 120 FairComparisonNetwork.node[5] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 121 FairComparisonNetwork.node[5] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 122 FairComparisonNetwork.node[5] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 123 FairComparisonNetwork.node[5] tableOperations:vector ETV
+attr recordingmode vector
+vector 124 FairComparisonNetwork.node[5] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 125 FairComparisonNetwork.node[6] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 126 FairComparisonNetwork.node[6] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 127 FairComparisonNetwork.node[6] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 128 FairComparisonNetwork.node[6] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 129 FairComparisonNetwork.node[6] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 130 FairComparisonNetwork.node[6] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 131 FairComparisonNetwork.node[6] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 132 FairComparisonNetwork.node[6] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 133 FairComparisonNetwork.node[6] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 134 FairComparisonNetwork.node[6] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 135 FairComparisonNetwork.node[6] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 136 FairComparisonNetwork.node[6] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 137 FairComparisonNetwork.node[6] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 138 FairComparisonNetwork.node[6] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 139 FairComparisonNetwork.node[6] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 140 FairComparisonNetwork.node[6] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 141 FairComparisonNetwork.node[6] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 142 FairComparisonNetwork.node[6] tableOperations:vector ETV
+attr recordingmode vector
+vector 143 FairComparisonNetwork.node[6] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 144 FairComparisonNetwork.node[7] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 145 FairComparisonNetwork.node[7] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 146 FairComparisonNetwork.node[7] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 147 FairComparisonNetwork.node[7] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 148 FairComparisonNetwork.node[7] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 149 FairComparisonNetwork.node[7] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 150 FairComparisonNetwork.node[7] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 151 FairComparisonNetwork.node[7] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 152 FairComparisonNetwork.node[7] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 153 FairComparisonNetwork.node[7] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 154 FairComparisonNetwork.node[7] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 155 FairComparisonNetwork.node[7] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 156 FairComparisonNetwork.node[7] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 157 FairComparisonNetwork.node[7] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 158 FairComparisonNetwork.node[7] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 159 FairComparisonNetwork.node[7] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 160 FairComparisonNetwork.node[7] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 161 FairComparisonNetwork.node[7] tableOperations:vector ETV
+attr recordingmode vector
+vector 162 FairComparisonNetwork.node[7] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 163 FairComparisonNetwork.node[8] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 164 FairComparisonNetwork.node[8] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 165 FairComparisonNetwork.node[8] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 166 FairComparisonNetwork.node[8] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 167 FairComparisonNetwork.node[8] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 168 FairComparisonNetwork.node[8] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 169 FairComparisonNetwork.node[8] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 170 FairComparisonNetwork.node[8] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 171 FairComparisonNetwork.node[8] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 172 FairComparisonNetwork.node[8] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 173 FairComparisonNetwork.node[8] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 174 FairComparisonNetwork.node[8] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 175 FairComparisonNetwork.node[8] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 176 FairComparisonNetwork.node[8] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 177 FairComparisonNetwork.node[8] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 178 FairComparisonNetwork.node[8] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 179 FairComparisonNetwork.node[8] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 180 FairComparisonNetwork.node[8] tableOperations:vector ETV
+attr recordingmode vector
+vector 181 FairComparisonNetwork.node[8] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 182 FairComparisonNetwork.node[9] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 183 FairComparisonNetwork.node[9] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 184 FairComparisonNetwork.node[9] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 185 FairComparisonNetwork.node[9] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 186 FairComparisonNetwork.node[9] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 187 FairComparisonNetwork.node[9] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 188 FairComparisonNetwork.node[9] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 189 FairComparisonNetwork.node[9] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 190 FairComparisonNetwork.node[9] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 191 FairComparisonNetwork.node[9] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 192 FairComparisonNetwork.node[9] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 193 FairComparisonNetwork.node[9] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 194 FairComparisonNetwork.node[9] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 195 FairComparisonNetwork.node[9] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 196 FairComparisonNetwork.node[9] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 197 FairComparisonNetwork.node[9] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 198 FairComparisonNetwork.node[9] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 199 FairComparisonNetwork.node[9] tableOperations:vector ETV
+attr recordingmode vector
+vector 200 FairComparisonNetwork.node[9] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 201 FairComparisonNetwork.node[10] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 202 FairComparisonNetwork.node[10] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 203 FairComparisonNetwork.node[10] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 204 FairComparisonNetwork.node[10] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 205 FairComparisonNetwork.node[10] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 206 FairComparisonNetwork.node[10] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 207 FairComparisonNetwork.node[10] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 208 FairComparisonNetwork.node[10] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 209 FairComparisonNetwork.node[10] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 210 FairComparisonNetwork.node[10] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 211 FairComparisonNetwork.node[10] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 212 FairComparisonNetwork.node[10] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 213 FairComparisonNetwork.node[10] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 214 FairComparisonNetwork.node[10] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 215 FairComparisonNetwork.node[10] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 216 FairComparisonNetwork.node[10] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 217 FairComparisonNetwork.node[10] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 218 FairComparisonNetwork.node[10] tableOperations:vector ETV
+attr recordingmode vector
+vector 219 FairComparisonNetwork.node[10] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 220 FairComparisonNetwork.node[11] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 221 FairComparisonNetwork.node[11] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 222 FairComparisonNetwork.node[11] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 223 FairComparisonNetwork.node[11] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 224 FairComparisonNetwork.node[11] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 225 FairComparisonNetwork.node[11] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 226 FairComparisonNetwork.node[11] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 227 FairComparisonNetwork.node[11] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 228 FairComparisonNetwork.node[11] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 229 FairComparisonNetwork.node[11] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 230 FairComparisonNetwork.node[11] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 231 FairComparisonNetwork.node[11] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 232 FairComparisonNetwork.node[11] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 233 FairComparisonNetwork.node[11] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 234 FairComparisonNetwork.node[11] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 235 FairComparisonNetwork.node[11] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 236 FairComparisonNetwork.node[11] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 237 FairComparisonNetwork.node[11] tableOperations:vector ETV
+attr recordingmode vector
+vector 238 FairComparisonNetwork.node[11] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 239 FairComparisonNetwork.node[12] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 240 FairComparisonNetwork.node[12] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 241 FairComparisonNetwork.node[12] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 242 FairComparisonNetwork.node[12] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 243 FairComparisonNetwork.node[12] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 244 FairComparisonNetwork.node[12] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 245 FairComparisonNetwork.node[12] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 246 FairComparisonNetwork.node[12] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 247 FairComparisonNetwork.node[12] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 248 FairComparisonNetwork.node[12] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 249 FairComparisonNetwork.node[12] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 250 FairComparisonNetwork.node[12] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 251 FairComparisonNetwork.node[12] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 252 FairComparisonNetwork.node[12] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 253 FairComparisonNetwork.node[12] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 254 FairComparisonNetwork.node[12] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 255 FairComparisonNetwork.node[12] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 256 FairComparisonNetwork.node[12] tableOperations:vector ETV
+attr recordingmode vector
+vector 257 FairComparisonNetwork.node[12] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 258 FairComparisonNetwork.node[13] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 259 FairComparisonNetwork.node[13] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 260 FairComparisonNetwork.node[13] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 261 FairComparisonNetwork.node[13] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 262 FairComparisonNetwork.node[13] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 263 FairComparisonNetwork.node[13] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 264 FairComparisonNetwork.node[13] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 265 FairComparisonNetwork.node[13] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 266 FairComparisonNetwork.node[13] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 267 FairComparisonNetwork.node[13] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 268 FairComparisonNetwork.node[13] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 269 FairComparisonNetwork.node[13] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 270 FairComparisonNetwork.node[13] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 271 FairComparisonNetwork.node[13] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 272 FairComparisonNetwork.node[13] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 273 FairComparisonNetwork.node[13] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 274 FairComparisonNetwork.node[13] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 275 FairComparisonNetwork.node[13] tableOperations:vector ETV
+attr recordingmode vector
+vector 276 FairComparisonNetwork.node[13] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 277 FairComparisonNetwork.node[14] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 278 FairComparisonNetwork.node[14] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 279 FairComparisonNetwork.node[14] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 280 FairComparisonNetwork.node[14] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 281 FairComparisonNetwork.node[14] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 282 FairComparisonNetwork.node[14] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 283 FairComparisonNetwork.node[14] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 284 FairComparisonNetwork.node[14] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 285 FairComparisonNetwork.node[14] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 286 FairComparisonNetwork.node[14] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 287 FairComparisonNetwork.node[14] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 288 FairComparisonNetwork.node[14] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 289 FairComparisonNetwork.node[14] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 290 FairComparisonNetwork.node[14] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 291 FairComparisonNetwork.node[14] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 292 FairComparisonNetwork.node[14] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 293 FairComparisonNetwork.node[14] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 294 FairComparisonNetwork.node[14] tableOperations:vector ETV
+attr recordingmode vector
+vector 295 FairComparisonNetwork.node[14] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 296 FairComparisonNetwork.node[15] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 297 FairComparisonNetwork.node[15] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 298 FairComparisonNetwork.node[15] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 299 FairComparisonNetwork.node[15] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 300 FairComparisonNetwork.node[15] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 301 FairComparisonNetwork.node[15] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 302 FairComparisonNetwork.node[15] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 303 FairComparisonNetwork.node[15] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 304 FairComparisonNetwork.node[15] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 305 FairComparisonNetwork.node[15] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 306 FairComparisonNetwork.node[15] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 307 FairComparisonNetwork.node[15] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 308 FairComparisonNetwork.node[15] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 309 FairComparisonNetwork.node[15] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 310 FairComparisonNetwork.node[15] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 311 FairComparisonNetwork.node[15] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 312 FairComparisonNetwork.node[15] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 313 FairComparisonNetwork.node[15] tableOperations:vector ETV
+attr recordingmode vector
+vector 314 FairComparisonNetwork.node[15] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 315 FairComparisonNetwork.node[16] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 316 FairComparisonNetwork.node[16] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 317 FairComparisonNetwork.node[16] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 318 FairComparisonNetwork.node[16] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 319 FairComparisonNetwork.node[16] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 320 FairComparisonNetwork.node[16] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 321 FairComparisonNetwork.node[16] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 322 FairComparisonNetwork.node[16] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 323 FairComparisonNetwork.node[16] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 324 FairComparisonNetwork.node[16] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 325 FairComparisonNetwork.node[16] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 326 FairComparisonNetwork.node[16] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 327 FairComparisonNetwork.node[16] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 328 FairComparisonNetwork.node[16] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 329 FairComparisonNetwork.node[16] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 330 FairComparisonNetwork.node[16] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 331 FairComparisonNetwork.node[16] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 332 FairComparisonNetwork.node[16] tableOperations:vector ETV
+attr recordingmode vector
+vector 333 FairComparisonNetwork.node[16] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 334 FairComparisonNetwork.node[17] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 335 FairComparisonNetwork.node[17] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 336 FairComparisonNetwork.node[17] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 337 FairComparisonNetwork.node[17] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 338 FairComparisonNetwork.node[17] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 339 FairComparisonNetwork.node[17] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 340 FairComparisonNetwork.node[17] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 341 FairComparisonNetwork.node[17] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 342 FairComparisonNetwork.node[17] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 343 FairComparisonNetwork.node[17] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 344 FairComparisonNetwork.node[17] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 345 FairComparisonNetwork.node[17] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 346 FairComparisonNetwork.node[17] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 347 FairComparisonNetwork.node[17] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 348 FairComparisonNetwork.node[17] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 349 FairComparisonNetwork.node[17] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 350 FairComparisonNetwork.node[17] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 351 FairComparisonNetwork.node[17] tableOperations:vector ETV
+attr recordingmode vector
+vector 352 FairComparisonNetwork.node[17] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 353 FairComparisonNetwork.node[18] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 354 FairComparisonNetwork.node[18] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 355 FairComparisonNetwork.node[18] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 356 FairComparisonNetwork.node[18] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 357 FairComparisonNetwork.node[18] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 358 FairComparisonNetwork.node[18] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 359 FairComparisonNetwork.node[18] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 360 FairComparisonNetwork.node[18] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 361 FairComparisonNetwork.node[18] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 362 FairComparisonNetwork.node[18] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 363 FairComparisonNetwork.node[18] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 364 FairComparisonNetwork.node[18] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 365 FairComparisonNetwork.node[18] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 366 FairComparisonNetwork.node[18] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 367 FairComparisonNetwork.node[18] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 368 FairComparisonNetwork.node[18] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 369 FairComparisonNetwork.node[18] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 370 FairComparisonNetwork.node[18] tableOperations:vector ETV
+attr recordingmode vector
+vector 371 FairComparisonNetwork.node[18] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 372 FairComparisonNetwork.node[19] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 373 FairComparisonNetwork.node[19] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 374 FairComparisonNetwork.node[19] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 375 FairComparisonNetwork.node[19] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 376 FairComparisonNetwork.node[19] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 377 FairComparisonNetwork.node[19] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 378 FairComparisonNetwork.node[19] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 379 FairComparisonNetwork.node[19] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 380 FairComparisonNetwork.node[19] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 381 FairComparisonNetwork.node[19] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 382 FairComparisonNetwork.node[19] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 383 FairComparisonNetwork.node[19] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 384 FairComparisonNetwork.node[19] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 385 FairComparisonNetwork.node[19] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 386 FairComparisonNetwork.node[19] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 387 FairComparisonNetwork.node[19] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 388 FairComparisonNetwork.node[19] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 389 FairComparisonNetwork.node[19] tableOperations:vector ETV
+attr recordingmode vector
+vector 390 FairComparisonNetwork.node[19] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 391 FairComparisonNetwork.node[20] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 392 FairComparisonNetwork.node[20] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 393 FairComparisonNetwork.node[20] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 394 FairComparisonNetwork.node[20] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 395 FairComparisonNetwork.node[20] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 396 FairComparisonNetwork.node[20] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 397 FairComparisonNetwork.node[20] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 398 FairComparisonNetwork.node[20] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 399 FairComparisonNetwork.node[20] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 400 FairComparisonNetwork.node[20] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 401 FairComparisonNetwork.node[20] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 402 FairComparisonNetwork.node[20] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 403 FairComparisonNetwork.node[20] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 404 FairComparisonNetwork.node[20] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 405 FairComparisonNetwork.node[20] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 406 FairComparisonNetwork.node[20] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 407 FairComparisonNetwork.node[20] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 408 FairComparisonNetwork.node[20] tableOperations:vector ETV
+attr recordingmode vector
+vector 409 FairComparisonNetwork.node[20] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 410 FairComparisonNetwork.node[21] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 411 FairComparisonNetwork.node[21] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 412 FairComparisonNetwork.node[21] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 413 FairComparisonNetwork.node[21] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 414 FairComparisonNetwork.node[21] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 415 FairComparisonNetwork.node[21] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 416 FairComparisonNetwork.node[21] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 417 FairComparisonNetwork.node[21] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 418 FairComparisonNetwork.node[21] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 419 FairComparisonNetwork.node[21] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 420 FairComparisonNetwork.node[21] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 421 FairComparisonNetwork.node[21] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 422 FairComparisonNetwork.node[21] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 423 FairComparisonNetwork.node[21] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 424 FairComparisonNetwork.node[21] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 425 FairComparisonNetwork.node[21] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 426 FairComparisonNetwork.node[21] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 427 FairComparisonNetwork.node[21] tableOperations:vector ETV
+attr recordingmode vector
+vector 428 FairComparisonNetwork.node[21] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 429 FairComparisonNetwork.node[22] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 430 FairComparisonNetwork.node[22] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 431 FairComparisonNetwork.node[22] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 432 FairComparisonNetwork.node[22] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 433 FairComparisonNetwork.node[22] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 434 FairComparisonNetwork.node[22] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 435 FairComparisonNetwork.node[22] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 436 FairComparisonNetwork.node[22] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 437 FairComparisonNetwork.node[22] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 438 FairComparisonNetwork.node[22] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 439 FairComparisonNetwork.node[22] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 440 FairComparisonNetwork.node[22] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 441 FairComparisonNetwork.node[22] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 442 FairComparisonNetwork.node[22] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 443 FairComparisonNetwork.node[22] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 444 FairComparisonNetwork.node[22] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 445 FairComparisonNetwork.node[22] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 446 FairComparisonNetwork.node[22] tableOperations:vector ETV
+attr recordingmode vector
+vector 447 FairComparisonNetwork.node[22] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 448 FairComparisonNetwork.node[23] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 449 FairComparisonNetwork.node[23] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 450 FairComparisonNetwork.node[23] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 451 FairComparisonNetwork.node[23] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 452 FairComparisonNetwork.node[23] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 453 FairComparisonNetwork.node[23] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 454 FairComparisonNetwork.node[23] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 455 FairComparisonNetwork.node[23] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 456 FairComparisonNetwork.node[23] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 457 FairComparisonNetwork.node[23] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 458 FairComparisonNetwork.node[23] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 459 FairComparisonNetwork.node[23] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 460 FairComparisonNetwork.node[23] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 461 FairComparisonNetwork.node[23] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 462 FairComparisonNetwork.node[23] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 463 FairComparisonNetwork.node[23] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 464 FairComparisonNetwork.node[23] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 465 FairComparisonNetwork.node[23] tableOperations:vector ETV
+attr recordingmode vector
+vector 466 FairComparisonNetwork.node[23] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 467 FairComparisonNetwork.node[24] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 468 FairComparisonNetwork.node[24] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 469 FairComparisonNetwork.node[24] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 470 FairComparisonNetwork.node[24] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 471 FairComparisonNetwork.node[24] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 472 FairComparisonNetwork.node[24] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 473 FairComparisonNetwork.node[24] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 474 FairComparisonNetwork.node[24] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 475 FairComparisonNetwork.node[24] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 476 FairComparisonNetwork.node[24] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 477 FairComparisonNetwork.node[24] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 478 FairComparisonNetwork.node[24] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 479 FairComparisonNetwork.node[24] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 480 FairComparisonNetwork.node[24] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 481 FairComparisonNetwork.node[24] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 482 FairComparisonNetwork.node[24] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 483 FairComparisonNetwork.node[24] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 484 FairComparisonNetwork.node[24] tableOperations:vector ETV
+attr recordingmode vector
+vector 485 FairComparisonNetwork.node[24] discoveryLatency:vector ETV
+attr recordingmode vector
+5	48407 141 52 665 5 60 13 0 0 0 0
+6	48548 141 52 665 5 60 13 0 0 0 0
+7	48689 141 52 665 5 60 13 0 0 0 0
+9	48830 168 52 665 5 60 13 0 0.4 4.6 1.7776
+10	48998 167 52 665 5 60 13 10 20 245 4711
+15	49165 12 665 665 60 60 1 0 0 0 0
+22	49177 12 665 665 60 60 1 0 0 0 0
+28	49189 101 31 31 3 3 10 1 10 55 385
+34	49290 12 665 665 60 60 1 0 0 0 0
+41	49302 12 665 665 60 60 1 0 0 0 0
+53	49314 12 665 665 60 60 1 0 0 0 0
+60	49326 12 665 665 60 60 1 0 0 0 0
+72	49338 12 665 665 60 60 1 0 0 0 0
+79	49350 12 665 665 60 60 1 0 0 0 0
+91	49362 12 665 665 60 60 1 0 0 0 0
+98	49374 12 665 665 60 60 1 0 0 0 0
+110	49386 13 665 665 60 60 1 0 0 0 0
+117	49399 13 665 665 60 60 1 0 0 0 0
+129	49412 13 665 665 60 60 1 0 0 0 0
+136	49425 13 665 665 60 60 1 0 0 0 0
+148	49438 13 665 665 60 60 1 0 0 0 0
+155	49451 13 665 665 60 60 1 0 0 0 0
+167	49464 13 665 665 60 60 1 0 0 0 0
+174	49477 13 665 665 60 60 1 0 0 0 0
+186	49490 13 665 665 60 60 1 0 0 0 0
+193	49503 13 665 665 60 60 1 0 0 0 0
+205	49516 13 665 665 60 60 1 0 0 0 0
+212	49529 13 665 665 60 60 1 0 0 0 0
+224	49542 13 665 665 60 60 1 0 0 0 0
+231	49555 13 665 665 60 60 1 0 0 0 0
+243	49568 13 665 665 60 60 1 0 0 0 0
+250	49581 142 53 665 5 60 11 1 10 65 485
+256	49723 128 53 284 5 24 10 1 10 55 385
+262	49851 13 665 665 60 60 1 0 0 0 0
+269	49864 13 665 665 60 60 1 0 0 0 0
+281	49877 13 665 665 60 60 1 0 0 0 0
+288	49890 13 665 665 60 60 1 0 0 0 0
+300	49903 13 665 665 60 60 1 0 0 0 0
+307	49916 13 665 665 60 60 1 0 0 0 0
+319	49929 13 665 665 60 60 1 0 0 0 0
+326	49942 13 665 665 60 60 1 0 0 0 0
+338	49955 13 665 665 60 60 1 0 0 0 0
+345	49968 13 665 665 60 60 1 0 0 0 0
+357	49981 13 665 665 60 60 1 0 0 0 0
+364	49994 13 665 665 60 60 1 0 0 0 0
+376	50007 13 665 665 60 60 1 0 0 0 0
+383	50020 13 665 665 60 60 1 0 0 0 0
+395	50033 13 665 665 60 60 1 0 0 0 0
+402	50046 13 665 665 60 60 1 0 0 0 0
+414	50059 13 665 665 60 60 1 0 0 0 0
+421	50072 13 665 665 60 60 1 0 0 0 0
+433	50085 13 665 665 60 60 1 0 0 0 0
+440	50098 13 665 665 60 60 1 0 0 0 0
+452	50111 13 665 665 60 60 1 0 0 0 0
+459	50124 13 665 665 60 60 1 0 0 0 0
+471	50137 13 665 665 60 60 1 0 0 0 0
+473	50150 682 53 351 5 29.5 50 1 1 50 50
+476	50832 682 53 351 5 29.5 50 1 1 50 50
+478	51514 13 665 665 60 60 1 0 0 0 0
+479	51527 555 77 351 7 29.5 40 1 1 40 40
+480	52082 682 53 351 5 29.5 50 1 1 50 50
+481	52764 782 53 351 5 29.5 50 0.1 0.2 6 0.8
+482	53546 732 53 351 5 29.5 50 48 48 2400 115200
+483	54278 732 53 351 5 29.5 50 80 80 4000 320000
+485	55010 782 53 351 5 29.5 50 0.1 0.2 6 0.8
+

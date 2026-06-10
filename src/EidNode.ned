@@ -39,6 +39,11 @@ simple EidNode
         // This simulates DNS running over an already-routed network (like real DNS over IP)
         bool dnsDirectMode = default(false);    // If true, DNS queries use sendDirect()
         double dnsBaseRtt @unit(s) = default(0s);  // Base RTT for direct mode (0 = use network diameter estimate)
+        // Contact schedule of the trunk link crossed by this node's direct-mode queries
+        // (mirrors IntermittentChannel semantics; period 0 = always-on, no waiting)
+        double dnsTrunkContactPeriod @unit(s) = default(0s);
+        double dnsTrunkContactDuty = default(1.0);
+        double dnsTrunkContactPhase @unit(s) = default(0s);
 
         // Publisher parameters (if isPublisher)
         string publishEids = default("");       // Comma-separated list of EIDs to publish

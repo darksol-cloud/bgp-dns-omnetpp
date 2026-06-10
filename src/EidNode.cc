@@ -2,6 +2,7 @@
 
 #include "EidNode.h"
 #include "GroundTruth.h"
+#include "IntermittentChannel.h"
 #include <algorithm>
 #include <sstream>
 #include <cmath>
@@ -120,6 +121,9 @@ void EidNode::parseParameters()
     dnsMaxHierarchyDepth = par("dnsMaxHierarchyDepth").intValue();
     dnsDirectMode = par("dnsDirectMode").boolValue();
     dnsBaseRtt = par("dnsBaseRtt").doubleValue();
+    dnsTrunkContactPeriod = par("dnsTrunkContactPeriod").doubleValue();
+    dnsTrunkContactDuty = par("dnsTrunkContactDuty").doubleValue();
+    dnsTrunkContactPhase = par("dnsTrunkContactPhase").doubleValue();
 
     publishEids = parseIntList(par("publishEids").stringValue());
     publishStartTime = par("publishStartTime").doubleValue();
@@ -1305,6 +1309,12 @@ void EidNode::dnsQueryEidDirect(int eid)
     emit(dnsResponsesReceivedSignal, 1L);
     recordBytesSent(48);  // Query size
     recordBytesReceived(80);  // Response size
+
+    // If this node's query path crosses an intermittent trunk link, the query
+    // waits (store-and-forward) until the next contact window before incurring
+    // the round-trip; cache hits above are unaffected.
+    rtt += IntermittentChannel::timeToNextContact(simTime().dbl(),
+            dnsTrunkContactPeriod, dnsTrunkContactDuty, dnsTrunkContactPhase);
 
     // Simulate the RTT delay for latency measurement
     // Round RTT to millisecond precision to avoid simtime_t precision issues

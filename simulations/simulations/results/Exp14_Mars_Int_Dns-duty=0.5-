@@ -1,0 +1,7205 @@
+version 3
+run Exp14_Mars_Int_Dns-9-20260610-00:35:12-12445
+attr configname Exp14_Mars_Int_Dns
+attr datetime 20260610-00:35:12
+attr datetimef 20260610-003512
+attr experiment Exp14_Mars_Int_Dns
+attr inifile simulations/experiments.ini
+attr iterationvars $duty=0.5
+attr iterationvarsd duty=0.5
+attr iterationvarsf duty=0.5-
+attr measurement $duty=0.5
+attr network bgpdns.MarsExplorationNetwork
+attr processid 12445
+attr repetition 4
+attr replication #4
+attr resultdir simulations/results
+attr runnumber 9
+attr seedset 4
+itervar duty 0.5
+config cmdenv-express-mode true
+config result-dir simulations/results
+config extends Exp13_Mars_Dns
+config description "Experiment 14: Mars network with intermittent Earth-Mars trunk - DNS"
+config *.jezeroHabitat.queryEids "\"1-3\""
+config *.jezeroHabitat.queryCount 8
+config *.jezeroHabitat.queryInterval 300s
+config *.jezeroHabitat.queryStartTime 100s
+config *.jezeroHabitat.dnsBaseRtt 1560s
+config *.jezeroHabitat.dnsTrunkContactPeriod 1800s
+config *.jezeroHabitat.dnsTrunkContactDuty 0.5
+config *.earthDsn.isClient true
+config *.earthDsn.queryEids "\"4-12\""
+config *.earthDsn.queryCount 8
+config *.earthDsn.queryInterval 300s
+config *.earthDsn.queryStartTime 150s
+config *.earthDsn.resolverNodeId 1
+config *.earthDsn.dnsTrunkContactPeriod 1800s
+config *.earthDsn.dnsTrunkContactDuty 0.5
+config extends Exp13_Mars_Base
+config description "Experiment 13: Mars exploration network - DNS"
+config *.earthDsn.isPublisher true
+config *.earthDsn.publishEids "\"1-3\""
+config *.earthDsn.publishStartTime 5s
+config *.earthDsn.authorityNodeId 0
+config *.jezeroHabitat.isPublisher true
+config *.jezeroHabitat.publishEids "\"4-6\""
+config *.jezeroHabitat.publishStartTime 10s
+config *.jezeroHabitat.authorityNodeId 1
+config *.olympusOutpost.isPublisher true
+config *.olympusOutpost.publishEids "\"7-8\""
+config *.olympusOutpost.publishStartTime 15s
+config *.olympusOutpost.authorityNodeId 1
+config *.rover[0].isPublisher true
+config *.rover[0].publishEids "\"9\""
+config *.rover[2].isPublisher true
+config *.rover[2].publishEids "\"10\""
+config *.rover[*].publishStartTime 20s
+config *.rover[*].authorityNodeId 1
+config *.instrument[0].isPublisher true
+config *.instrument[0].publishEids "\"11\""
+config *.instrument[1].isPublisher true
+config *.instrument[1].publishEids "\"12\""
+config *.instrument[*].publishStartTime 30s
+config *.instrument[*].authorityNodeId 1
+config *.rover[*].churnInterval 300s
+config *.rover[*].churnProbability 0.1
+config *.marsOrbiter.isAuthority true
+config *.marsOrbiter.isResolver true
+config *.earthDsn.isAuthority true
+config *.rover[0].isClient true
+config *.rover[0].queryEids "\"4-12\""
+config *.rover[0].queryCount 40
+config *.rover[0].queryInterval 20s
+config *.rover[0].queryStartTime 200s
+config *.rover[0].resolverNodeId 1
+config *.rover[0].authorityNodeId 1
+config *.jezeroHabitat.isClient true
+config *.jezeroHabitat.queryEids "\"1-12\""
+config *.jezeroHabitat.queryCount 30
+config *.jezeroHabitat.queryInterval 30s
+config *.jezeroHabitat.queryStartTime 300s
+config *.jezeroHabitat.resolverNodeId 1
+config *.jezeroHabitat.authorityNodeId 1
+config *.marsOrbiter.isClient true
+config *.marsOrbiter.queryEids "\"1-12\""
+config *.marsOrbiter.queryCount 25
+config *.marsOrbiter.queryInterval 40s
+config *.marsOrbiter.queryStartTime 250s
+config *.marsOrbiter.resolverNodeId 1
+config *.marsOrbiter.authorityNodeId 1
+config *.earthDsn.bgpEnabled false
+config *.marsOrbiter.bgpEnabled false
+config *.jezeroHabitat.bgpEnabled false
+config *.olympusOutpost.bgpEnabled false
+config *.rover[*].bgpEnabled false
+config *.instrument[*].bgpEnabled false
+config *.earthDsn.dnsEnabled true
+config *.marsOrbiter.dnsEnabled true
+config *.jezeroHabitat.dnsEnabled true
+config *.olympusOutpost.dnsEnabled true
+config *.rover[*].dnsEnabled true
+config *.instrument[*].dnsEnabled true
+config *.earthDsn.dnsDirectMode true
+config *.marsOrbiter.dnsDirectMode true
+config *.jezeroHabitat.dnsDirectMode true
+config *.olympusOutpost.dnsDirectMode true
+config *.rover[*].dnsDirectMode true
+config *.instrument[*].dnsDirectMode true
+config *.earthDsn.dnsBaseRtt 1440s
+config *.marsOrbiter.dnsBaseRtt 0s
+config *.jezeroHabitat.dnsBaseRtt 120s
+config *.olympusOutpost.dnsBaseRtt 120s
+config *.rover[*].dnsBaseRtt 130s
+config *.instrument[*].dnsBaseRtt 132s
+config *.earthDsn.dnsTtl 120s
+config *.marsOrbiter.dnsTtl 120s
+config *.jezeroHabitat.dnsTtl 120s
+config *.olympusOutpost.dnsTtl 120s
+config *.rover[*].dnsTtl 120s
+config *.instrument[*].dnsTtl 120s
+config network bgpdns.MarsExplorationNetwork
+config sim-time-limit 3600s
+config repeat 5
+config *.earthDsn.nodeId 0
+config *.marsOrbiter.nodeId 1
+config *.jezeroHabitat.nodeId 2
+config *.olympusOutpost.nodeId 3
+config *.rover[*].nodeId "4 + index"
+config *.instrument[*].nodeId "8 + index"
+config *.groundTruth.totalNodes 10
+config *.groundTruth.snapshotInterval 120s
+config network bgpdns.FairComparisonNetwork
+config sim-time-limit 120s
+config warmup-period 2s
+config output-scalar-file simulations/results/Exp14_Mars_Int_Dns-duty=0.5-
+config output-vector-file simulations/results/Exp14_Mars_Int_Dns-duty=0.5-
+config seed-set 4
+config **.result-recording-modes default,+histogram
+config **.channel.delay 10ms
+
+par MarsExplorationNetwork.earthDsn.port$o[0].channel typename "\"bgpdns.MarsInterplanetaryChannel\""
+par MarsExplorationNetwork.earthDsn.port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.earthDsn.port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.earthDsn.port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.earthDsn.port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.earthDsn.port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.earthDsn.port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.earthDsn.port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel typename "\"bgpdns.MarsInterplanetaryChannel\""
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.marsOrbiter.port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.marsOrbiter.port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.marsOrbiter.port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel typename "\"bgpdns.MarsOrbitalChannel\""
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.marsOrbiter.port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.marsOrbiter.port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.marsOrbiter.port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel typename "\"bgpdns.MarsOrbitalChannel\""
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.jezeroHabitat.port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel typename "\"bgpdns.MarsOrbitalChannel\""
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel contactDuty 1
+par MarsExplorationNetwork.marsOrbiter.port$o[2].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.marsOrbiter.port$o[2].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.marsOrbiter.port$o[2].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel typename "\"bgpdns.MarsOrbitalChannel\""
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.olympusOutpost.port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.olympusOutpost.port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.olympusOutpost.port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel typename "\"bgpdns.EidChannel\""
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel delay 30s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.jezeroHabitat.port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel typename "\"bgpdns.EidChannel\""
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel delay 30s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.olympusOutpost.port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.olympusOutpost.port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.olympusOutpost.port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel contactDuty 1
+par MarsExplorationNetwork.jezeroHabitat.port$o[2].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[2].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[2].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[0].port$o[0].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[0].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[0].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.rover[0].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[0].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[0].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel contactDuty 1
+par MarsExplorationNetwork.jezeroHabitat.port$o[3].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[3].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.jezeroHabitat.port$o[3].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[1].port$o[0].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[1].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[1].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[1].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[1].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.rover[1].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[1].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[1].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel contactDuty 1
+par MarsExplorationNetwork.olympusOutpost.port$o[2].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.olympusOutpost.port$o[2].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.olympusOutpost.port$o[2].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[2].port$o[0].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[2].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[2].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.rover[2].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[2].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[2].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel contactDuty 1
+par MarsExplorationNetwork.olympusOutpost.port$o[3].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.olympusOutpost.port$o[3].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.olympusOutpost.port$o[3].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[3].port$o[0].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[3].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[3].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[3].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[3].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.rover[3].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[3].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[3].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[0].port$o[1].channel typename "\"bgpdns.MarsLocalChannel\""
+par MarsExplorationNetwork.rover[0].port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[0].port$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.rover[0].port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[0].port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[0].port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.instrument[0].port$o[0].channel typename "\"bgpdns.MarsLocalChannel\""
+par MarsExplorationNetwork.instrument[0].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.instrument[0].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.instrument[0].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.instrument[0].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.instrument[0].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.instrument[0].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.instrument[0].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[2].port$o[1].channel typename "\"bgpdns.MarsLocalChannel\""
+par MarsExplorationNetwork.rover[2].port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[2].port$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.rover[2].port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[2].port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[2].port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.instrument[1].port$o[0].channel typename "\"bgpdns.MarsLocalChannel\""
+par MarsExplorationNetwork.instrument[1].port$o[0].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.instrument[1].port$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.instrument[1].port$o[0].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.instrument[1].port$o[0].channel contactDuty 1
+par MarsExplorationNetwork.instrument[1].port$o[0].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.instrument[1].port$o[0].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.instrument[1].port$o[0].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[0].port$o[2].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[0].port$o[2].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[0].port$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[2].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[0].port$o[2].channel contactDuty 1
+par MarsExplorationNetwork.rover[0].port$o[2].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[0].port$o[2].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[0].port$o[2].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[1].port$o[1].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[1].port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[1].port$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[1].port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[1].port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.rover[1].port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[1].port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[1].port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[2].port$o[2].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[2].port$o[2].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[2].port$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[2].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[2].port$o[2].channel contactDuty 1
+par MarsExplorationNetwork.rover[2].port$o[2].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[2].port$o[2].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[2].port$o[2].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.rover[3].port$o[1].channel typename "\"bgpdns.MarsSurfaceChannel\""
+par MarsExplorationNetwork.rover[3].port$o[1].channel disabled false
+attr mutable ""
+par MarsExplorationNetwork.rover[3].port$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par MarsExplorationNetwork.rover[3].port$o[1].channel contactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[3].port$o[1].channel contactDuty 1
+par MarsExplorationNetwork.rover[3].port$o[1].channel contactPhase 0s
+attr unit s
+statistic MarsExplorationNetwork.rover[3].port$o[1].channel messagesDiscarded:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageDiscarded)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+statistic MarsExplorationNetwork.rover[3].port$o[1].channel messages:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr interpolationmode none
+attr recordingmode histogram
+attr source constant1(messageSent)
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+par MarsExplorationNetwork.groundTruth typename "\"bgpdns.GroundTruth\""
+par MarsExplorationNetwork.groundTruth snapshotInterval 120s
+attr unit s
+par MarsExplorationNetwork.groundTruth convergenceCheckInterval 0.1s
+attr unit s
+par MarsExplorationNetwork.groundTruth convergenceThreshold 0.99
+par MarsExplorationNetwork.groundTruth totalNodes 10
+par MarsExplorationNetwork.groundTruth totalEids 0
+par MarsExplorationNetwork.groundTruth verboseLogging false
+par MarsExplorationNetwork.groundTruth recordConvergenceEvents true
+par MarsExplorationNetwork.groundTruth recordAccuracySnapshots true
+scalar MarsExplorationNetwork.groundTruth totalEidsPublished 12
+scalar MarsExplorationNetwork.groundTruth activeEids 12
+scalar MarsExplorationNetwork.groundTruth convergedEids 0
+scalar MarsExplorationNetwork.groundTruth initialConvergedEids 0
+scalar MarsExplorationNetwork.groundTruth churnConvergedCount 0
+scalar MarsExplorationNetwork.groundTruth totalBgpTableSize 0
+scalar MarsExplorationNetwork.groundTruth totalDnsCacheSize 0
+scalar MarsExplorationNetwork.groundTruth totalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.groundTruth totalTableOperations 0
+scalar MarsExplorationNetwork.groundTruth totalTableOperations:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.groundTruth totalTableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.groundTruth totalTableOperations:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.groundTruth avgDnsCacheSize:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth avgDnsCacheSize:max nan
+attr recordingmode max
+scalar MarsExplorationNetwork.groundTruth avgDnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.groundTruth avgDnsCacheSize:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth avgBgpTableSize:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth avgBgpTableSize:max nan
+attr recordingmode max
+scalar MarsExplorationNetwork.groundTruth avgBgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.groundTruth avgBgpTableSize:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth globalStaleRate:mean 0
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth globalStaleRate:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.groundTruth globalStaleRate:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.groundTruth globalStaleRate:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.groundTruth globalCoverage:mean 0
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth globalCoverage:min 0
+attr recordingmode min
+scalar MarsExplorationNetwork.groundTruth globalCoverage:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.groundTruth globalCoverage:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.groundTruth globalAccuracy:mean 0
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth globalAccuracy:min 0
+attr recordingmode min
+scalar MarsExplorationNetwork.groundTruth globalAccuracy:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.groundTruth globalAccuracy:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.groundTruth globalConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.groundTruth globalConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.groundTruth globalConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth globalDnsBytes:last nan
+attr recordingmode last
+scalar MarsExplorationNetwork.groundTruth globalDnsBytes:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.groundTruth globalDnsBytes:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth globalBgpBytes:last nan
+attr recordingmode last
+scalar MarsExplorationNetwork.groundTruth globalBgpBytes:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.groundTruth globalBgpBytes:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth globalDnsMessages:last nan
+attr recordingmode last
+scalar MarsExplorationNetwork.groundTruth globalDnsMessages:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.groundTruth globalDnsMessages:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.groundTruth globalBgpMessages:last nan
+attr recordingmode last
+scalar MarsExplorationNetwork.groundTruth globalBgpMessages:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.groundTruth globalBgpMessages:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.earthDsn typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.earthDsn nodeId 0
+par MarsExplorationNetwork.earthDsn isPublisher true
+par MarsExplorationNetwork.earthDsn isClient true
+par MarsExplorationNetwork.earthDsn bgpEnabled false
+par MarsExplorationNetwork.earthDsn dnsEnabled true
+par MarsExplorationNetwork.earthDsn isResolver false
+par MarsExplorationNetwork.earthDsn isAuthority true
+par MarsExplorationNetwork.earthDsn isRoot false
+par MarsExplorationNetwork.earthDsn authorityDomain -1
+par MarsExplorationNetwork.earthDsn resolverNodeId 1
+par MarsExplorationNetwork.earthDsn authorityNodeId 0
+par MarsExplorationNetwork.earthDsn bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.earthDsn bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.earthDsn bgpPathVector true
+par MarsExplorationNetwork.earthDsn bgpMaxPathLength 100
+par MarsExplorationNetwork.earthDsn dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.earthDsn dnsCacheSize 10000
+par MarsExplorationNetwork.earthDsn dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.earthDsn dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.earthDsn dnsDirectMode true
+par MarsExplorationNetwork.earthDsn dnsBaseRtt 1440s
+attr unit s
+par MarsExplorationNetwork.earthDsn dnsTrunkContactPeriod 1800s
+attr unit s
+par MarsExplorationNetwork.earthDsn dnsTrunkContactDuty 0.5
+par MarsExplorationNetwork.earthDsn dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.earthDsn publishEids "\"1-3\""
+par MarsExplorationNetwork.earthDsn publishStartTime 5s
+attr unit s
+par MarsExplorationNetwork.earthDsn publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.earthDsn claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.earthDsn claPort 4556
+par MarsExplorationNetwork.earthDsn queryEids "\"4-12\""
+par MarsExplorationNetwork.earthDsn queryStartTime 150s
+attr unit s
+par MarsExplorationNetwork.earthDsn queryInterval 300s
+attr unit s
+par MarsExplorationNetwork.earthDsn queryCount 8
+par MarsExplorationNetwork.earthDsn queryZipfAlpha 0
+par MarsExplorationNetwork.earthDsn churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.earthDsn churnProbability 0.1
+par MarsExplorationNetwork.earthDsn withdrawProbability 0.3
+par MarsExplorationNetwork.earthDsn processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.earthDsn finalBgpTableSize 0
+scalar MarsExplorationNetwork.earthDsn finalDnsCacheSize 0
+scalar MarsExplorationNetwork.earthDsn finalDnsAuthoritySize 3
+scalar MarsExplorationNetwork.earthDsn totalTableOperations 3
+scalar MarsExplorationNetwork.earthDsn nodeId 0
+scalar MarsExplorationNetwork.earthDsn correctAnswers:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn correctAnswers:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn correctAnswers:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.earthDsn staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn discoveryLatency:mean 2868.75
+attr recordingmode mean
+scalar MarsExplorationNetwork.earthDsn discoveryLatency:min 1440
+attr recordingmode min
+scalar MarsExplorationNetwork.earthDsn discoveryLatency:max 3630
+attr recordingmode max
+statistic MarsExplorationNetwork.earthDsn discoveryLatency:histogram
+field count 8
+field mean 2868.75
+field stddev 639.20570129766
+field min 1440
+field max 3630
+field sum 22950
+field sqrsum 68697900
+attr recordingmode histogram
+bin	-inf	0
+bin	850	0
+bin	900	0
+bin	950	0
+bin	1000	0
+bin	1050	0
+bin	1100	0
+bin	1150	0
+bin	1200	0
+bin	1250	0
+bin	1300	0
+bin	1350	0
+bin	1400	1
+bin	1450	0
+bin	1500	0
+bin	1550	0
+bin	1600	0
+bin	1650	0
+bin	1700	0
+bin	1750	0
+bin	1800	0
+bin	1850	0
+bin	1900	0
+bin	1950	0
+bin	2000	0
+bin	2050	0
+bin	2100	0
+bin	2150	0
+bin	2200	0
+bin	2250	0
+bin	2300	0
+bin	2350	0
+bin	2400	0
+bin	2450	0
+bin	2500	0
+bin	2550	0
+bin	2600	0
+bin	2650	0
+bin	2700	0
+bin	2750	0
+bin	2800	0
+bin	2850	4
+bin	2900	0
+bin	2950	0
+bin	3000	1
+bin	3050	0
+bin	3100	0
+bin	3150	0
+bin	3200	0
+bin	3250	0
+bin	3300	1
+bin	3350	0
+bin	3400	0
+bin	3450	0
+bin	3500	0
+bin	3550	0
+bin	3600	1
+bin	3650	0
+bin	3700	0
+bin	3750	0
+bin	3800	0
+bin	3850	0
+bin	3900	0
+bin	3950	0
+bin	4000	0
+bin	4050	0
+bin	4100	0
+bin	4150	0
+bin	4200	0
+scalar MarsExplorationNetwork.earthDsn tableOperations:sum 6
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn tableOperations:histogram
+field count 3
+field mean 2
+field stddev 1
+field min 1
+field max 3
+field sum 6
+field sqrsum 14
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	1
+bin	3	1
+bin	4	0
+scalar MarsExplorationNetwork.earthDsn messageBytesReceived:sum 640
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn messageBytesReceived:histogram
+field count 8
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 640
+field sqrsum 51200
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	8
+bin	81	0
+scalar MarsExplorationNetwork.earthDsn messageBytesSent:sum 384
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn messageBytesSent:histogram
+field count 8
+field mean 48
+field stddev 0
+field min 48
+field max 48
+field sum 384
+field sqrsum 18432
+attr recordingmode histogram
+bin	-inf	0
+bin	47	0
+bin	48	8
+bin	49	0
+scalar MarsExplorationNetwork.earthDsn dnsQueryLatency:mean 2868.75
+attr recordingmode mean
+scalar MarsExplorationNetwork.earthDsn dnsQueryLatency:min 1440
+attr recordingmode min
+scalar MarsExplorationNetwork.earthDsn dnsQueryLatency:max 3630
+attr recordingmode max
+statistic MarsExplorationNetwork.earthDsn dnsQueryLatency:histogram
+field count 8
+field mean 2868.75
+field stddev 639.20570129766
+field min 1440
+field max 3630
+field sum 22950
+field sqrsum 68697900
+attr recordingmode histogram
+bin	-inf	0
+bin	850	0
+bin	900	0
+bin	950	0
+bin	1000	0
+bin	1050	0
+bin	1100	0
+bin	1150	0
+bin	1200	0
+bin	1250	0
+bin	1300	0
+bin	1350	0
+bin	1400	1
+bin	1450	0
+bin	1500	0
+bin	1550	0
+bin	1600	0
+bin	1650	0
+bin	1700	0
+bin	1750	0
+bin	1800	0
+bin	1850	0
+bin	1900	0
+bin	1950	0
+bin	2000	0
+bin	2050	0
+bin	2100	0
+bin	2150	0
+bin	2200	0
+bin	2250	0
+bin	2300	0
+bin	2350	0
+bin	2400	0
+bin	2450	0
+bin	2500	0
+bin	2550	0
+bin	2600	0
+bin	2650	0
+bin	2700	0
+bin	2750	0
+bin	2800	0
+bin	2850	4
+bin	2900	0
+bin	2950	0
+bin	3000	1
+bin	3050	0
+bin	3100	0
+bin	3150	0
+bin	3200	0
+bin	3250	0
+bin	3300	1
+bin	3350	0
+bin	3400	0
+bin	3450	0
+bin	3500	0
+bin	3550	0
+bin	3600	1
+bin	3650	0
+bin	3700	0
+bin	3750	0
+bin	3800	0
+bin	3850	0
+bin	3900	0
+bin	3950	0
+bin	4000	0
+bin	4050	0
+bin	4100	0
+bin	4150	0
+bin	4200	0
+scalar MarsExplorationNetwork.earthDsn dnsCacheMisses:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsCacheMisses:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsCacheMisses:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.earthDsn dnsCacheHits:count 1
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsCacheHits:sum 1
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsCacheHits:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+scalar MarsExplorationNetwork.earthDsn dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.earthDsn dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.earthDsn dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.earthDsn dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.earthDsn dnsRegistrationsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsRegistrationsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsRegistrationsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn dnsResponsesReceived:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsResponsesReceived:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsResponsesReceived:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.earthDsn dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn dnsQueriesSent:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn dnsQueriesSent:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn dnsQueriesSent:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.earthDsn bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.earthDsn bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.earthDsn bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.earthDsn bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.earthDsn bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.earthDsn bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.earthDsn bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.earthDsn bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.earthDsn bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.earthDsn bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.marsOrbiter typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.marsOrbiter nodeId 1
+par MarsExplorationNetwork.marsOrbiter isPublisher false
+par MarsExplorationNetwork.marsOrbiter isClient true
+par MarsExplorationNetwork.marsOrbiter bgpEnabled false
+par MarsExplorationNetwork.marsOrbiter dnsEnabled true
+par MarsExplorationNetwork.marsOrbiter isResolver true
+par MarsExplorationNetwork.marsOrbiter isAuthority true
+par MarsExplorationNetwork.marsOrbiter isRoot false
+par MarsExplorationNetwork.marsOrbiter authorityDomain -1
+par MarsExplorationNetwork.marsOrbiter resolverNodeId 1
+par MarsExplorationNetwork.marsOrbiter authorityNodeId 1
+par MarsExplorationNetwork.marsOrbiter bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter bgpPathVector true
+par MarsExplorationNetwork.marsOrbiter bgpMaxPathLength 100
+par MarsExplorationNetwork.marsOrbiter dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter dnsCacheSize 10000
+par MarsExplorationNetwork.marsOrbiter dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.marsOrbiter dnsDirectMode true
+par MarsExplorationNetwork.marsOrbiter dnsBaseRtt 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter dnsTrunkContactDuty 1
+par MarsExplorationNetwork.marsOrbiter dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter publishEids "\"\""
+par MarsExplorationNetwork.marsOrbiter publishStartTime 1s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.marsOrbiter claPort 4556
+par MarsExplorationNetwork.marsOrbiter queryEids "\"1-12\""
+par MarsExplorationNetwork.marsOrbiter queryStartTime 250s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter queryInterval 40s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter queryCount 25
+par MarsExplorationNetwork.marsOrbiter queryZipfAlpha 0
+par MarsExplorationNetwork.marsOrbiter churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.marsOrbiter churnProbability 0.1
+par MarsExplorationNetwork.marsOrbiter withdrawProbability 0.3
+par MarsExplorationNetwork.marsOrbiter processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.marsOrbiter finalBgpTableSize 0
+scalar MarsExplorationNetwork.marsOrbiter finalDnsCacheSize 9
+scalar MarsExplorationNetwork.marsOrbiter finalDnsAuthoritySize 9
+scalar MarsExplorationNetwork.marsOrbiter totalTableOperations 69
+scalar MarsExplorationNetwork.marsOrbiter nodeId 1
+scalar MarsExplorationNetwork.marsOrbiter correctAnswers:count 18
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter correctAnswers:sum 18
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter correctAnswers:histogram
+field count 18
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 18
+field sqrsum 18
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	18
+bin	2	0
+scalar MarsExplorationNetwork.marsOrbiter staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter discoveryLatency:mean 0.126
+attr recordingmode mean
+scalar MarsExplorationNetwork.marsOrbiter discoveryLatency:min 0.126
+attr recordingmode min
+scalar MarsExplorationNetwork.marsOrbiter discoveryLatency:max 0.126
+attr recordingmode max
+statistic MarsExplorationNetwork.marsOrbiter discoveryLatency:histogram
+field count 19
+field mean 0.126
+field stddev 0
+field min 0.126
+field max 0.126
+field sum 2.394
+field sqrsum 0.301644
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	0.01	0
+bin	0.02	0
+bin	0.03	0
+bin	0.04	0
+bin	0.05	0
+bin	0.06	0
+bin	0.07	0
+bin	0.08	0
+bin	0.09	0
+bin	0.1	0
+bin	0.11	0
+bin	0.12	19
+bin	0.13	0
+bin	0.14	0
+bin	0.15	0
+bin	0.16	0
+bin	0.17	0
+bin	0.18	0
+bin	0.19	0
+bin	0.2	0
+bin	0.21	0
+bin	0.22	0
+bin	0.23	0
+bin	0.24	0
+bin	0.25	0
+bin	0.26	0
+bin	0.27	0
+bin	0.28	0
+bin	0.29	0
+bin	0.3	0
+bin	0.31	0
+bin	0.32	0
+bin	0.33	0
+bin	0.34	0
+bin	0.35	0
+bin	0.36	0
+bin	0.37	0
+bin	0.38	0
+bin	0.39	0
+bin	0.4	0
+bin	0.41	0
+bin	0.42	0
+bin	0.43	0
+bin	0.44	0
+bin	0.45	0
+bin	0.46	0
+bin	0.47	0
+bin	0.48	0
+bin	0.49	0
+bin	0.5	0
+bin	0.51	0
+bin	0.52	0
+bin	0.53	0
+bin	0.54	0
+bin	0.55	0
+bin	0.56	0
+bin	0.57	0
+bin	0.58	0
+bin	0.59	0
+bin	0.6	0
+bin	0.61	0
+bin	0.62	0
+bin	0.63	0
+scalar MarsExplorationNetwork.marsOrbiter tableOperations:sum 2415
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter tableOperations:histogram
+field count 69
+field mean 35
+field stddev 20.062402647739
+field min 1
+field max 69
+field sum 2415
+field sqrsum 111895
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	1
+bin	3	1
+bin	4	1
+bin	5	1
+bin	6	1
+bin	7	1
+bin	8	1
+bin	9	1
+bin	10	1
+bin	11	1
+bin	12	1
+bin	13	1
+bin	14	1
+bin	15	1
+bin	16	1
+bin	17	1
+bin	18	1
+bin	19	1
+bin	20	1
+bin	21	1
+bin	22	1
+bin	23	1
+bin	24	1
+bin	25	1
+bin	26	1
+bin	27	1
+bin	28	1
+bin	29	1
+bin	30	1
+bin	31	1
+bin	32	1
+bin	33	1
+bin	34	1
+bin	35	1
+bin	36	1
+bin	37	1
+bin	38	1
+bin	39	1
+bin	40	1
+bin	41	1
+bin	42	1
+bin	43	1
+bin	44	1
+bin	45	1
+bin	46	1
+bin	47	1
+bin	48	1
+bin	49	1
+bin	50	1
+bin	51	1
+bin	52	1
+bin	53	1
+bin	54	1
+bin	55	1
+bin	56	1
+bin	57	1
+bin	58	1
+bin	59	1
+bin	60	1
+bin	61	1
+bin	62	1
+bin	63	1
+bin	64	1
+bin	65	1
+bin	66	1
+bin	67	1
+bin	68	1
+bin	69	1
+bin	70	0
+bin	71	0
+bin	72	0
+bin	73	0
+bin	74	0
+bin	75	0
+bin	76	0
+bin	77	0
+bin	78	0
+bin	79	0
+bin	80	0
+bin	81	0
+bin	82	0
+bin	83	0
+bin	84	0
+bin	85	0
+bin	86	0
+scalar MarsExplorationNetwork.marsOrbiter messageBytesReceived:sum 1520
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter messageBytesReceived:histogram
+field count 19
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 1520
+field sqrsum 121600
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	19
+bin	81	0
+scalar MarsExplorationNetwork.marsOrbiter messageBytesSent:sum 912
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter messageBytesSent:histogram
+field count 19
+field mean 48
+field stddev 0
+field min 48
+field max 48
+field sum 912
+field sqrsum 43776
+attr recordingmode histogram
+bin	-inf	0
+bin	47	0
+bin	48	19
+bin	49	0
+scalar MarsExplorationNetwork.marsOrbiter dnsQueryLatency:mean 0.126
+attr recordingmode mean
+scalar MarsExplorationNetwork.marsOrbiter dnsQueryLatency:min 0.126
+attr recordingmode min
+scalar MarsExplorationNetwork.marsOrbiter dnsQueryLatency:max 0.126
+attr recordingmode max
+statistic MarsExplorationNetwork.marsOrbiter dnsQueryLatency:histogram
+field count 19
+field mean 0.126
+field stddev 0
+field min 0.126
+field max 0.126
+field sum 2.394
+field sqrsum 0.301644
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	0.01	0
+bin	0.02	0
+bin	0.03	0
+bin	0.04	0
+bin	0.05	0
+bin	0.06	0
+bin	0.07	0
+bin	0.08	0
+bin	0.09	0
+bin	0.1	0
+bin	0.11	0
+bin	0.12	19
+bin	0.13	0
+bin	0.14	0
+bin	0.15	0
+bin	0.16	0
+bin	0.17	0
+bin	0.18	0
+bin	0.19	0
+bin	0.2	0
+bin	0.21	0
+bin	0.22	0
+bin	0.23	0
+bin	0.24	0
+bin	0.25	0
+bin	0.26	0
+bin	0.27	0
+bin	0.28	0
+bin	0.29	0
+bin	0.3	0
+bin	0.31	0
+bin	0.32	0
+bin	0.33	0
+bin	0.34	0
+bin	0.35	0
+bin	0.36	0
+bin	0.37	0
+bin	0.38	0
+bin	0.39	0
+bin	0.4	0
+bin	0.41	0
+bin	0.42	0
+bin	0.43	0
+bin	0.44	0
+bin	0.45	0
+bin	0.46	0
+bin	0.47	0
+bin	0.48	0
+bin	0.49	0
+bin	0.5	0
+bin	0.51	0
+bin	0.52	0
+bin	0.53	0
+bin	0.54	0
+bin	0.55	0
+bin	0.56	0
+bin	0.57	0
+bin	0.58	0
+bin	0.59	0
+bin	0.6	0
+bin	0.61	0
+bin	0.62	0
+bin	0.63	0
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheMisses:count 19
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheMisses:sum 19
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsCacheMisses:histogram
+field count 19
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 19
+field sqrsum 19
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	19
+bin	2	0
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheHits:count 6
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheHits:sum 6
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsCacheHits:histogram
+field count 6
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 6
+field sqrsum 6
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	6
+bin	2	0
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheSize:last 9
+attr recordingmode last
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheSize:max 9
+attr recordingmode max
+scalar MarsExplorationNetwork.marsOrbiter dnsCacheSize:timeavg 8.6550724637681
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.marsOrbiter dnsCacheSize:histogram
+field count 53
+field mean 8.0754716981132
+field stddev 1.9498427609561
+field min 1
+field max 9
+field sum 428
+field sqrsum 3654
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	1
+bin	3	1
+bin	4	1
+bin	5	2
+bin	6	3
+bin	7	2
+bin	8	2
+bin	9	40
+bin	10	0
+bin	11	0
+scalar MarsExplorationNetwork.marsOrbiter dnsRegistrationsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsRegistrationsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsRegistrationsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter dnsResponsesReceived:count 19
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsResponsesReceived:sum 19
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsResponsesReceived:histogram
+field count 19
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 19
+field sqrsum 19
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	19
+bin	2	0
+scalar MarsExplorationNetwork.marsOrbiter dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter dnsQueriesSent:count 19
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter dnsQueriesSent:sum 19
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter dnsQueriesSent:histogram
+field count 19
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 19
+field sqrsum 19
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	19
+bin	2	0
+scalar MarsExplorationNetwork.marsOrbiter bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.marsOrbiter bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.marsOrbiter bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.marsOrbiter bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.marsOrbiter bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.marsOrbiter bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.marsOrbiter bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.marsOrbiter bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.marsOrbiter bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.marsOrbiter bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.jezeroHabitat typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.jezeroHabitat nodeId 2
+par MarsExplorationNetwork.jezeroHabitat isPublisher true
+par MarsExplorationNetwork.jezeroHabitat isClient true
+par MarsExplorationNetwork.jezeroHabitat bgpEnabled false
+par MarsExplorationNetwork.jezeroHabitat dnsEnabled true
+par MarsExplorationNetwork.jezeroHabitat isResolver false
+par MarsExplorationNetwork.jezeroHabitat isAuthority false
+par MarsExplorationNetwork.jezeroHabitat isRoot false
+par MarsExplorationNetwork.jezeroHabitat authorityDomain -1
+par MarsExplorationNetwork.jezeroHabitat resolverNodeId 1
+par MarsExplorationNetwork.jezeroHabitat authorityNodeId 1
+par MarsExplorationNetwork.jezeroHabitat bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat bgpPathVector true
+par MarsExplorationNetwork.jezeroHabitat bgpMaxPathLength 100
+par MarsExplorationNetwork.jezeroHabitat dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat dnsCacheSize 10000
+par MarsExplorationNetwork.jezeroHabitat dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.jezeroHabitat dnsDirectMode true
+par MarsExplorationNetwork.jezeroHabitat dnsBaseRtt 1560s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat dnsTrunkContactPeriod 1800s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat dnsTrunkContactDuty 0.5
+par MarsExplorationNetwork.jezeroHabitat dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat publishEids "\"4-6\""
+par MarsExplorationNetwork.jezeroHabitat publishStartTime 10s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.jezeroHabitat claPort 4556
+par MarsExplorationNetwork.jezeroHabitat queryEids "\"1-3\""
+par MarsExplorationNetwork.jezeroHabitat queryStartTime 100s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat queryInterval 300s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat queryCount 8
+par MarsExplorationNetwork.jezeroHabitat queryZipfAlpha 0
+par MarsExplorationNetwork.jezeroHabitat churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.jezeroHabitat churnProbability 0.1
+par MarsExplorationNetwork.jezeroHabitat withdrawProbability 0.3
+par MarsExplorationNetwork.jezeroHabitat processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.jezeroHabitat finalBgpTableSize 0
+scalar MarsExplorationNetwork.jezeroHabitat finalDnsCacheSize 0
+scalar MarsExplorationNetwork.jezeroHabitat finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.jezeroHabitat totalTableOperations 0
+scalar MarsExplorationNetwork.jezeroHabitat nodeId 2
+scalar MarsExplorationNetwork.jezeroHabitat correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat discoveryLatency:mean 3307.5
+attr recordingmode mean
+scalar MarsExplorationNetwork.jezeroHabitat discoveryLatency:min 3120
+attr recordingmode min
+scalar MarsExplorationNetwork.jezeroHabitat discoveryLatency:max 3920
+attr recordingmode max
+statistic MarsExplorationNetwork.jezeroHabitat discoveryLatency:histogram
+field count 8
+field mean 3307.5
+field stddev 304.43155458752
+field min 3120
+field max 3920
+field sum 26460
+field sqrsum 88165200
+attr recordingmode histogram
+bin	-inf	0
+bin	2920	0
+bin	2940	0
+bin	2960	0
+bin	2980	0
+bin	3000	0
+bin	3020	0
+bin	3040	0
+bin	3060	0
+bin	3080	0
+bin	3100	0
+bin	3120	5
+bin	3140	0
+bin	3160	0
+bin	3180	0
+bin	3200	0
+bin	3220	0
+bin	3240	0
+bin	3260	0
+bin	3280	0
+bin	3300	0
+bin	3320	1
+bin	3340	0
+bin	3360	0
+bin	3380	0
+bin	3400	0
+bin	3420	0
+bin	3440	0
+bin	3460	0
+bin	3480	0
+bin	3500	0
+bin	3520	0
+bin	3540	0
+bin	3560	0
+bin	3580	0
+bin	3600	0
+bin	3620	1
+bin	3640	0
+bin	3660	0
+bin	3680	0
+bin	3700	0
+bin	3720	0
+bin	3740	0
+bin	3760	0
+bin	3780	0
+bin	3800	0
+bin	3820	0
+bin	3840	0
+bin	3860	0
+bin	3880	0
+bin	3900	0
+bin	3920	1
+bin	3940	0
+bin	3960	0
+bin	3980	0
+bin	4000	0
+bin	4020	0
+bin	4040	0
+bin	4060	0
+bin	4080	0
+bin	4100	0
+bin	4120	0
+scalar MarsExplorationNetwork.jezeroHabitat tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat messageBytesReceived:sum 640
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat messageBytesReceived:histogram
+field count 8
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 640
+field sqrsum 51200
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	8
+bin	81	0
+scalar MarsExplorationNetwork.jezeroHabitat messageBytesSent:sum 624
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat messageBytesSent:histogram
+field count 11
+field mean 56.727272727273
+field stddev 14.947179727901
+field min 48
+field max 80
+field sum 624
+field sqrsum 37632
+attr recordingmode histogram
+bin	-inf	0
+bin	40	0
+bin	41	0
+bin	42	0
+bin	43	0
+bin	44	0
+bin	45	0
+bin	46	0
+bin	47	0
+bin	48	8
+bin	49	0
+bin	50	0
+bin	51	0
+bin	52	0
+bin	53	0
+bin	54	0
+bin	55	0
+bin	56	0
+bin	57	0
+bin	58	0
+bin	59	0
+bin	60	0
+bin	61	0
+bin	62	0
+bin	63	0
+bin	64	0
+bin	65	0
+bin	66	0
+bin	67	0
+bin	68	0
+bin	69	0
+bin	70	0
+bin	71	0
+bin	72	0
+bin	73	0
+bin	74	0
+bin	75	0
+bin	76	0
+bin	77	0
+bin	78	0
+bin	79	0
+bin	80	3
+bin	81	0
+bin	82	0
+bin	83	0
+bin	84	0
+bin	85	0
+bin	86	0
+bin	87	0
+bin	88	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueryLatency:mean 3307.5
+attr recordingmode mean
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueryLatency:min 3120
+attr recordingmode min
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueryLatency:max 3920
+attr recordingmode max
+statistic MarsExplorationNetwork.jezeroHabitat dnsQueryLatency:histogram
+field count 8
+field mean 3307.5
+field stddev 304.43155458752
+field min 3120
+field max 3920
+field sum 26460
+field sqrsum 88165200
+attr recordingmode histogram
+bin	-inf	0
+bin	2920	0
+bin	2940	0
+bin	2960	0
+bin	2980	0
+bin	3000	0
+bin	3020	0
+bin	3040	0
+bin	3060	0
+bin	3080	0
+bin	3100	0
+bin	3120	5
+bin	3140	0
+bin	3160	0
+bin	3180	0
+bin	3200	0
+bin	3220	0
+bin	3240	0
+bin	3260	0
+bin	3280	0
+bin	3300	0
+bin	3320	1
+bin	3340	0
+bin	3360	0
+bin	3380	0
+bin	3400	0
+bin	3420	0
+bin	3440	0
+bin	3460	0
+bin	3480	0
+bin	3500	0
+bin	3520	0
+bin	3540	0
+bin	3560	0
+bin	3580	0
+bin	3600	0
+bin	3620	1
+bin	3640	0
+bin	3660	0
+bin	3680	0
+bin	3700	0
+bin	3720	0
+bin	3740	0
+bin	3760	0
+bin	3780	0
+bin	3800	0
+bin	3820	0
+bin	3840	0
+bin	3860	0
+bin	3880	0
+bin	3900	0
+bin	3920	1
+bin	3940	0
+bin	3960	0
+bin	3980	0
+bin	4000	0
+bin	4020	0
+bin	4040	0
+bin	4060	0
+bin	4080	0
+bin	4100	0
+bin	4120	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheMisses:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheMisses:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsCacheMisses:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.jezeroHabitat dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.jezeroHabitat dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsRegistrationsSent:count 3
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsRegistrationsSent:sum 3
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsRegistrationsSent:histogram
+field count 3
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 3
+field sqrsum 3
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	3
+bin	2	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsResponsesReceived:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsResponsesReceived:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsResponsesReceived:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueriesSent:count 8
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat dnsQueriesSent:sum 8
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat dnsQueriesSent:histogram
+field count 8
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 8
+field sqrsum 8
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	8
+bin	2	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.jezeroHabitat bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.jezeroHabitat bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.jezeroHabitat bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.jezeroHabitat bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.jezeroHabitat bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.jezeroHabitat bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.jezeroHabitat bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.jezeroHabitat bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.olympusOutpost typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.olympusOutpost nodeId 3
+par MarsExplorationNetwork.olympusOutpost isPublisher true
+par MarsExplorationNetwork.olympusOutpost isClient false
+par MarsExplorationNetwork.olympusOutpost bgpEnabled false
+par MarsExplorationNetwork.olympusOutpost dnsEnabled true
+par MarsExplorationNetwork.olympusOutpost isResolver false
+par MarsExplorationNetwork.olympusOutpost isAuthority false
+par MarsExplorationNetwork.olympusOutpost isRoot false
+par MarsExplorationNetwork.olympusOutpost authorityDomain -1
+par MarsExplorationNetwork.olympusOutpost resolverNodeId -1
+par MarsExplorationNetwork.olympusOutpost authorityNodeId 1
+par MarsExplorationNetwork.olympusOutpost bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost bgpPathVector true
+par MarsExplorationNetwork.olympusOutpost bgpMaxPathLength 100
+par MarsExplorationNetwork.olympusOutpost dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost dnsCacheSize 10000
+par MarsExplorationNetwork.olympusOutpost dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.olympusOutpost dnsDirectMode true
+par MarsExplorationNetwork.olympusOutpost dnsBaseRtt 120s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost dnsTrunkContactDuty 1
+par MarsExplorationNetwork.olympusOutpost dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost publishEids "\"7-8\""
+par MarsExplorationNetwork.olympusOutpost publishStartTime 15s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.olympusOutpost claPort 4556
+par MarsExplorationNetwork.olympusOutpost queryEids "\"\""
+par MarsExplorationNetwork.olympusOutpost queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost queryCount 100
+par MarsExplorationNetwork.olympusOutpost queryZipfAlpha 0
+par MarsExplorationNetwork.olympusOutpost churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.olympusOutpost churnProbability 0.1
+par MarsExplorationNetwork.olympusOutpost withdrawProbability 0.3
+par MarsExplorationNetwork.olympusOutpost processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.olympusOutpost finalBgpTableSize 0
+scalar MarsExplorationNetwork.olympusOutpost finalDnsCacheSize 0
+scalar MarsExplorationNetwork.olympusOutpost finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.olympusOutpost totalTableOperations 0
+scalar MarsExplorationNetwork.olympusOutpost nodeId 3
+scalar MarsExplorationNetwork.olympusOutpost correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.olympusOutpost discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.olympusOutpost discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.olympusOutpost discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost messageBytesSent:sum 160
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost messageBytesSent:histogram
+field count 2
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 160
+field sqrsum 12800
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	2
+bin	81	0
+scalar MarsExplorationNetwork.olympusOutpost dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.olympusOutpost dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.olympusOutpost dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.olympusOutpost dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.olympusOutpost dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.olympusOutpost dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.olympusOutpost dnsRegistrationsSent:count 2
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsRegistrationsSent:sum 2
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsRegistrationsSent:histogram
+field count 2
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 2
+field sqrsum 2
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	2
+bin	2	0
+scalar MarsExplorationNetwork.olympusOutpost dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.olympusOutpost bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.olympusOutpost bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.olympusOutpost bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.olympusOutpost bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.olympusOutpost bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.olympusOutpost bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.olympusOutpost bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.olympusOutpost bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.olympusOutpost bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.rover[0] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.rover[0] nodeId 4
+par MarsExplorationNetwork.rover[0] isPublisher true
+par MarsExplorationNetwork.rover[0] isClient true
+par MarsExplorationNetwork.rover[0] bgpEnabled false
+par MarsExplorationNetwork.rover[0] dnsEnabled true
+par MarsExplorationNetwork.rover[0] isResolver false
+par MarsExplorationNetwork.rover[0] isAuthority false
+par MarsExplorationNetwork.rover[0] isRoot false
+par MarsExplorationNetwork.rover[0] authorityDomain -1
+par MarsExplorationNetwork.rover[0] resolverNodeId 1
+par MarsExplorationNetwork.rover[0] authorityNodeId 1
+par MarsExplorationNetwork.rover[0] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.rover[0] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.rover[0] bgpPathVector true
+par MarsExplorationNetwork.rover[0] bgpMaxPathLength 100
+par MarsExplorationNetwork.rover[0] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.rover[0] dnsCacheSize 10000
+par MarsExplorationNetwork.rover[0] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.rover[0] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.rover[0] dnsDirectMode true
+par MarsExplorationNetwork.rover[0] dnsBaseRtt 130s
+attr unit s
+par MarsExplorationNetwork.rover[0] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[0] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.rover[0] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.rover[0] publishEids "\"9\""
+par MarsExplorationNetwork.rover[0] publishStartTime 20s
+attr unit s
+par MarsExplorationNetwork.rover[0] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.rover[0] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.rover[0] claPort 4556
+par MarsExplorationNetwork.rover[0] queryEids "\"4-12\""
+par MarsExplorationNetwork.rover[0] queryStartTime 200s
+attr unit s
+par MarsExplorationNetwork.rover[0] queryInterval 20s
+attr unit s
+par MarsExplorationNetwork.rover[0] queryCount 40
+par MarsExplorationNetwork.rover[0] queryZipfAlpha 0
+par MarsExplorationNetwork.rover[0] churnInterval 300s
+attr unit s
+par MarsExplorationNetwork.rover[0] churnProbability 0.1
+par MarsExplorationNetwork.rover[0] withdrawProbability 0.3
+par MarsExplorationNetwork.rover[0] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.rover[0] finalBgpTableSize 0
+scalar MarsExplorationNetwork.rover[0] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.rover[0] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.rover[0] totalTableOperations 0
+scalar MarsExplorationNetwork.rover[0] nodeId 4
+scalar MarsExplorationNetwork.rover[0] correctAnswers:count 40
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] correctAnswers:sum 40
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] correctAnswers:histogram
+field count 40
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 40
+field sqrsum 40
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	40
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] discoveryLatency:mean 198.25
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[0] discoveryLatency:min 130
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[0] discoveryLatency:max 260
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[0] discoveryLatency:histogram
+field count 40
+field mean 198.25
+field stddev 65.745722294306
+field min 130
+field max 260
+field sum 7930
+field sqrsum 1740700
+attr recordingmode histogram
+bin	-inf	0
+bin	96	0
+bin	98	0
+bin	100	0
+bin	102	0
+bin	104	0
+bin	106	0
+bin	108	0
+bin	110	0
+bin	112	0
+bin	114	0
+bin	116	0
+bin	118	0
+bin	120	0
+bin	122	0
+bin	124	0
+bin	126	0
+bin	128	0
+bin	130	19
+bin	132	0
+bin	134	0
+bin	136	0
+bin	138	0
+bin	140	0
+bin	142	0
+bin	144	0
+bin	146	0
+bin	148	0
+bin	150	0
+bin	152	0
+bin	154	0
+bin	156	0
+bin	158	0
+bin	160	0
+bin	162	0
+bin	164	0
+bin	166	0
+bin	168	0
+bin	170	0
+bin	172	0
+bin	174	0
+bin	176	0
+bin	178	0
+bin	180	0
+bin	182	0
+bin	184	0
+bin	186	0
+bin	188	0
+bin	190	0
+bin	192	0
+bin	194	0
+bin	196	0
+bin	198	0
+bin	200	0
+bin	202	0
+bin	204	0
+bin	206	0
+bin	208	0
+bin	210	0
+bin	212	0
+bin	214	0
+bin	216	0
+bin	218	0
+bin	220	0
+bin	222	0
+bin	224	0
+bin	226	0
+bin	228	0
+bin	230	0
+bin	232	0
+bin	234	0
+bin	236	0
+bin	238	0
+bin	240	0
+bin	242	0
+bin	244	0
+bin	246	0
+bin	248	0
+bin	250	0
+bin	252	0
+bin	254	0
+bin	256	0
+bin	258	0
+bin	260	21
+bin	262	0
+bin	264	0
+bin	266	0
+bin	268	0
+bin	270	0
+bin	272	0
+bin	274	0
+bin	276	0
+bin	278	0
+bin	280	0
+bin	282	0
+bin	284	0
+bin	286	0
+bin	288	0
+bin	290	0
+bin	292	0
+bin	294	0
+scalar MarsExplorationNetwork.rover[0] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] messageBytesReceived:sum 3200
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] messageBytesReceived:histogram
+field count 40
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 3200
+field sqrsum 256000
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	40
+bin	81	0
+scalar MarsExplorationNetwork.rover[0] messageBytesSent:sum 2240
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] messageBytesSent:histogram
+field count 44
+field mean 50.909090909091
+field stddev 9.3057076304369
+field min 48
+field max 80
+field sum 2240
+field sqrsum 117760
+attr recordingmode histogram
+bin	-inf	0
+bin	40	0
+bin	41	0
+bin	42	0
+bin	43	0
+bin	44	0
+bin	45	0
+bin	46	0
+bin	47	0
+bin	48	40
+bin	49	0
+bin	50	0
+bin	51	0
+bin	52	0
+bin	53	0
+bin	54	0
+bin	55	0
+bin	56	0
+bin	57	0
+bin	58	0
+bin	59	0
+bin	60	0
+bin	61	0
+bin	62	0
+bin	63	0
+bin	64	0
+bin	65	0
+bin	66	0
+bin	67	0
+bin	68	0
+bin	69	0
+bin	70	0
+bin	71	0
+bin	72	0
+bin	73	0
+bin	74	0
+bin	75	0
+bin	76	0
+bin	77	0
+bin	78	0
+bin	79	0
+bin	80	4
+bin	81	0
+bin	82	0
+bin	83	0
+bin	84	0
+bin	85	0
+bin	86	0
+bin	87	0
+bin	88	0
+scalar MarsExplorationNetwork.rover[0] dnsQueryLatency:mean 198.25
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[0] dnsQueryLatency:min 130
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[0] dnsQueryLatency:max 260
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[0] dnsQueryLatency:histogram
+field count 40
+field mean 198.25
+field stddev 65.745722294306
+field min 130
+field max 260
+field sum 7930
+field sqrsum 1740700
+attr recordingmode histogram
+bin	-inf	0
+bin	96	0
+bin	98	0
+bin	100	0
+bin	102	0
+bin	104	0
+bin	106	0
+bin	108	0
+bin	110	0
+bin	112	0
+bin	114	0
+bin	116	0
+bin	118	0
+bin	120	0
+bin	122	0
+bin	124	0
+bin	126	0
+bin	128	0
+bin	130	19
+bin	132	0
+bin	134	0
+bin	136	0
+bin	138	0
+bin	140	0
+bin	142	0
+bin	144	0
+bin	146	0
+bin	148	0
+bin	150	0
+bin	152	0
+bin	154	0
+bin	156	0
+bin	158	0
+bin	160	0
+bin	162	0
+bin	164	0
+bin	166	0
+bin	168	0
+bin	170	0
+bin	172	0
+bin	174	0
+bin	176	0
+bin	178	0
+bin	180	0
+bin	182	0
+bin	184	0
+bin	186	0
+bin	188	0
+bin	190	0
+bin	192	0
+bin	194	0
+bin	196	0
+bin	198	0
+bin	200	0
+bin	202	0
+bin	204	0
+bin	206	0
+bin	208	0
+bin	210	0
+bin	212	0
+bin	214	0
+bin	216	0
+bin	218	0
+bin	220	0
+bin	222	0
+bin	224	0
+bin	226	0
+bin	228	0
+bin	230	0
+bin	232	0
+bin	234	0
+bin	236	0
+bin	238	0
+bin	240	0
+bin	242	0
+bin	244	0
+bin	246	0
+bin	248	0
+bin	250	0
+bin	252	0
+bin	254	0
+bin	256	0
+bin	258	0
+bin	260	21
+bin	262	0
+bin	264	0
+bin	266	0
+bin	268	0
+bin	270	0
+bin	272	0
+bin	274	0
+bin	276	0
+bin	278	0
+bin	280	0
+bin	282	0
+bin	284	0
+bin	286	0
+bin	288	0
+bin	290	0
+bin	292	0
+bin	294	0
+scalar MarsExplorationNetwork.rover[0] dnsCacheMisses:count 40
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsCacheMisses:sum 40
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsCacheMisses:histogram
+field count 40
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 40
+field sqrsum 40
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	40
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] dnsCacheHits:count 19
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsCacheHits:sum 19
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsCacheHits:histogram
+field count 19
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 19
+field sqrsum 19
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	19
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[0] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[0] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[0] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[0] dnsRegistrationsSent:count 4
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsRegistrationsSent:sum 4
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsRegistrationsSent:histogram
+field count 4
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 4
+field sqrsum 4
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	4
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] dnsResponsesReceived:count 40
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsResponsesReceived:sum 40
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsResponsesReceived:histogram
+field count 40
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 40
+field sqrsum 40
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	40
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] dnsQueriesSent:count 40
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] dnsQueriesSent:sum 40
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] dnsQueriesSent:histogram
+field count 40
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 40
+field sqrsum 40
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	40
+bin	2	0
+scalar MarsExplorationNetwork.rover[0] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[0] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[0] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[0] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[0] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[0] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[0] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[0] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[0] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[0] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.rover[1] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.rover[1] nodeId 5
+par MarsExplorationNetwork.rover[1] isPublisher false
+par MarsExplorationNetwork.rover[1] isClient false
+par MarsExplorationNetwork.rover[1] bgpEnabled false
+par MarsExplorationNetwork.rover[1] dnsEnabled true
+par MarsExplorationNetwork.rover[1] isResolver false
+par MarsExplorationNetwork.rover[1] isAuthority false
+par MarsExplorationNetwork.rover[1] isRoot false
+par MarsExplorationNetwork.rover[1] authorityDomain -1
+par MarsExplorationNetwork.rover[1] resolverNodeId -1
+par MarsExplorationNetwork.rover[1] authorityNodeId 1
+par MarsExplorationNetwork.rover[1] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.rover[1] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.rover[1] bgpPathVector true
+par MarsExplorationNetwork.rover[1] bgpMaxPathLength 100
+par MarsExplorationNetwork.rover[1] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.rover[1] dnsCacheSize 10000
+par MarsExplorationNetwork.rover[1] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.rover[1] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.rover[1] dnsDirectMode true
+par MarsExplorationNetwork.rover[1] dnsBaseRtt 130s
+attr unit s
+par MarsExplorationNetwork.rover[1] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[1] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.rover[1] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.rover[1] publishEids "\"\""
+par MarsExplorationNetwork.rover[1] publishStartTime 20s
+attr unit s
+par MarsExplorationNetwork.rover[1] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.rover[1] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.rover[1] claPort 4556
+par MarsExplorationNetwork.rover[1] queryEids "\"\""
+par MarsExplorationNetwork.rover[1] queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.rover[1] queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.rover[1] queryCount 100
+par MarsExplorationNetwork.rover[1] queryZipfAlpha 0
+par MarsExplorationNetwork.rover[1] churnInterval 300s
+attr unit s
+par MarsExplorationNetwork.rover[1] churnProbability 0.1
+par MarsExplorationNetwork.rover[1] withdrawProbability 0.3
+par MarsExplorationNetwork.rover[1] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.rover[1] finalBgpTableSize 0
+scalar MarsExplorationNetwork.rover[1] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.rover[1] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.rover[1] totalTableOperations 0
+scalar MarsExplorationNetwork.rover[1] nodeId 5
+scalar MarsExplorationNetwork.rover[1] correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[1] discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[1] discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[1] discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] messageBytesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] messageBytesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[1] dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[1] dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[1] dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[1] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[1] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[1] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[1] dnsRegistrationsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsRegistrationsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsRegistrationsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[1] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[1] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[1] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[1] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[1] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[1] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[1] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[1] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[1] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.rover[2] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.rover[2] nodeId 6
+par MarsExplorationNetwork.rover[2] isPublisher true
+par MarsExplorationNetwork.rover[2] isClient false
+par MarsExplorationNetwork.rover[2] bgpEnabled false
+par MarsExplorationNetwork.rover[2] dnsEnabled true
+par MarsExplorationNetwork.rover[2] isResolver false
+par MarsExplorationNetwork.rover[2] isAuthority false
+par MarsExplorationNetwork.rover[2] isRoot false
+par MarsExplorationNetwork.rover[2] authorityDomain -1
+par MarsExplorationNetwork.rover[2] resolverNodeId -1
+par MarsExplorationNetwork.rover[2] authorityNodeId 1
+par MarsExplorationNetwork.rover[2] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.rover[2] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.rover[2] bgpPathVector true
+par MarsExplorationNetwork.rover[2] bgpMaxPathLength 100
+par MarsExplorationNetwork.rover[2] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.rover[2] dnsCacheSize 10000
+par MarsExplorationNetwork.rover[2] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.rover[2] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.rover[2] dnsDirectMode true
+par MarsExplorationNetwork.rover[2] dnsBaseRtt 130s
+attr unit s
+par MarsExplorationNetwork.rover[2] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[2] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.rover[2] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.rover[2] publishEids "\"10\""
+par MarsExplorationNetwork.rover[2] publishStartTime 20s
+attr unit s
+par MarsExplorationNetwork.rover[2] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.rover[2] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.rover[2] claPort 4556
+par MarsExplorationNetwork.rover[2] queryEids "\"\""
+par MarsExplorationNetwork.rover[2] queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.rover[2] queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.rover[2] queryCount 100
+par MarsExplorationNetwork.rover[2] queryZipfAlpha 0
+par MarsExplorationNetwork.rover[2] churnInterval 300s
+attr unit s
+par MarsExplorationNetwork.rover[2] churnProbability 0.1
+par MarsExplorationNetwork.rover[2] withdrawProbability 0.3
+par MarsExplorationNetwork.rover[2] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.rover[2] finalBgpTableSize 0
+scalar MarsExplorationNetwork.rover[2] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.rover[2] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.rover[2] totalTableOperations 0
+scalar MarsExplorationNetwork.rover[2] nodeId 6
+scalar MarsExplorationNetwork.rover[2] correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[2] discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[2] discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[2] discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] messageBytesSent:sum 160
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] messageBytesSent:histogram
+field count 2
+field mean 80
+field stddev 0
+field min 80
+field max 80
+field sum 160
+field sqrsum 12800
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	2
+bin	81	0
+scalar MarsExplorationNetwork.rover[2] dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[2] dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[2] dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[2] dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[2] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[2] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[2] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[2] dnsRegistrationsSent:count 2
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsRegistrationsSent:sum 2
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsRegistrationsSent:histogram
+field count 2
+field mean 1
+field stddev 0
+field min 1
+field max 1
+field sum 2
+field sqrsum 2
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	2
+bin	2	0
+scalar MarsExplorationNetwork.rover[2] dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[2] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[2] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[2] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[2] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[2] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[2] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[2] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[2] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[2] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.rover[3] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.rover[3] nodeId 7
+par MarsExplorationNetwork.rover[3] isPublisher false
+par MarsExplorationNetwork.rover[3] isClient false
+par MarsExplorationNetwork.rover[3] bgpEnabled false
+par MarsExplorationNetwork.rover[3] dnsEnabled true
+par MarsExplorationNetwork.rover[3] isResolver false
+par MarsExplorationNetwork.rover[3] isAuthority false
+par MarsExplorationNetwork.rover[3] isRoot false
+par MarsExplorationNetwork.rover[3] authorityDomain -1
+par MarsExplorationNetwork.rover[3] resolverNodeId -1
+par MarsExplorationNetwork.rover[3] authorityNodeId 1
+par MarsExplorationNetwork.rover[3] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.rover[3] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.rover[3] bgpPathVector true
+par MarsExplorationNetwork.rover[3] bgpMaxPathLength 100
+par MarsExplorationNetwork.rover[3] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.rover[3] dnsCacheSize 10000
+par MarsExplorationNetwork.rover[3] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.rover[3] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.rover[3] dnsDirectMode true
+par MarsExplorationNetwork.rover[3] dnsBaseRtt 130s
+attr unit s
+par MarsExplorationNetwork.rover[3] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.rover[3] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.rover[3] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.rover[3] publishEids "\"\""
+par MarsExplorationNetwork.rover[3] publishStartTime 20s
+attr unit s
+par MarsExplorationNetwork.rover[3] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.rover[3] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.rover[3] claPort 4556
+par MarsExplorationNetwork.rover[3] queryEids "\"\""
+par MarsExplorationNetwork.rover[3] queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.rover[3] queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.rover[3] queryCount 100
+par MarsExplorationNetwork.rover[3] queryZipfAlpha 0
+par MarsExplorationNetwork.rover[3] churnInterval 300s
+attr unit s
+par MarsExplorationNetwork.rover[3] churnProbability 0.1
+par MarsExplorationNetwork.rover[3] withdrawProbability 0.3
+par MarsExplorationNetwork.rover[3] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.rover[3] finalBgpTableSize 0
+scalar MarsExplorationNetwork.rover[3] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.rover[3] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.rover[3] totalTableOperations 0
+scalar MarsExplorationNetwork.rover[3] nodeId 7
+scalar MarsExplorationNetwork.rover[3] correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[3] discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[3] discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[3] discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] messageBytesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] messageBytesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[3] dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.rover[3] dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[3] dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[3] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[3] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[3] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[3] dnsRegistrationsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsRegistrationsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsRegistrationsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.rover[3] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.rover[3] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.rover[3] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.rover[3] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.rover[3] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.rover[3] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.rover[3] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.rover[3] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.rover[3] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.instrument[0] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.instrument[0] nodeId 8
+par MarsExplorationNetwork.instrument[0] isPublisher true
+par MarsExplorationNetwork.instrument[0] isClient false
+par MarsExplorationNetwork.instrument[0] bgpEnabled false
+par MarsExplorationNetwork.instrument[0] dnsEnabled true
+par MarsExplorationNetwork.instrument[0] isResolver false
+par MarsExplorationNetwork.instrument[0] isAuthority false
+par MarsExplorationNetwork.instrument[0] isRoot false
+par MarsExplorationNetwork.instrument[0] authorityDomain -1
+par MarsExplorationNetwork.instrument[0] resolverNodeId -1
+par MarsExplorationNetwork.instrument[0] authorityNodeId 1
+par MarsExplorationNetwork.instrument[0] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.instrument[0] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.instrument[0] bgpPathVector true
+par MarsExplorationNetwork.instrument[0] bgpMaxPathLength 100
+par MarsExplorationNetwork.instrument[0] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.instrument[0] dnsCacheSize 10000
+par MarsExplorationNetwork.instrument[0] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.instrument[0] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.instrument[0] dnsDirectMode true
+par MarsExplorationNetwork.instrument[0] dnsBaseRtt 132s
+attr unit s
+par MarsExplorationNetwork.instrument[0] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.instrument[0] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.instrument[0] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.instrument[0] publishEids "\"11\""
+par MarsExplorationNetwork.instrument[0] publishStartTime 30s
+attr unit s
+par MarsExplorationNetwork.instrument[0] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.instrument[0] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.instrument[0] claPort 4556
+par MarsExplorationNetwork.instrument[0] queryEids "\"\""
+par MarsExplorationNetwork.instrument[0] queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.instrument[0] queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.instrument[0] queryCount 100
+par MarsExplorationNetwork.instrument[0] queryZipfAlpha 0
+par MarsExplorationNetwork.instrument[0] churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.instrument[0] churnProbability 0.1
+par MarsExplorationNetwork.instrument[0] withdrawProbability 0.3
+par MarsExplorationNetwork.instrument[0] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.instrument[0] finalBgpTableSize 0
+scalar MarsExplorationNetwork.instrument[0] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.instrument[0] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.instrument[0] totalTableOperations 0
+scalar MarsExplorationNetwork.instrument[0] nodeId 8
+scalar MarsExplorationNetwork.instrument[0] correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[0] discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.instrument[0] discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[0] discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] messageBytesSent:sum 80
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] messageBytesSent:histogram
+field count 1
+field mean 80
+field stddev nan
+field min 80
+field max 80
+field sum 80
+field sqrsum 6400
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	1
+bin	81	0
+scalar MarsExplorationNetwork.instrument[0] dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[0] dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.instrument[0] dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[0] dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.instrument[0] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.instrument[0] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.instrument[0] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.instrument[0] dnsRegistrationsSent:count 1
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsRegistrationsSent:sum 1
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsRegistrationsSent:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+scalar MarsExplorationNetwork.instrument[0] dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[0] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[0] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.instrument[0] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.instrument[0] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.instrument[0] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.instrument[0] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[0] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[0] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[0] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork.instrument[1] typename "\"bgpdns.EidNode\""
+par MarsExplorationNetwork.instrument[1] nodeId 9
+par MarsExplorationNetwork.instrument[1] isPublisher true
+par MarsExplorationNetwork.instrument[1] isClient false
+par MarsExplorationNetwork.instrument[1] bgpEnabled false
+par MarsExplorationNetwork.instrument[1] dnsEnabled true
+par MarsExplorationNetwork.instrument[1] isResolver false
+par MarsExplorationNetwork.instrument[1] isAuthority false
+par MarsExplorationNetwork.instrument[1] isRoot false
+par MarsExplorationNetwork.instrument[1] authorityDomain -1
+par MarsExplorationNetwork.instrument[1] resolverNodeId -1
+par MarsExplorationNetwork.instrument[1] authorityNodeId 1
+par MarsExplorationNetwork.instrument[1] bgpKeepaliveInterval 30s
+attr unit s
+par MarsExplorationNetwork.instrument[1] bgpHoldTime 90s
+attr unit s
+par MarsExplorationNetwork.instrument[1] bgpPathVector true
+par MarsExplorationNetwork.instrument[1] bgpMaxPathLength 100
+par MarsExplorationNetwork.instrument[1] dnsTtl 120s
+attr unit s
+par MarsExplorationNetwork.instrument[1] dnsCacheSize 10000
+par MarsExplorationNetwork.instrument[1] dnsQueryTimeout 5s
+attr unit s
+par MarsExplorationNetwork.instrument[1] dnsMaxHierarchyDepth 5
+par MarsExplorationNetwork.instrument[1] dnsDirectMode true
+par MarsExplorationNetwork.instrument[1] dnsBaseRtt 132s
+attr unit s
+par MarsExplorationNetwork.instrument[1] dnsTrunkContactPeriod 0s
+attr unit s
+par MarsExplorationNetwork.instrument[1] dnsTrunkContactDuty 1
+par MarsExplorationNetwork.instrument[1] dnsTrunkContactPhase 0s
+attr unit s
+par MarsExplorationNetwork.instrument[1] publishEids "\"12\""
+par MarsExplorationNetwork.instrument[1] publishStartTime 30s
+attr unit s
+par MarsExplorationNetwork.instrument[1] publishInterval 0s
+attr unit s
+par MarsExplorationNetwork.instrument[1] claProtocol "\"tcpcl\""
+par MarsExplorationNetwork.instrument[1] claPort 4556
+par MarsExplorationNetwork.instrument[1] queryEids "\"\""
+par MarsExplorationNetwork.instrument[1] queryStartTime 10s
+attr unit s
+par MarsExplorationNetwork.instrument[1] queryInterval 1s
+attr unit s
+par MarsExplorationNetwork.instrument[1] queryCount 100
+par MarsExplorationNetwork.instrument[1] queryZipfAlpha 0
+par MarsExplorationNetwork.instrument[1] churnInterval 0s
+attr unit s
+par MarsExplorationNetwork.instrument[1] churnProbability 0.1
+par MarsExplorationNetwork.instrument[1] withdrawProbability 0.3
+par MarsExplorationNetwork.instrument[1] processingDelayPerOp 0.0001s
+attr unit s
+scalar MarsExplorationNetwork.instrument[1] finalBgpTableSize 0
+scalar MarsExplorationNetwork.instrument[1] finalDnsCacheSize 0
+scalar MarsExplorationNetwork.instrument[1] finalDnsAuthoritySize 0
+scalar MarsExplorationNetwork.instrument[1] totalTableOperations 0
+scalar MarsExplorationNetwork.instrument[1] nodeId 9
+scalar MarsExplorationNetwork.instrument[1] correctAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] correctAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] correctAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] staleAnswers:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] staleAnswers:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] staleAnswers:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] discoveryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[1] discoveryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.instrument[1] discoveryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[1] discoveryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] tableOperations:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] tableOperations:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] messageBytesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] messageBytesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] messageBytesSent:sum 80
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] messageBytesSent:histogram
+field count 1
+field mean 80
+field stddev nan
+field min 80
+field max 80
+field sum 80
+field sqrsum 6400
+attr recordingmode histogram
+bin	-inf	0
+bin	79	0
+bin	80	1
+bin	81	0
+scalar MarsExplorationNetwork.instrument[1] dnsQueryLatency:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[1] dnsQueryLatency:min nan
+attr recordingmode min
+scalar MarsExplorationNetwork.instrument[1] dnsQueryLatency:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[1] dnsQueryLatency:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsCacheMisses:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsCacheMisses:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsCacheMisses:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsCacheHits:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsCacheHits:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsCacheHits:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsCacheSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.instrument[1] dnsCacheSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.instrument[1] dnsCacheSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.instrument[1] dnsCacheSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.instrument[1] dnsRegistrationsSent:count 1
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsRegistrationsSent:sum 1
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsRegistrationsSent:histogram
+field count 1
+field mean 1
+field stddev nan
+field min 1
+field max 1
+field sum 1
+field sqrsum 1
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	1
+bin	2	0
+scalar MarsExplorationNetwork.instrument[1] dnsResponsesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsResponsesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsResponsesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsResponsesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsResponsesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsResponsesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsQueriesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsQueriesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsQueriesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] dnsQueriesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] dnsQueriesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] dnsQueriesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] bgpConvergenceTime:mean nan
+attr recordingmode mean
+scalar MarsExplorationNetwork.instrument[1] bgpConvergenceTime:max nan
+attr recordingmode max
+statistic MarsExplorationNetwork.instrument[1] bgpConvergenceTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] bgpTableSize:last 0
+attr recordingmode last
+scalar MarsExplorationNetwork.instrument[1] bgpTableSize:max 0
+attr recordingmode max
+scalar MarsExplorationNetwork.instrument[1] bgpTableSize:timeavg nan
+attr recordingmode timeavg
+statistic MarsExplorationNetwork.instrument[1] bgpTableSize:histogram
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar MarsExplorationNetwork.instrument[1] bgpWithdrawsReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] bgpWithdrawsReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] bgpWithdrawsReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] bgpWithdrawsSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] bgpWithdrawsSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] bgpWithdrawsSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] bgpAnnouncesReceived:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] bgpAnnouncesReceived:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] bgpAnnouncesReceived:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar MarsExplorationNetwork.instrument[1] bgpAnnouncesSent:count 0
+attr recordingmode count
+scalar MarsExplorationNetwork.instrument[1] bgpAnnouncesSent:sum 0
+attr recordingmode sum
+statistic MarsExplorationNetwork.instrument[1] bgpAnnouncesSent:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+bin	-inf	0
+bin	0	0
+bin	1	0
+par MarsExplorationNetwork typename "\"bgpdns.MarsExplorationNetwork\""
+

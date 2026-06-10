@@ -4,10 +4,19 @@ package bgpdns;
 
 // Basic delay channel - using DelayChannel for simplicity (no transmission time modeling)
 // This is appropriate for control-plane simulation where we focus on propagation delay
+//
+// All channels optionally support periodic contact windows (scheduled DTN links):
+// the link is up for the first contactDuty fraction of each contactPeriod (shifted
+// by contactPhase); messages submitted while down wait for the next window
+// (store-and-forward). Defaults (contactPeriod=0s) preserve always-on behavior.
 channel EidChannel extends ned.DelayChannel
 {
     parameters:
+        @class(IntermittentChannel);
         delay = default(10ms);
+        double contactPeriod @unit(s) = default(0s);
+        double contactDuty = default(1.0);
+        double contactPhase @unit(s) = default(0s);
         @display("ls=black,1");
 }
 

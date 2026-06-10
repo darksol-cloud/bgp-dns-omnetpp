@@ -1,0 +1,683 @@
+file 196608 1781062511                                          
+version 3
+run Exp14_Lunar_Int_Dns-14-20260610-00:35:11-12428
+attr configname Exp14_Lunar_Int_Dns
+attr datetime 20260610-00:35:11
+attr datetimef 20260610-003511
+attr experiment Exp14_Lunar_Int_Dns
+attr inifile simulations/experiments.ini
+attr iterationvars $duty=0.75
+attr iterationvarsd duty=0.75
+attr iterationvarsf duty=0.75-
+attr measurement $duty=0.75
+attr network bgpdns.LunarArtemisNetwork
+attr processid 12428
+attr repetition 4
+attr replication #4
+attr resultdir simulations/results
+attr runnumber 14
+attr seedset 4
+itervar duty 0.75
+config cmdenv-express-mode true
+config result-dir simulations/results
+config extends Exp12_Lunar_Dns
+config description "Experiment 14: Lunar network with intermittent Earth-Moon trunk - DNS"
+config *.rover[1].dnsBaseRtt 3.12s
+config *.rover[1].dnsTrunkContactPeriod 600s
+config *.rover[1].dnsTrunkContactDuty 0.75
+config *.earthDsn.isClient true
+config *.earthDsn.queryEids "\"6-15\""
+config *.earthDsn.queryCount 30
+config *.earthDsn.queryInterval 10s
+config *.earthDsn.queryStartTime 40s
+config *.earthDsn.resolverNodeId 1
+config *.earthDsn.dnsTrunkContactPeriod 600s
+config *.earthDsn.dnsTrunkContactDuty 0.75
+config extends Exp12_Lunar_Base
+config description "Experiment 12: Lunar Artemis network - DNS"
+config *.earthDsn.isPublisher true
+config *.earthDsn.publishEids "\"1-5\""
+config *.earthDsn.publishStartTime 2s
+config *.earthDsn.authorityNodeId 0
+config *.southPoleBase.isPublisher true
+config *.southPoleBase.publishEids "\"6-8\""
+config *.southPoleBase.publishStartTime 5s
+config *.southPoleBase.authorityNodeId 1
+config *.rover[0].isPublisher true
+config *.rover[0].publishEids "\"9-10\""
+config *.rover[2].isPublisher true
+config *.rover[2].publishEids "\"11-12\""
+config *.rover[*].publishStartTime 10s
+config *.rover[*].authorityNodeId 1
+config *.fieldAsset[0].isPublisher true
+config *.fieldAsset[0].publishEids "\"13\""
+config *.fieldAsset[2].isPublisher true
+config *.fieldAsset[2].publishEids "\"14-15\""
+config *.fieldAsset[*].publishStartTime 15s
+config *.fieldAsset[*].authorityNodeId 1
+config *.rover[*].churnInterval 120s
+config *.rover[*].churnProbability 0.15
+config *.gateway.isAuthority true
+config *.gateway.isResolver true
+config *.earthDsn.isAuthority true
+config *.rover[0].isClient true
+config *.rover[0].queryEids "\"6-15\""
+config *.rover[0].queryCount 50
+config *.rover[0].queryInterval 5s
+config *.rover[0].queryStartTime 30s
+config *.rover[0].resolverNodeId 1
+config *.rover[0].authorityNodeId 1
+config *.rover[1].isClient true
+config *.rover[1].queryEids "\"1-5\""
+config *.rover[1].queryCount 30
+config *.rover[1].queryInterval 10s
+config *.rover[1].queryStartTime 40s
+config *.rover[1].resolverNodeId 1
+config *.rover[1].authorityNodeId 0
+config *.gateway.isClient true
+config *.gateway.queryEids "\"1-15\""
+config *.gateway.queryCount 40
+config *.gateway.queryInterval 8s
+config *.gateway.queryStartTime 20s
+config *.gateway.resolverNodeId 1
+config *.gateway.authorityNodeId 1
+config *.earthDsn.bgpEnabled false
+config *.gateway.bgpEnabled false
+config *.southPoleBase.bgpEnabled false
+config *.equatorialRelay.bgpEnabled false
+config *.rover[*].bgpEnabled false
+config *.fieldAsset[*].bgpEnabled false
+config *.earthDsn.dnsEnabled true
+config *.gateway.dnsEnabled true
+config *.southPoleBase.dnsEnabled true
+config *.equatorialRelay.dnsEnabled true
+config *.rover[*].dnsEnabled true
+config *.fieldAsset[*].dnsEnabled true
+config *.earthDsn.dnsDirectMode true
+config *.gateway.dnsDirectMode true
+config *.southPoleBase.dnsDirectMode true
+config *.equatorialRelay.dnsDirectMode true
+config *.rover[*].dnsDirectMode true
+config *.fieldAsset[*].dnsDirectMode true
+config *.earthDsn.dnsBaseRtt 2.6s
+config *.gateway.dnsBaseRtt 0s
+config *.southPoleBase.dnsBaseRtt 0.5s
+config *.equatorialRelay.dnsBaseRtt 0.5s
+config *.rover[*].dnsBaseRtt 0.52s
+config *.fieldAsset[*].dnsBaseRtt 0.53s
+config *.earthDsn.dnsTtl 60s
+config *.gateway.dnsTtl 60s
+config *.southPoleBase.dnsTtl 60s
+config *.equatorialRelay.dnsTtl 60s
+config *.rover[*].dnsTtl 60s
+config *.fieldAsset[*].dnsTtl 60s
+config network bgpdns.LunarArtemisNetwork
+config sim-time-limit 1200s
+config repeat 5
+config *.earthDsn.nodeId 0
+config *.gateway.nodeId 1
+config *.southPoleBase.nodeId 2
+config *.equatorialRelay.nodeId 3
+config *.rover[*].nodeId "4 + index"
+config *.fieldAsset[*].nodeId "8 + index"
+config *.groundTruth.totalNodes 12
+config *.groundTruth.snapshotInterval 60s
+config network bgpdns.FairComparisonNetwork
+config sim-time-limit 120s
+config warmup-period 2s
+config output-scalar-file simulations/results/Exp14_Lunar_Int_Dns-duty=0.75-
+config output-vector-file simulations/results/Exp14_Lunar_Int_Dns-duty=0.75-
+config seed-set 4
+config **.result-recording-modes default,+histogram
+config **.channel.delay 10ms
+
+vector 0 LunarArtemisNetwork.groundTruth globalBgpMessages:vector ETV
+attr recordingmode vector
+vector 1 LunarArtemisNetwork.groundTruth globalDnsMessages:vector ETV
+attr recordingmode vector
+vector 2 LunarArtemisNetwork.groundTruth globalBgpBytes:vector ETV
+attr recordingmode vector
+vector 3 LunarArtemisNetwork.groundTruth globalDnsBytes:vector ETV
+attr recordingmode vector
+vector 4 LunarArtemisNetwork.groundTruth globalConvergenceTime:vector ETV
+attr recordingmode vector
+vector 5 LunarArtemisNetwork.groundTruth globalAccuracy:vector ETV
+attr recordingmode vector
+vector 6 LunarArtemisNetwork.groundTruth globalCoverage:vector ETV
+attr recordingmode vector
+vector 7 LunarArtemisNetwork.groundTruth globalStaleRate:vector ETV
+attr recordingmode vector
+vector 8 LunarArtemisNetwork.groundTruth avgBgpTableSize:vector ETV
+attr recordingmode vector
+vector 9 LunarArtemisNetwork.groundTruth avgDnsCacheSize:vector ETV
+attr recordingmode vector
+vector 10 LunarArtemisNetwork.groundTruth totalTableOperations:vector ETV
+attr recordingmode vector
+vector 11 LunarArtemisNetwork.earthDsn bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 12 LunarArtemisNetwork.earthDsn bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 13 LunarArtemisNetwork.earthDsn bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 14 LunarArtemisNetwork.earthDsn bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 15 LunarArtemisNetwork.earthDsn bgpTableSize:vector ETV
+attr recordingmode vector
+vector 16 LunarArtemisNetwork.earthDsn bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 17 LunarArtemisNetwork.earthDsn dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 18 LunarArtemisNetwork.earthDsn dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 19 LunarArtemisNetwork.earthDsn dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 20 LunarArtemisNetwork.earthDsn dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 21 LunarArtemisNetwork.earthDsn dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 22 LunarArtemisNetwork.earthDsn dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 23 LunarArtemisNetwork.earthDsn dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 24 LunarArtemisNetwork.earthDsn dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 25 LunarArtemisNetwork.earthDsn dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 26 LunarArtemisNetwork.earthDsn messageBytesSent:vector ETV
+attr recordingmode vector
+vector 27 LunarArtemisNetwork.earthDsn messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 28 LunarArtemisNetwork.earthDsn tableOperations:vector ETV
+attr recordingmode vector
+vector 29 LunarArtemisNetwork.earthDsn discoveryLatency:vector ETV
+attr recordingmode vector
+vector 30 LunarArtemisNetwork.gateway bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 31 LunarArtemisNetwork.gateway bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 32 LunarArtemisNetwork.gateway bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 33 LunarArtemisNetwork.gateway bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 34 LunarArtemisNetwork.gateway bgpTableSize:vector ETV
+attr recordingmode vector
+vector 35 LunarArtemisNetwork.gateway bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 36 LunarArtemisNetwork.gateway dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 37 LunarArtemisNetwork.gateway dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 38 LunarArtemisNetwork.gateway dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 39 LunarArtemisNetwork.gateway dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 40 LunarArtemisNetwork.gateway dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 41 LunarArtemisNetwork.gateway dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 42 LunarArtemisNetwork.gateway dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 43 LunarArtemisNetwork.gateway dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 44 LunarArtemisNetwork.gateway dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 45 LunarArtemisNetwork.gateway messageBytesSent:vector ETV
+attr recordingmode vector
+vector 46 LunarArtemisNetwork.gateway messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 47 LunarArtemisNetwork.gateway tableOperations:vector ETV
+attr recordingmode vector
+vector 48 LunarArtemisNetwork.gateway discoveryLatency:vector ETV
+attr recordingmode vector
+vector 49 LunarArtemisNetwork.southPoleBase bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 50 LunarArtemisNetwork.southPoleBase bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 51 LunarArtemisNetwork.southPoleBase bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 52 LunarArtemisNetwork.southPoleBase bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 53 LunarArtemisNetwork.southPoleBase bgpTableSize:vector ETV
+attr recordingmode vector
+vector 54 LunarArtemisNetwork.southPoleBase bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 55 LunarArtemisNetwork.southPoleBase dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 56 LunarArtemisNetwork.southPoleBase dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 57 LunarArtemisNetwork.southPoleBase dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 58 LunarArtemisNetwork.southPoleBase dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 59 LunarArtemisNetwork.southPoleBase dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 60 LunarArtemisNetwork.southPoleBase dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 61 LunarArtemisNetwork.southPoleBase dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 62 LunarArtemisNetwork.southPoleBase dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 63 LunarArtemisNetwork.southPoleBase dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 64 LunarArtemisNetwork.southPoleBase messageBytesSent:vector ETV
+attr recordingmode vector
+vector 65 LunarArtemisNetwork.southPoleBase messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 66 LunarArtemisNetwork.southPoleBase tableOperations:vector ETV
+attr recordingmode vector
+vector 67 LunarArtemisNetwork.southPoleBase discoveryLatency:vector ETV
+attr recordingmode vector
+vector 68 LunarArtemisNetwork.equatorialRelay bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 69 LunarArtemisNetwork.equatorialRelay bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 70 LunarArtemisNetwork.equatorialRelay bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 71 LunarArtemisNetwork.equatorialRelay bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 72 LunarArtemisNetwork.equatorialRelay bgpTableSize:vector ETV
+attr recordingmode vector
+vector 73 LunarArtemisNetwork.equatorialRelay bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 74 LunarArtemisNetwork.equatorialRelay dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 75 LunarArtemisNetwork.equatorialRelay dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 76 LunarArtemisNetwork.equatorialRelay dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 77 LunarArtemisNetwork.equatorialRelay dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 78 LunarArtemisNetwork.equatorialRelay dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 79 LunarArtemisNetwork.equatorialRelay dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 80 LunarArtemisNetwork.equatorialRelay dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 81 LunarArtemisNetwork.equatorialRelay dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 82 LunarArtemisNetwork.equatorialRelay dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 83 LunarArtemisNetwork.equatorialRelay messageBytesSent:vector ETV
+attr recordingmode vector
+vector 84 LunarArtemisNetwork.equatorialRelay messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 85 LunarArtemisNetwork.equatorialRelay tableOperations:vector ETV
+attr recordingmode vector
+vector 86 LunarArtemisNetwork.equatorialRelay discoveryLatency:vector ETV
+attr recordingmode vector
+vector 87 LunarArtemisNetwork.rover[0] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 88 LunarArtemisNetwork.rover[0] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 89 LunarArtemisNetwork.rover[0] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 90 LunarArtemisNetwork.rover[0] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 91 LunarArtemisNetwork.rover[0] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 92 LunarArtemisNetwork.rover[0] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 93 LunarArtemisNetwork.rover[0] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 94 LunarArtemisNetwork.rover[0] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 95 LunarArtemisNetwork.rover[0] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 96 LunarArtemisNetwork.rover[0] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 97 LunarArtemisNetwork.rover[0] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 98 LunarArtemisNetwork.rover[0] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 99 LunarArtemisNetwork.rover[0] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 100 LunarArtemisNetwork.rover[0] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 101 LunarArtemisNetwork.rover[0] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 102 LunarArtemisNetwork.rover[0] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 103 LunarArtemisNetwork.rover[0] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 104 LunarArtemisNetwork.rover[0] tableOperations:vector ETV
+attr recordingmode vector
+vector 105 LunarArtemisNetwork.rover[0] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 106 LunarArtemisNetwork.rover[1] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 107 LunarArtemisNetwork.rover[1] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 108 LunarArtemisNetwork.rover[1] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 109 LunarArtemisNetwork.rover[1] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 110 LunarArtemisNetwork.rover[1] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 111 LunarArtemisNetwork.rover[1] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 112 LunarArtemisNetwork.rover[1] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 113 LunarArtemisNetwork.rover[1] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 114 LunarArtemisNetwork.rover[1] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 115 LunarArtemisNetwork.rover[1] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 116 LunarArtemisNetwork.rover[1] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 117 LunarArtemisNetwork.rover[1] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 118 LunarArtemisNetwork.rover[1] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 119 LunarArtemisNetwork.rover[1] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 120 LunarArtemisNetwork.rover[1] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 121 LunarArtemisNetwork.rover[1] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 122 LunarArtemisNetwork.rover[1] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 123 LunarArtemisNetwork.rover[1] tableOperations:vector ETV
+attr recordingmode vector
+vector 124 LunarArtemisNetwork.rover[1] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 125 LunarArtemisNetwork.rover[2] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 126 LunarArtemisNetwork.rover[2] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 127 LunarArtemisNetwork.rover[2] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 128 LunarArtemisNetwork.rover[2] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 129 LunarArtemisNetwork.rover[2] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 130 LunarArtemisNetwork.rover[2] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 131 LunarArtemisNetwork.rover[2] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 132 LunarArtemisNetwork.rover[2] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 133 LunarArtemisNetwork.rover[2] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 134 LunarArtemisNetwork.rover[2] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 135 LunarArtemisNetwork.rover[2] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 136 LunarArtemisNetwork.rover[2] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 137 LunarArtemisNetwork.rover[2] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 138 LunarArtemisNetwork.rover[2] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 139 LunarArtemisNetwork.rover[2] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 140 LunarArtemisNetwork.rover[2] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 141 LunarArtemisNetwork.rover[2] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 142 LunarArtemisNetwork.rover[2] tableOperations:vector ETV
+attr recordingmode vector
+vector 143 LunarArtemisNetwork.rover[2] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 144 LunarArtemisNetwork.rover[3] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 145 LunarArtemisNetwork.rover[3] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 146 LunarArtemisNetwork.rover[3] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 147 LunarArtemisNetwork.rover[3] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 148 LunarArtemisNetwork.rover[3] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 149 LunarArtemisNetwork.rover[3] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 150 LunarArtemisNetwork.rover[3] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 151 LunarArtemisNetwork.rover[3] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 152 LunarArtemisNetwork.rover[3] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 153 LunarArtemisNetwork.rover[3] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 154 LunarArtemisNetwork.rover[3] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 155 LunarArtemisNetwork.rover[3] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 156 LunarArtemisNetwork.rover[3] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 157 LunarArtemisNetwork.rover[3] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 158 LunarArtemisNetwork.rover[3] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 159 LunarArtemisNetwork.rover[3] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 160 LunarArtemisNetwork.rover[3] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 161 LunarArtemisNetwork.rover[3] tableOperations:vector ETV
+attr recordingmode vector
+vector 162 LunarArtemisNetwork.rover[3] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 163 LunarArtemisNetwork.fieldAsset[0] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 164 LunarArtemisNetwork.fieldAsset[0] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 165 LunarArtemisNetwork.fieldAsset[0] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 166 LunarArtemisNetwork.fieldAsset[0] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 167 LunarArtemisNetwork.fieldAsset[0] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 168 LunarArtemisNetwork.fieldAsset[0] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 169 LunarArtemisNetwork.fieldAsset[0] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 170 LunarArtemisNetwork.fieldAsset[0] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 171 LunarArtemisNetwork.fieldAsset[0] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 172 LunarArtemisNetwork.fieldAsset[0] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 173 LunarArtemisNetwork.fieldAsset[0] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 174 LunarArtemisNetwork.fieldAsset[0] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 175 LunarArtemisNetwork.fieldAsset[0] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 176 LunarArtemisNetwork.fieldAsset[0] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 177 LunarArtemisNetwork.fieldAsset[0] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 178 LunarArtemisNetwork.fieldAsset[0] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 179 LunarArtemisNetwork.fieldAsset[0] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 180 LunarArtemisNetwork.fieldAsset[0] tableOperations:vector ETV
+attr recordingmode vector
+vector 181 LunarArtemisNetwork.fieldAsset[0] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 182 LunarArtemisNetwork.fieldAsset[1] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 183 LunarArtemisNetwork.fieldAsset[1] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 184 LunarArtemisNetwork.fieldAsset[1] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 185 LunarArtemisNetwork.fieldAsset[1] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 186 LunarArtemisNetwork.fieldAsset[1] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 187 LunarArtemisNetwork.fieldAsset[1] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 188 LunarArtemisNetwork.fieldAsset[1] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 189 LunarArtemisNetwork.fieldAsset[1] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 190 LunarArtemisNetwork.fieldAsset[1] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 191 LunarArtemisNetwork.fieldAsset[1] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 192 LunarArtemisNetwork.fieldAsset[1] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 193 LunarArtemisNetwork.fieldAsset[1] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 194 LunarArtemisNetwork.fieldAsset[1] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 195 LunarArtemisNetwork.fieldAsset[1] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 196 LunarArtemisNetwork.fieldAsset[1] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 197 LunarArtemisNetwork.fieldAsset[1] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 198 LunarArtemisNetwork.fieldAsset[1] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 199 LunarArtemisNetwork.fieldAsset[1] tableOperations:vector ETV
+attr recordingmode vector
+vector 200 LunarArtemisNetwork.fieldAsset[1] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 201 LunarArtemisNetwork.fieldAsset[2] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 202 LunarArtemisNetwork.fieldAsset[2] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 203 LunarArtemisNetwork.fieldAsset[2] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 204 LunarArtemisNetwork.fieldAsset[2] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 205 LunarArtemisNetwork.fieldAsset[2] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 206 LunarArtemisNetwork.fieldAsset[2] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 207 LunarArtemisNetwork.fieldAsset[2] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 208 LunarArtemisNetwork.fieldAsset[2] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 209 LunarArtemisNetwork.fieldAsset[2] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 210 LunarArtemisNetwork.fieldAsset[2] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 211 LunarArtemisNetwork.fieldAsset[2] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 212 LunarArtemisNetwork.fieldAsset[2] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 213 LunarArtemisNetwork.fieldAsset[2] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 214 LunarArtemisNetwork.fieldAsset[2] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 215 LunarArtemisNetwork.fieldAsset[2] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 216 LunarArtemisNetwork.fieldAsset[2] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 217 LunarArtemisNetwork.fieldAsset[2] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 218 LunarArtemisNetwork.fieldAsset[2] tableOperations:vector ETV
+attr recordingmode vector
+vector 219 LunarArtemisNetwork.fieldAsset[2] discoveryLatency:vector ETV
+attr recordingmode vector
+vector 220 LunarArtemisNetwork.fieldAsset[3] bgpAnnouncesSent:vector ETV
+attr recordingmode vector
+vector 221 LunarArtemisNetwork.fieldAsset[3] bgpAnnouncesReceived:vector ETV
+attr recordingmode vector
+vector 222 LunarArtemisNetwork.fieldAsset[3] bgpWithdrawsSent:vector ETV
+attr recordingmode vector
+vector 223 LunarArtemisNetwork.fieldAsset[3] bgpWithdrawsReceived:vector ETV
+attr recordingmode vector
+vector 224 LunarArtemisNetwork.fieldAsset[3] bgpTableSize:vector ETV
+attr recordingmode vector
+vector 225 LunarArtemisNetwork.fieldAsset[3] bgpConvergenceTime:vector ETV
+attr recordingmode vector
+vector 226 LunarArtemisNetwork.fieldAsset[3] dnsQueriesSent:vector ETV
+attr recordingmode vector
+vector 227 LunarArtemisNetwork.fieldAsset[3] dnsQueriesReceived:vector ETV
+attr recordingmode vector
+vector 228 LunarArtemisNetwork.fieldAsset[3] dnsResponsesSent:vector ETV
+attr recordingmode vector
+vector 229 LunarArtemisNetwork.fieldAsset[3] dnsResponsesReceived:vector ETV
+attr recordingmode vector
+vector 230 LunarArtemisNetwork.fieldAsset[3] dnsRegistrationsSent:vector ETV
+attr recordingmode vector
+vector 231 LunarArtemisNetwork.fieldAsset[3] dnsCacheSize:vector ETV
+attr recordingmode vector
+vector 232 LunarArtemisNetwork.fieldAsset[3] dnsCacheHits:vector ETV
+attr recordingmode vector
+vector 233 LunarArtemisNetwork.fieldAsset[3] dnsCacheMisses:vector ETV
+attr recordingmode vector
+vector 234 LunarArtemisNetwork.fieldAsset[3] dnsQueryLatency:vector ETV
+attr recordingmode vector
+vector 235 LunarArtemisNetwork.fieldAsset[3] messageBytesSent:vector ETV
+attr recordingmode vector
+vector 236 LunarArtemisNetwork.fieldAsset[3] messageBytesReceived:vector ETV
+attr recordingmode vector
+vector 237 LunarArtemisNetwork.fieldAsset[3] tableOperations:vector ETV
+attr recordingmode vector
+vector 238 LunarArtemisNetwork.fieldAsset[3] discoveryLatency:vector ETV
+attr recordingmode vector
+5	27817 281 622 12196 60 1200 21 0 0 0 0
+6	28098 281 622 12196 60 1200 21 0 0 0 0
+7	28379 315 622 12196 60 1200 21 0 0.3 4.7 1.37
+9	28694 300 622 12196 60 1200 21 8 10 207 2045
+10	28994 323 622 12196 60 1200 21 13 62 1176 69744
+15	29317 16 12196 12196 1200 1200 1 0 0 0 0
+17	29333 408 412 3463 40 330 30 1 1 30 30
+20	29741 408 412 3463 40 330 30 1 1 30 30
+22	30149 16 12196 12196 1200 1200 1 0 0 0 0
+23	30165 256 517 3153 50 300 19 1 1 19 19
+24	30421 408 412 3463 40 330 30 1 1 30 30
+25	30829 468 412 3463 40 330 30 2.6 5.2 106.6 425.88
+26	31297 438 412 3463 40 330 30 48 48 1440 69120
+27	31735 438 412 3463 40 330 30 80 80 2400 192000
+28	32173 50 21 21 2 2 5 1 5 15 55
+29	32223 468 412 3463 40 330 30 2.6 5.2 106.6 425.88
+34	32691 16 12196 12196 1200 1200 1 0 0 0 0
+36	32707 406 207 3485 20 332 30 1 1 30 30
+39	33113 406 207 3485 20 332 30 1 1 30 30
+41	33519 661 207 12196 20 1200 47 1 10 392 3622
+42	34180 134 540 3236 52 308 10 1 1 10 10
+43	34314 406 207 3485 20 332 30 1 1 30 30
+44	34720 526 207 3485 20 332 30 0.138 0.138 4.14 0.57132
+45	35246 436 207 3485 20 332 30 48 48 1440 69120
+46	35682 436 207 3485 20 332 30 80 80 2400 192000
+47	36118 889 207 3463 20 330 62 1 62 1953 81375
+48	37007 526 207 3485 20 332 30 0.138 0.138 4.14 0.57132
+53	37533 16 12196 12196 1200 1200 1 0 0 0 0
+59	37549 30 52 52 5 5 3 1 1 3 3
+60	37579 16 12196 12196 1200 1200 1 0 0 0 0
+64	37595 33 52 52 5 5 3 80 80 240 19200
+72	37628 16 12196 12196 1200 1200 1 0 0 0 0
+79	37644 16 12196 12196 1200 1200 1 0 0 0 0
+91	37660 16 12196 12196 1200 1200 1 0 0 0 0
+93	37676 672 309 2894 30 275 50 1 1 50 50
+96	38348 672 309 2894 30 275 50 1 1 50 50
+97	39020 54 103 11091 10 1090 4 1 1 4 4
+98	39074 16 12196 12196 1200 1200 1 0 0 0 0
+99	39090 470 360 2894 35 275 35 1 1 35 35
+100	39560 722 309 2894 30 275 50 1 1 50 50
+101	40282 872 309 2894 30 275 50 0.52 1.04 33.8 25.688
+102	41154 850 103 11091 10 1090 55 48 80 2768 143104
+103	42004 772 309 2894 30 275 50 80 80 4000 320000
+105	42776 872 309 2894 30 275 50 0.52 1.04 33.8 25.688
+110	43648 17 12196 12196 1200 1200 1 0 0 0 0
+112	43665 438 413 3464 40 330 30 1 1 30 30
+115	44103 438 413 3464 40 330 30 1 1 30 30
+117	44541 17 12196 12196 1200 1200 1 0 0 0 0
+119	44558 438 413 3464 40 330 30 1 1 30 30
+120	44996 528 413 3464 40 330 30 6.24 6.24 187.2 1168.128
+121	45524 468 413 3464 40 330 30 48 48 1440 69120
+122	45992 468 413 3464 40 330 30 80 80 2400 192000
+124	46460 528 413 3464 40 330 30 6.24 6.24 187.2 1168.128
+129	46988 17 12196 12196 1200 1200 1 0 0 0 0
+135	47005 41 104 2629 10 250 3 1 1 3 3
+136	47046 17 12196 12196 1200 1200 1 0 0 0 0
+140	47063 44 104 2629 10 250 3 80 80 240 19200
+148	47107 17 12196 12196 1200 1200 1 0 0 0 0
+155	47124 17 12196 12196 1200 1200 1 0 0 0 0
+167	47141 17 12196 12196 1200 1200 1 0 0 0 0
+173	47158 13 155 155 15 15 1 1 1 1 1
+174	47171 17 12196 12196 1200 1200 1 0 0 0 0
+178	47188 14 155 155 15 15 1 80 80 80 6400
+186	47202 17 12196 12196 1200 1200 1 0 0 0 0
+193	47219 17 12196 12196 1200 1200 1 0 0 0 0
+205	47236 17 12196 12196 1200 1200 1 0 0 0 0
+211	47253 26 156 156 15 15 2 1 1 2 2
+212	47279 17 12196 12196 1200 1200 1 0 0 0 0
+216	47296 28 156 156 15 15 2 80 80 160 12800
+224	47324 17 12196 12196 1200 1200 1 0 0 0 0
+231	47341 17 12196 12196 1200 1200 1 0 0 0 0
+
