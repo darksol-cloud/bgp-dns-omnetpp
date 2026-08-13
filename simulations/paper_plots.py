@@ -20,12 +20,12 @@ from pathlib import Path
 # IEEE-friendly style
 matplotlib.rcParams.update({
     'font.family': 'serif',
-    'font.size': 9,
-    'axes.labelsize': 9,
-    'axes.titlesize': 10,
-    'legend.fontsize': 8,
-    'xtick.labelsize': 8,
-    'ytick.labelsize': 8,
+    'font.size': 8,
+    'axes.labelsize': 8,
+    'axes.titlesize': 8,
+    'legend.fontsize': 6.5,
+    'xtick.labelsize': 7,
+    'ytick.labelsize': 7,
     'figure.dpi': 300,
     'savefig.dpi': 300,
     'lines.linewidth': 1.5,
@@ -39,6 +39,8 @@ HATCH_BGP = None
 HATCH_DNS = '//'
 
 # IEEE column widths
+# Figures are drawn at the width they are rendered at (one IEEE column), so
+# that in-figure text keeps its nominal point size in the compiled paper.
 COL_W = 3.45  # single-column width in inches
 DBL_W = 7.16  # double-column width in inches
 
@@ -103,7 +105,7 @@ def sum_per_run(df_filtered, metric='messageBytesSent:sum', module='node'):
 # Fig 1: Scalability (Network Size + EID Count) - double column
 # =========================================================================
 def plot_scalability(df, out):
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(DBL_W, 2.4))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(COL_W, 1.22))
 
     # --- Panel (a): Network size scalability ---
     for protocol, color, marker, label in [('BGP', C_BGP, 'o', 'BGP (push)'),
@@ -120,7 +122,7 @@ def plot_scalability(df, out):
     ax1.set_xlabel('Number of nodes ($N$)')
     ax1.set_ylabel('Total bytes')
     ax1.set_yscale('log')
-    ax1.legend()
+    ax1.legend(handlelength=1.0, borderpad=0.3, labelspacing=0.2)
     ax1.set_title('(a) Network size scalability')
 
     # --- Panel (b): EID count scalability ---
@@ -137,7 +139,6 @@ def plot_scalability(df, out):
     ax2.set_xlabel('Number of EIDs ($M$)')
     ax2.set_ylabel('Total bytes')
     ax2.set_yscale('log')
-    ax2.legend()
     ax2.set_title('(b) EID count scalability')
 
     plt.tight_layout()
@@ -148,7 +149,7 @@ def plot_scalability(df, out):
 # Fig 2: Churn resilience - overhead and accuracy
 # =========================================================================
 def plot_churn(df, out):
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(DBL_W, 2.4))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(COL_W, 1.22))
 
     churn_vals = [5, 10, 20, 60]
 
@@ -166,8 +167,8 @@ def plot_churn(df, out):
     ax1.set_ylabel('Total bytes')
     ax1.set_yscale('log')
     ax1.invert_xaxis()
-    ax1.legend()
-    ax1.set_title('(a) Overhead vs. churn rate')
+    ax1.legend(handlelength=1.0, borderpad=0.3, labelspacing=0.2)
+    ax1.set_title('(a) Overhead vs. churn')
 
     # --- Panel (b): Accuracy under churn ---
     for protocol, color, marker, label in [('BGP', C_BGP, 'o', 'BGP'),
@@ -188,8 +189,7 @@ def plot_churn(df, out):
     ax2.set_ylabel('Accuracy (%)')
     ax2.set_ylim([0, 105])
     ax2.invert_xaxis()
-    ax2.legend(loc='lower left')
-    ax2.set_title('(b) Accuracy vs. churn rate')
+    ax2.set_title('(b) Accuracy vs. churn')
 
     plt.tight_layout()
     save(out, 'fig_churn')
@@ -226,7 +226,7 @@ def plot_dns_analysis(df, out):
     ax1.set_xlabel('DNS TTL (s)')
     ax1.set_ylabel('Accuracy (%)')
     ax1.set_ylim([0, 105])
-    ax1.legend()
+    ax1.legend(handlelength=1.0, borderpad=0.3, labelspacing=0.2)
     ax1.set_title('(a) Accuracy vs. TTL (churn=10 s)')
 
     # --- Panel (b): Cache hit rate vs Zipf alpha ---
@@ -256,7 +256,7 @@ def plot_dns_analysis(df, out):
 # Fig 4: Deep-space latency and churn
 # =========================================================================
 def plot_deepspace(df, out):
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(DBL_W, 2.4))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(COL_W, 1.22))
 
     # --- Panel (a): Convergence/query time vs link delay ---
     delays = [0.01, 0.1, 1, 5, 10, 20]
@@ -276,14 +276,14 @@ def plot_deepspace(df, out):
         ql = pd.to_numeric(cl[cl['name'] == 'dnsQueryLatency:mean']['value'], errors='coerce').mean()
         dns_lat.append(ql if not pd.isna(ql) else 0)
 
-    ax1.plot(delays, bgp_conv, 'o-', color=C_BGP, label='BGP convergence')
-    ax1.plot(delays, dns_lat, 's-', color=C_DNS, label='DNS query RTT')
+    ax1.plot(delays, bgp_conv, 'o-', color=C_BGP, label='BGP conv.')
+    ax1.plot(delays, dns_lat, 's-', color=C_DNS, label='DNS RTT')
     ax1.set_xlabel('Link delay (s)')
     ax1.set_ylabel('Time (s)')
     ax1.set_xscale('log')
     ax1.set_yscale('log')
-    ax1.legend()
-    ax1.set_title('(a) Latency vs. link delay')
+    ax1.legend(loc='upper left', handlelength=1.0, borderpad=0.3, labelspacing=0.2)
+    ax1.set_title('(a) Latency vs. delay')
 
     # --- Panel (b): Accuracy under deep-space churn ---
     # Group by conv/churn ratio
@@ -316,12 +316,12 @@ def plot_deepspace(df, out):
     ax2.plot(ratios_sorted, bgp_sorted, 'o-', color=C_BGP, label='BGP')
     ax2.plot(ratios_sorted, dns_sorted, 's-', color=C_DNS, label='DNS')
     ax2.axvline(x=1.0, color='gray', linestyle=':', alpha=0.7)
-    ax2.annotate('conv = churn', xy=(1.0, 85), fontsize=7, color='gray', ha='right')
-    ax2.set_xlabel('Convergence / churn ratio')
+    ax2.annotate('conv = churn', xy=(1.3, 71.5), fontsize=5, color='gray',
+                 ha='left', va='bottom')
+    ax2.set_xlabel('Conv./churn ratio $R$')
     ax2.set_ylabel('Accuracy (%)')
     ax2.set_ylim([70, 105])
-    ax2.legend()
-    ax2.set_title('(b) Accuracy vs. conv/churn ratio')
+    ax2.set_title('(b) Accuracy vs. $R$')
 
     plt.tight_layout()
     save(out, 'fig_deepspace')
@@ -331,7 +331,7 @@ def plot_deepspace(df, out):
 # Fig 5: Realistic scenarios - three panels
 # =========================================================================
 def plot_realistic(df, out):
-    fig, axes = plt.subplots(1, 3, figsize=(DBL_W, 2.6))
+    fig, axes = plt.subplots(1, 3, figsize=(COL_W, 1.22))
 
     # --- Panel (a): Terrestrial overhead ---
     ax = axes[0]
@@ -362,8 +362,8 @@ def plot_realistic(df, out):
     ax.set_ylabel('Overhead (KB)')
     ax.set_xticks(x)
     ax.set_xticklabels(churn_labels)
-    ax.legend(fontsize=7)
-    ax.set_title('(a) Terrestrial (5--30 ms)')
+    ax.legend(fontsize=6, handlelength=1.0, borderpad=0.3, labelspacing=0.2)
+    ax.set_title('(a) Terrestrial')
 
     # --- Panel (b): Lunar amortized cost ---
     ax = axes[1]
@@ -372,18 +372,17 @@ def plot_realistic(df, out):
     dns_query = 0.6   # seconds per query (lunar-local)
     n_queries = np.arange(1, 21)
     ax.plot(n_queries, np.full_like(n_queries, bgp_conv, dtype=float), '-',
-            color=C_BGP, label='BGP (convergence)')
+            color=C_BGP, label='BGP (conv.)')
     ax.plot(n_queries, n_queries * dns_query, '-',
-            color=C_DNS, label='DNS (per query)')
+            color=C_DNS, label='DNS (query)')
 
     breakeven = bgp_conv / dns_query
     ax.axvline(x=breakeven, color='gray', linestyle=':', alpha=0.7)
-    ax.annotate(f'Break-even\n({breakeven:.1f} queries)', xy=(breakeven, bgp_conv * 1.8),
-                fontsize=7, ha='center', color='gray')
-    ax.set_xlabel('Number of queries')
-    ax.set_ylabel('Cumulative time (s)')
-    ax.legend(fontsize=7)
-    ax.set_title('(b) Lunar (1.3 s Earth--Moon)')
+    ax.annotate(f'break-even\n{breakeven:.1f} queries', xy=(9.5, 2.4),
+                fontsize=5.5, ha='left', color='gray')
+    ax.set_xlabel('Queries')
+    ax.set_ylabel('Cum. time (s)', fontsize=7)
+    ax.set_title('(b) Lunar')
 
     # --- Panel (c): Mars cumulative cost ---
     ax = axes[2]
@@ -391,16 +390,15 @@ def plot_realistic(df, out):
     dns_query_mars = 240  # 4 min per Mars-local query
     n_q = np.arange(1, 16)
     ax.plot(n_q, np.full_like(n_q, bgp_conv_mars/60, dtype=float), '-',
-            color=C_BGP, label='BGP (convergence)')
+            color=C_BGP, label='BGP (conv.)')
     ax.plot(n_q, n_q * dns_query_mars / 60, '-',
-            color=C_DNS, label='DNS (per query)')
+            color=C_DNS, label='DNS (query)')
 
     ax.fill_between(n_q, np.full_like(n_q, bgp_conv_mars/60, dtype=float),
                      n_q * dns_query_mars / 60, alpha=0.15, color=C_DNS)
-    ax.set_xlabel('Number of queries')
-    ax.set_ylabel('Cumulative time (min)')
-    ax.legend(fontsize=7)
-    ax.set_title('(c) Mars (12 min Earth--Mars)')
+    ax.set_xlabel('Queries')
+    ax.set_ylabel('Cum. time (min)', fontsize=7)
+    ax.set_title('(c) Mars')
 
     plt.tight_layout()
     save(out, 'fig_realistic')
